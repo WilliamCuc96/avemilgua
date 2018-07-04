@@ -1,9 +1,11 @@
 <!-- PHP -->
 <?php
 
+include_once('../class.upload.php');
+
 //Definición de Variables locales *
     // av_datos_personales
-    global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $genero; $fecha_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; //$nacionalidad;
+    global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $genero; $fecha_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $foto; //$nacionalidad;
 
     // av_datos_servicios
     global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar;
@@ -22,6 +24,7 @@
     $apellido2 = '';
     $apellido3 = '';
     $dpi = '';
+    $foto ='';
     //$nacionalidad = '';
     $genero = '';
     $beneficiario = '';
@@ -55,6 +58,7 @@
     if (!$apellido2) { $apellido2 = isset_or('apellido2', ''); };
     if (!$apellido3) { $apellido3 = isset_or('apellido3', ''); };
     if (!$dpi) { $dpi = isset_or('dpi', ''); };
+    if (!$foto) { $foto = isset_or('foto', ''); };
     //if (!$nacionalidad) { $nacionalidad = isset_or('nacionalidad', ''); };
     if (!$genero) { $genero = isset_or('genero', ''); };
     if (!$beneficiario) { $beneficiario = isset_or('beneficiario', ''); };
@@ -78,6 +82,10 @@
     if (!$sueldo_mensual) { $sueldo_mensual = isset_or('sueldo_mensual', ''); };
     if (!$zona_militar) { $zona_militar = isset_or('zona_militar', ''); };
 
+    $new_name = "carne_".$id;
+
+    subirFoto($new_name);
+
 
     if (!$btn) { $btn = isset_or('btn', ''); };
 
@@ -91,7 +99,7 @@
             $sql1 = "INSERT INTO av_datos_personales (id, codigo, nombre, nombre2,
                     apellido, apellido2, apellido3, dpi, genero, beneficiario,
                     fecha_nacimiento, lugar_nacimiento, vecindad, estado_civil,
-                    profesion, direccion, telefono, correo, nit) VALUES ('".$id."',
+                    profesion, direccion, telefono, correo, nit, foto) VALUES ('".$id."',
                     '".utf8_decode($codigo)."', '".utf8_decode($nombre)."',
                     '".utf8_decode($nombre2)."', '".utf8_decode($apellido)."',
                     '".utf8_decode($apellido2)."', '".utf8_decode($apellido3)."',
@@ -99,7 +107,7 @@
                     '".$fecha_nacimiento."', '".$lugar_nacimiento."', '".$vecindad."',
                     '".$estado_civil."', '".$profesion."',
                     '".utf8_decode($direccion)."', '".utf8_decode($telefono)."',
-                    '".utf8_decode($correo)."', '".$nit."');";
+                    '".utf8_decode($correo)."', '".utf8_decode($nit)."', '".utf8_decode($new_name)."');";
             $sql2 = "INSERT INTO av_datos_servicios (id, grado_militar,
                     compania, puesto, fecha_alta, fecha_baja, motivo_baja,
                     computo_servicios, sueldo_mensual, zona_militar) VALUES ('".$last_id."',
@@ -128,7 +136,8 @@
                     direccion = '".utf8_decode($direccion)."',
                     telefono = '".utf8_decode($telefono)."',
                     correo =  '".utf8_decode($correo)."',
-                    nit = '".utf8_decode($nit)."'
+                    nit = '".utf8_decode($nit)."',
+                    foto = '".utf8_decode($new_name)."'
                     WHERE id = '".$id."'";
              $sql2 = "UPDATE av_datos_servicios SET
                     grado_militar =  '".utf8_decode($grado_militar)."',
@@ -151,7 +160,7 @@
     function success_msg() {
         global $mensaje1, $mensaje2, $mensaje3;
         $mensaje1 = '<button type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-check"></i></button>';
-        $mensaje2 = utf8_encode('Su gestion fue exitosa');
+        $mensaje2 = $sql1;
         $mensaje3 = utf8_encode('Gracias por usar nuestro servicio!');
     }
 
@@ -161,6 +170,32 @@
         $mensaje2 = utf8_encode('Error de base de datos');
         $mensaje3 = utf8_encode('Su gestion no pudo ser realizada, intentelo de nuevo!');
         //$mensaje3 = utf8_encode($sql1);
+    }
+    function subirFoto($nfoto){
+        $foto = new upload($_FILES['foto']); // Recibir la imagen
+        
+        if($foto->uploaded) { // Subir la imagen a la libreria
+            
+            // Redimencionar la imagen para acoplarla mejor al sistema
+            $foto->dir_auto_chmod = true;
+            $foto->image_convert = 'png';
+            $foto->file_new_name_ext = 'png';
+            $foto->png_compression = 9;
+            $foto->file_new_name_body   = $nfoto; // El nombre que le vas a poner
+
+            $foto->image_resize         = true;
+            $foto->image_x              = 1130;
+            $foto->image_y              = 1210;
+            $foto->image_ratio_y        = false;
+
+            $foto->process('../img'); // Carpeta a la que se subira la imagen
+
+            if($foto->processed)  // Subir la imagen a la carpeta
+                $foto->clean(); // Limpiar el registro de la variable para la imagen
+            else
+                echo 'error : ' . $foto->error; // Error
+
+        }
     }
 
     if (mysql_query($sql1)) {
@@ -192,16 +227,16 @@
                         <?php echo $mensaje3; ?>
                     </p>
                     <div class="btn-group">
-                        <a href="../pdf/carnet/carnet1.php?idu=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>&nombre2=<?php echo $nombre2; ?>&apellido=<?php echo $apellido; ?>&apellido2=<?php echo $apellido2; ?>&dpi=<?php echo $dpi; ?>&codigo=<?php echo $codigo; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
+                        <a href="../pdf/carnet/carnet1.php?idu=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>&nombre2=<?php echo $nombre2; ?>&apellido=<?php echo $apellido; ?>&apellido2=<?php echo $apellido2; ?>&dpi=<?php echo $dpi; ?>&codigo=<?php echo $codigo; ?>&foto=<?php echo $new_name.".png"; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
                     </div>
                     <div class="btn-group">
-                        <a href="../pdf/carnet/carnet2.php?idu=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>&nombre2=<?php echo $nombre2; ?>&apellido=<?php echo $apellido; ?>&apellido2=<?php echo $apellido2; ?>&dpi=<?php echo $dpi; ?>&codigo=<?php echo $codigo; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 2</a>
+                        <a href="../pdf/carnet/carnet2.php?idu=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>&nombre2=<?php echo $nombre2; ?>&apellido=<?php echo $apellido; ?>&apellido2=<?php echo $apellido2; ?>&dpi=<?php echo $dpi; ?>&codigo=<?php echo $codigo; ?>&foto=<?php echo $new_name.".png"; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 2</a>
                     </div>
                     <div class="btn-group">
-                        <a href="../pdf/carnet/carnet3.php?idu=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>&nombre2=<?php echo $nombre2; ?>&apellido=<?php echo $apellido; ?>&apellido2=<?php echo $apellido2; ?>&dpi=<?php echo $dpi; ?>&codigo=<?php echo $codigo; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 3</a>
+                        <a href="../pdf/carnet/carnet3.php?idu=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>&nombre2=<?php echo $nombre2; ?>&apellido=<?php echo $apellido; ?>&apellido2=<?php echo $apellido2; ?>&dpi=<?php echo $dpi; ?>&codigo=<?php echo $codigo; ?>&foto=<?php echo $new_name.".png"; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 3</a>
                     </div>
                     <div class="btn-group">
-                        <a href="../pdf/carnet/carnet4.php?idu=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>&nombre2=<?php echo $nombre2; ?>&apellido=<?php echo $apellido; ?>&apellido2=<?php echo $apellido2; ?>&dpi=<?php echo $dpi; ?>&codigo=<?php echo $codigo; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 4</a>
+                        <a href="../pdf/carnet/carnet4.php?idu=<?php echo $id; ?>&nombre=<?php echo $nombre; ?>&nombre2=<?php echo $nombre2; ?>&apellido=<?php echo $apellido; ?>&apellido2=<?php echo $apellido2; ?>&dpi=<?php echo $dpi; ?>&codigo=<?php echo $codigo; ?>&foto=<?php echo $new_name.".png"; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 4</a>
                     </div>
                 </div>
             </div>

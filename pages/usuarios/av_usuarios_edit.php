@@ -4,7 +4,7 @@
 
 //Definición de Variables locales *
     // av_datos_personales
-    global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi;$genero; $fecha_nacimiento;$vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $departamento_id; //$nacionalidad;
+    global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi;$genero; $fecha_nacimiento;$vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $departamento_id; $foto; //$nacionalidad;
 
     // av_datos_servicios
     global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar;
@@ -19,6 +19,7 @@
     $apellido2 = '';
     $apellido3 = '';
     $dpi = '';
+    $foto = '';
     // $nacionalidad = '';
     $genero = '';
     $beneficiario = '';
@@ -53,6 +54,7 @@
     if (!$apellido2) { $apellido2 = isset_or('apellido2', ''); };
     if (!$apellido3) { $apellido3 = isset_or('apellido3', ''); };
     if (!$dpi) { $dpi = isset_or('dpi', ''); };
+    if (!$foto) { $foto = isset_or('foto', ''); };
     //if (!$nacionalidad) { $nacionalidad = isset_or('nacionalidad', ''); };
     if (!$genero) { $genero = isset_or('genero', ''); };
     if (!$beneficiario) { $beneficiario = isset_or('beneficiario', ''); };
@@ -99,7 +101,7 @@
         $var_where1 = " ";
     } else {
         $var_where1 = " AND a.id = '" . $id . "' ";
-        $sql1 = "SELECT a.id, a.codigo, a.nombre, a.nombre2, a.apellido, a.apellido2, a.apellido3, a.dpi, a.genero, a.fecha_nacimiento, a.lugar_nacimiento, a.vecindad, a.estado_civil, a.profesion, a.direccion, a.telefono, a.correo, a.nit, b.grado_militar, b.compania, b.puesto, b.fecha_alta, b.fecha_baja, b.motivo_baja, b.computo_servicios, b.sueldo_mensual, b.zona_militar FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id ". $var_where1 ." ";
+        $sql1 = "SELECT a.id, a.codigo, a.nombre, a.nombre2, a.apellido, a.apellido2, a.apellido3, a.dpi, a.genero, a.fecha_nacimiento, a.lugar_nacimiento, a.vecindad, a.estado_civil, a.profesion, a.direccion, a.telefono, a.correo, a.nit, a.foto, b.grado_militar, b.compania, b.puesto, b.fecha_alta, b.fecha_baja, b.motivo_baja, b.computo_servicios, b.sueldo_mensual, b.zona_militar FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id ". $var_where1 ." ";
 
         $resp1 = mysql_query($sql1);
 
@@ -125,6 +127,7 @@
                 $apellido2 = utf8_encode($row['apellido2']);
                 $apellido3 = utf8_encode($row['apellido3']);
                 $dpi = $row['dpi'];
+                $foto = $row['foto'];
                 //$nacionalidad = utf8_encode($row['nacionalidad']);
                 $genero = $row['genero'];
                 $fecha_nacimiento = $row['fecha_nacimiento'];
@@ -159,7 +162,7 @@
                         <i class="fa fa-info-circle"></i> Ingrese en el siguiente formulario toda la información del veterano
                     </div>
                         <div class="panel-body">
-                        <form class="form-horizontal" role="form" action="index.php" method="post">
+                        <form class="form-horizontal" role="form" action="index.php" method="post" enctype="multipart/form-data">
                         <div class="tabbable header-tabs">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#box_tab1" data-toggle="tab"><i class="fa fa-user"></i> <span class="hidden-inline-mobile">Personal</span></a></li>
