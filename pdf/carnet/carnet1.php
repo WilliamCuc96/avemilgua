@@ -111,7 +111,7 @@ $pdf->SetXY(5,37);
 $pdf->Write(0,"Codigo:");
 $pdf->SetXY(19,37);
 $pdf->Write(0,$codigo);
-$pdf->writeHTMLCell(50, 30, 55, 18, '<img src="../../img/'.$foto.'">');
+$pdf->writeHTMLCell(30, 15, 55, 18, '<img src="../../img/'.$foto.'">');
 //---------------------Text----------------------
 
 // restore auto-page-break status

@@ -11,6 +11,7 @@ $apellido = $_REQUEST['apellido'];
 $apellido2 = $_REQUEST['apellido2'];
 $dpi = $_REQUEST['dpi'];
 $codigo = $_REQUEST['codigo'];
+$foto = $_REQUEST['foto'];
 
 // create new PDF document
 $custom_layout = array(85.5, 54);
@@ -89,7 +90,7 @@ $pdf->SetXY(5,37);
 $pdf->Write(0,"Codigo:");
 $pdf->SetXY(19,37);
 $pdf->Write(0,$codigo);
-$pdf->writeHTMLCell(30, 15, 53.8, 18, '<img src="images/no-user.png" />');
+$pdf->writeHTMLCell(30, 15, 55, 18, '<img src="../../img/'.$foto.'">');
 //---------------------Text----------------------
 
 // restore auto-page-break status
