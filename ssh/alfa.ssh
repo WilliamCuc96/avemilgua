@@ -1,0 +1,84 @@
+#!/bin/bash
+cd ~/opt/test/amm/
+if [ -f ~/opt/test/amm/.inicio ];
+  then
+    echo "Sí, sí existe."
+  else
+    echo "No, no existe"
+    touch .inicio
+fi
+
+test -f /etc/hosts && elcomando
+o
+test ! -f /etc/hosts && echo "no se encontró el archivo"
+
+
+
+
+
+
+
+
+
+
+if ! $(ping -c 1 192.168.0.100 > /dev/null); then
+    echo La máquina 192.168.0.100 no responde
+else
+    echo La máquina 192.168.0.100 está ahí!
+fi
+sshpass -p '123456' scp prueba@200.30.140.92:/var/log/top10/* ~/opt/test/amm/
+
+logout
+
+
+#sh -x script argument
+
+
+#!/bin/bash
+Directorio=”$HOME/Directorio de Prueba”
+Archivo=”$HOME/Archivo de Prueba”
+
+if [ ! -d “$Directorio” ]; then
+echo “No existe $Directorio”
+echo “Creando -> “$Directorio”
+mkdir “$Directorio”
+else
+echo “El Directorio “$Directorio” ya existe
+fi
+
+if [ ! -d “$Archivo” ]; then
+echo “No existe $Archivo”
+echo “Creando -> “$Archivo”
+touch “$Archivo”
+else
+echo “El Archivo “$Archivo” ya existe
+fi
+
+programa que copia un archivo de una carpeta hacia otra, reemplazando un archivo viejo.
+
+#/bin/bash
+#Establecemos directorios de origen y destino
+ORIGEN=/home/usuario/Descargas
+DESTINO=/home/usuario/Documentos
+#Nos posicionamos en el de origen
+cd $ORIGEN
+#De todos los archivos, solo queremos aquel que se #llame ARCHIVO
+for ARCHIVO in *
+do
+ ARCH-DESTINO= “$DESTINO/$ARCHIVO”
+ # -f nos filtra los archivos regulares, ya que de
+#nada nos sirven los directorios. –nt nos filtra
+#los archivos “más nuevos” que aquellos
+#encontrados en la carpeta destino
+ if [ -f $ARCHIVO ] && [ $ARCHIVO –nt $ARCH-DESTINO ]; then
+     echo “Copiando $ARCHIVO…”
+     #copiamos el archive con cp
+     cp $ARCHIVO $ARCH-DESTINO
+ fi
+done
+#Hacemos cd para salir de la carpeta de origen
+cd
+
+
+ssh -p 1022 cert@190.99.117.194
+/home/cert/opt/test/amm
