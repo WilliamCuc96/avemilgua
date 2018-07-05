@@ -23,7 +23,7 @@
           if (formdata) {
               formdata.append("image", file);
               jQuery.ajax({
-                  url: "../uploadPhoto.php",
+                  url: "uploadPhoto.php",
                   type: "POST",
                   data: formdata,
                   processData: false,

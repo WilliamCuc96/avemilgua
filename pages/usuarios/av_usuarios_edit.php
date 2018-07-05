@@ -294,7 +294,7 @@
                                     <option value="" selected="selected" >Seleccionar</option>
                                     <?php
                                         while($row2=mysql_fetch_assoc($resp2)){
-                                            print '<option value="'.$row2['comodin'].'" ';
+                                            print '<option value="'.$row2['id'].'" ';
                                             if ($beneficiario == $row2['comodin']) { print ' selected="selected" '; };
                                             print ' >'.utf8_encode($row2['nombre']).'</option>';
                                         }
@@ -404,6 +404,7 @@
                                 <input type="file" class="form-control" id="image_to_upload"
                                 placeholder="Seleccione una foto" name="foto" value="<?php echo $foto; ?>">
                                 <img style="display:none" id="im" src="" alt="your image" />
+                                <input type="hidden" id="image_aviary" name="image_aviary" value="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -772,10 +773,7 @@ function readURL(url) {
                 }
             })
             .done(function( msg ) {
-                var arrayData = msg.split("|@|");
-                $( "#rep" ).html(  arrayData[1] );
-                //alert(arrayData[0]);
-                $("#save").attr("disabled" ,false);
+                $('#image_aviary').val(msg);
             });
         featherEditor.close();
         },
@@ -790,7 +788,7 @@ function readURL(url) {
         featherEditor.launch({
             image: id,
             url: src,
-            //forceCropPreset: ['Your Post','8:3']
+            // forceCropPreset: ['Your Post','square']
         });
         return false;
     }
@@ -803,7 +801,6 @@ function readURL(url) {
 
     function saveFoto(newURL){
       var img = document.getElementById(im).src;
-
     }
 
 

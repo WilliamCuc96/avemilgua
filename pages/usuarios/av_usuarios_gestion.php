@@ -8,7 +8,7 @@ include_once('../class.upload.php');
     global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $genero; $fecha_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $foto; //$nacionalidad;
 
     // av_datos_servicios
-    global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar;
+    global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $img_edited;
 
 
 //Inicialización de Variables locales *
@@ -48,6 +48,7 @@ include_once('../class.upload.php');
     $computo_servicios = '';
     $sueldo_mensual = '';
     $zona_militar = '';
+    $img_edited = '';
 
     // Asignar el valor que viene en el request a variables *
     if (!$id) { $id  = isset_or('id', '0'); };
@@ -81,10 +82,12 @@ include_once('../class.upload.php');
     if (!$computo_servicios) { $computo_servicios = isset_or('computo_servicios', ''); };
     if (!$sueldo_mensual) { $sueldo_mensual = isset_or('sueldo_mensual', ''); };
     if (!$zona_militar) { $zona_militar = isset_or('zona_militar', ''); };
+    if (!$img_edited) { $img_edited = isset_or('image_aviary', ''); };
+
 
     $new_name = "carne_".$id;
-
-    subirFoto($new_name);
+    $img_edited = "carne_".$id;
+    // subirFoto($new_name);
 
 
     if (!$btn) { $btn = isset_or('btn', ''); };
@@ -96,10 +99,10 @@ include_once('../class.upload.php');
 
     switch ($btn) {
         case "Insertar":
-            $sql1 = "INSERT INTO av_datos_personales (id, codigo, nombre, nombre2,
+            $sql1 = "INSERT INTO av_datos_personales (codigo, nombre, nombre2,
                     apellido, apellido2, apellido3, dpi, genero, beneficiario,
                     fecha_nacimiento, lugar_nacimiento, vecindad, estado_civil,
-                    profesion, direccion, telefono, correo, nit, foto) VALUES ('".$id."',
+                    profesion, direccion, telefono, correo, nit, foto) VALUES (
                     '".utf8_decode($codigo)."', '".utf8_decode($nombre)."',
                     '".utf8_decode($nombre2)."', '".utf8_decode($apellido)."',
                     '".utf8_decode($apellido2)."', '".utf8_decode($apellido3)."',
@@ -107,15 +110,7 @@ include_once('../class.upload.php');
                     '".$fecha_nacimiento."', '".$lugar_nacimiento."', '".$vecindad."',
                     '".$estado_civil."', '".$profesion."',
                     '".utf8_decode($direccion)."', '".utf8_decode($telefono)."',
-                    '".utf8_decode($correo)."', '".utf8_decode($nit)."', '".utf8_decode($new_name)."');";
-            $sql2 = "INSERT INTO av_datos_servicios (id, grado_militar,
-                    compania, puesto, fecha_alta, fecha_baja, motivo_baja,
-                    computo_servicios, sueldo_mensual, zona_militar) VALUES ('".$last_id."',
-                    '".utf8_decode($grado_militar)."', '".utf8_decode($compania)."',
-                    '".utf8_decode($puesto)."', '".utf8_decode($fecha_alta)."',
-                    '".utf8_decode($fecha_baja)."', '".utf8_decode($motivo_baja)."',
-                    '".utf8_decode($computo_servicios)."', '".$sueldo_mensual."',
-                    '".utf8_decode($zona_militar)."');";
+                    '".utf8_decode($correo)."', '".utf8_decode($nit)."', '".utf8_decode($img_edited)."');";
             break;
 
         case "Actualizar":
@@ -137,7 +132,7 @@ include_once('../class.upload.php');
                     telefono = '".utf8_decode($telefono)."',
                     correo =  '".utf8_decode($correo)."',
                     nit = '".utf8_decode($nit)."',
-                    foto = '".utf8_decode($new_name)."'
+                    foto = '".utf8_decode($img_edited)."'
                     WHERE id = '".$id."'";
              $sql2 = "UPDATE av_datos_servicios SET
                     grado_militar =  '".utf8_decode($grado_militar)."',
@@ -173,9 +168,9 @@ include_once('../class.upload.php');
     }
     function subirFoto($nfoto){
         $foto = new upload($_FILES['foto']); // Recibir la imagen
-        
+
         if($foto->uploaded) { // Subir la imagen a la libreria
-            
+
             // Redimencionar la imagen para acoplarla mejor al sistema
             $foto->dir_auto_chmod = true;
             $foto->image_convert = 'png';
@@ -188,7 +183,7 @@ include_once('../class.upload.php');
             $foto->image_y              = 1210;
             $foto->image_ratio_y        = false;
 
-            $foto->process('../img'); // Carpeta a la que se subira la imagen
+            $foto->process('../img/usuarios'); // Carpeta a la que se subira la imagen
 
             if($foto->processed)  // Subir la imagen a la carpeta
                 $foto->clean(); // Limpiar el registro de la variable para la imagen
@@ -200,10 +195,20 @@ include_once('../class.upload.php');
 
     if (mysql_query($sql1)) {
         $last_id = mysql_insert_id();
-        if (mysql_query($sql2)) {
-            success_msg();
-        } else {
-            error_msg();
+        if ($last_id) {
+          $sql2 = "INSERT INTO av_datos_servicios (id, grado_militar,
+                  compania, puesto, fecha_alta, fecha_baja, motivo_baja,
+                  computo_servicios, sueldo_mensual, zona_militar) VALUES ('".$last_id."',
+                  '".utf8_decode($grado_militar)."', '".utf8_decode($compania)."',
+                  '".utf8_decode($puesto)."', '".utf8_decode($fecha_alta)."',
+                  '".utf8_decode($fecha_baja)."', '".utf8_decode($motivo_baja)."',
+                  '".utf8_decode($computo_servicios)."', '".$sueldo_mensual."',
+                  '".utf8_decode($zona_militar)."');";
+          if (mysql_query($sql2)) {
+              success_msg();
+          } else {
+              error_msg();
+          }
         }
     } else {
         error_msg();
