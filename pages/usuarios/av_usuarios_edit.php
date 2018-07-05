@@ -410,7 +410,7 @@
                         <div class="form-group">
                             <label for="foto" class="col-sm-2 control-label">Tomar Fotografía</label>
                             <div class="col-sm-9">
-                            <iframe src="../img/usuarios/foto.html" name="mipagina" width="700" height="550" frameborder="0">Tu navegador no soporta iframes</iframe>
+                            <?php include_once '../img/usuarios/foto.html'; ?>
                             </div>
                             <!--
                             <div class="col-sm-9">
@@ -807,6 +807,8 @@ function readURL(url) {
 
 
 </script>
+<script src="usuarios/script.js"></script>
+
 <!-- Finaliza Area Scripts Locales * -->
 
 <!-- *: indica que es material/comentarios del cascaron inicial de webappbase -->
