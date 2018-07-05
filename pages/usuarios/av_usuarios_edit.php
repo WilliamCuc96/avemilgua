@@ -223,25 +223,16 @@
                             <div class="col-sm-3">
                                 <select id="lugar_nacimiento" class="form-control col-md-12" name="lugar_nacimiento" >
                                     <?php
-                                        $sql2="SELECT   departamento
+                                        $sql2="SELECT departamento
                                         FROM ap_municipios
-                                        GROUP BY departamento
-                                        HAVING count(departamento) > 1";
+                                        GROUP BY departamento";
                                         $resp2 = mysql_query($sql2);
                                     ?>
                                     <option value="" selected="selected" >Seleccionar</option>
                                     <?php
                                         while($row2=mysql_fetch_assoc($resp2)){
-                                            if ($refa == '') {
-                                                echo "<optgroup label='".utf8_encode($row2['departamento'])."'>";
-                                                $refa = $row2['departamento'];
-                                            } elseif ($refa != $row2['departamento']) {
-                                                echo "<optgroup label='".utf8_encode($row2['departamento'])."'>";
-                                                $refa = $row2['departamento'];
-                                            };
-                                            print '<option value="'.$row2['id'].'" ';
-                                            if ($lugar_nacimiento == $row2['id']) { print ' selected="selected" '; };
-                                            print ' >'.utf8_encode($row2['nombre']).'</option>';
+                                            echo "<option value='".$row2['departamento']."'>".$row2['departamento']."</option>";
+                                            
                                         }
                                     ?>
                                 </select>
