@@ -4,6 +4,7 @@ include_once 'class_upload.php';
 $url_p= "http://".$_SERVER['HTTP_HOST']."/"."avemilgua/";
 $temporal = $_REQUEST['temporal'];//trae la url de la imagein editada, donde la guarda el editor (no sirve)
 $actual = $_REQUEST['actual'];//ruta de la primer image (hay que eliminarla)
+$imgDelete = $_REQUEST['img'];
 
 $image_old = str_replace($url_p,'', $actual);
 unlink($image_old);
@@ -20,11 +21,12 @@ $imagen2->dir_auto_chmod = true;
 $imagen2->image_convert = 'png';
 $imagen2->file_new_name_ext = 'png';
 $imagen2->png_compression = 9;
-$imagen2->file_new_name_body   = $nuevo_nombre."_crop24";
+$imagen2->file_new_name_body   = $nuevo_nombre."_crop";
 $image_blog = $imagen2;
 $image_blog->process('../../../avemilgua/img/usuarios/');
 if($image_blog->processed) {
-    $img_b = $url_p . "img/usuarios/" . $nuevo_nombre . "_crop24.png";
+    unlink("../../".$imgDelete);
+    $img_b = $url_p . "img/usuarios/" . $nuevo_nombre . "_crop.png";
     $val = 1;
     echo $img_b;
 }else {

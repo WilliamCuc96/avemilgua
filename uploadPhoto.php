@@ -1,5 +1,5 @@
 <?php
-$target_dir = "img/usuarios/";
+$target_dir = "img/temp/";
 $temp = explode(".", $_FILES["image"]["name"]);
 $newfilename = uniqid(). '.' . end($temp);
 $target_file = $target_dir . "foto_".$newfilename;

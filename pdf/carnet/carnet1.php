@@ -29,7 +29,7 @@ $sql1 = "SELECT id,
         WHERE id = ".$id;
         $data = mysql_query($sql1);
         $data = mysql_fetch_assoc($data);
-        
+
 
 // create new PDF document
 $custom_layout = array(85.5, 54);
@@ -111,7 +111,7 @@ $pdf->SetXY(5,37);
 $pdf->Write(0,"Codigo:");
 $pdf->SetXY(19,37);
 $pdf->Write(0,$codigo);
-$pdf->writeHTMLCell(30, 15, 55, 18, '<img src="../../img/'.$foto.'">');
+$pdf->writeHTMLCell(30, 15, 54, 18, '<img src="'.$foto.'">');
 //---------------------Text----------------------
 
 // restore auto-page-break status

@@ -770,6 +770,7 @@ function readURL(url) {
                 data: {
                     temporal: newURL,
                     actual: completeURL,
+                    img: newImage
                 }
             })
             .done(function( msg ) {
@@ -788,7 +789,8 @@ function readURL(url) {
         featherEditor.launch({
             image: id,
             url: src,
-            // forceCropPreset: ['Your Post','square']
+            forceCropPreset: ['Foto de carnet','7:7'],
+            forceCropMessage: 'Por favor cortar la imagen'
         });
         return false;
     }
