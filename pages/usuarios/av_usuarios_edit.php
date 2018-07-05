@@ -223,24 +223,21 @@
                             <div class="col-sm-3">
                                 <select id="lugar_nacimiento" class="form-control col-md-12" name="lugar_nacimiento" >
                                     <?php
-                                        $sql2="SELECT a.id,
-                                                      a.nombre,
-                                                      a.departamento_id,
-                                                      (select b.departamento from av_departamentos b where b.departamento_id = a.departamento_id) as nunidad
-                                                FROM ap_municipios a
-                                                WHERE 1=1
-                                                ORDER BY a.departamento_id, a.id";
+                                        $sql2="SELECT   departamento
+                                        FROM ap_municipios
+                                        GROUP BY departamento
+                                        HAVING count(departamento) > 1";
                                         $resp2 = mysql_query($sql2);
                                     ?>
                                     <option value="" selected="selected" >Seleccionar</option>
                                     <?php
                                         while($row2=mysql_fetch_assoc($resp2)){
                                             if ($refa == '') {
-                                                echo "<optgroup label='".utf8_encode($row2['nunidad'])."'>";
-                                                $refa = $row2['nunidad'];
-                                            } elseif ($refa != $row2['nunidad']) {
-                                                echo "<optgroup label='".utf8_encode($row2['nunidad'])."'>";
-                                                $refa = $row2['nunidad'];
+                                                echo "<optgroup label='".utf8_encode($row2['departamento'])."'>";
+                                                $refa = $row2['departamento'];
+                                            } elseif ($refa != $row2['departamento']) {
+                                                echo "<optgroup label='".utf8_encode($row2['departamento'])."'>";
+                                                $refa = $row2['departamento'];
                                             };
                                             print '<option value="'.$row2['id'].'" ';
                                             if ($lugar_nacimiento == $row2['id']) { print ' selected="selected" '; };
@@ -328,7 +325,7 @@
                             <div class="col-sm-3">
                                 <select id="profesion" class="form-control col-md-12" name="profesion" >
                                     <?php
-                                        $sql2="SELECT  id, nombre, comodin
+                                        $sql2="SELECT  id, nombre
                                                 FROM ap_catalogos
                                                 WHERE tipo_catalogo = 38 AND institucion = 1
                                                 ORDER BY nombre";
@@ -337,8 +334,8 @@
                                     <option value="" selected="selected" >Seleccionar</option>
                                     <?php
                                         while($row2=mysql_fetch_assoc($resp2)){
-                                            print '<option value="'.$row2['comodin'].'" ';
-                                            if ($profesion == $row2['comodin']) { print ' selected="selected" '; };
+                                            print '<option value="'.$row2['id'].'" ';
+                                            if ($profesion == $row2['nombre']) { print ' selected="selected" '; };
                                             print ' >'.utf8_encode($row2['nombre']).'</option>';
                                         }
                                     ?>
@@ -355,10 +352,10 @@
                             <div class="col-sm-3">
                                 <select id="vecindad" class="form-control col-md-12" name="vecindad" >
                                     <?php
-                                        $sql2="SELECT a.id,
-                                                      a.nombre,
-                                                      a.departamento_id,
-                                                      (select b.departamento from av_departamentos b where b.departamento_id = a.departamento_id) as nunidad
+                                        $sql2="SELECT   a.id,
+                                                        a.nombre,
+                                                        a.departamento_id,
+                                                        (select b.departamento from ap_municipios b where b.departamento_id = a.departamento_id LIMIT 1) as nunidad
                                                 FROM ap_municipios a
                                                 WHERE 1=1
                                                 ORDER BY a.departamento_id, a.id";
