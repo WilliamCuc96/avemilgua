@@ -401,13 +401,15 @@
                         <div class="form-group">
                             <label for="foto" class="col-sm-2 control-label">Subir Fotografía</label>
                             <div class="col-sm-9">
-                                <input type="file" class="form-control" id="foto" placeholder="Seleccione una foto" name="foto" value="<?php echo $foto; ?>">
+                                <input type="file" class="form-control" id="image_to_upload"
+                                placeholder="Seleccione una foto" name="foto" value="<?php echo $foto; ?>">
+                                <img style="display:none" id="im" src="" alt="your image" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="foto" class="col-sm-2 control-label">Tomar Fotografía</label>
                             <div class="col-sm-9">
-                            <iframe src="../foto.html" name="mipagina" width="700" height="550" frameborder="0">Tu navegador no soporta iframes</iframe>
+                            <iframe src="../img/usuarios/foto.html" name="mipagina" width="700" height="550" frameborder="0">Tu navegador no soporta iframes</iframe>
                             </div>
                             <!--
                             <div class="col-sm-9">
@@ -721,6 +723,90 @@ if (!monster.get('cookieConsent')) {
         });
     </script>
     <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript" src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+function readURL(url) {
+  completeURL = "http://"+window.location.hostname + "/avemilgua/" + url;
+  document.getElementById('im').src=completeURL;
+  }
+    jQuery.noConflict();
+    formdata = new FormData();
+    jQuery("#image_to_upload").on("change", function() {
+        var file = this.files[0];
+        if (formdata) {
+            formdata.append("image", file);
+            jQuery.ajax({
+                url: "../uploadPhoto.php",
+                type: "POST",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success:function(data){
+                  newImage = data;
+                  readURL(newImage);
+                  openAviary(newImage);
+                }
+            });
+        }
+    });
+
+
+    var featherEditor = new Aviary.Feather({
+        apiKey: '1620c74b36464cfc857eb4b2d3e555cf',
+        apiVersion: 3,
+        theme: 'minimum', // Check out our new 'light' and 'dark' themes!
+        tools: 'all',
+        appendTo: '',
+        onSave: function(imageID, newURL) {
+            var img = document.getElementById(imageID);
+            img.src = newURL;
+            $.ajax({
+                method: "POST",
+                url: "usuarios/uploadPhoto.php",
+                data: {
+                    temporal: newURL,
+                    actual: completeURL,
+                }
+            })
+            .done(function( msg ) {
+                var arrayData = msg.split("|@|");
+                $( "#rep" ).html(  arrayData[1] );
+                //alert(arrayData[0]);
+                $("#save").attr("disabled" ,false);
+            });
+        featherEditor.close();
+        },
+        onError: function(errorObj) {
+            // alert(errorObj.message);
+        }
+    });
+
+    function launchEditor(id,src) {
+
+        //alert("ENTRE A LA FUNCION");
+        featherEditor.launch({
+            image: id,
+            url: src,
+            //forceCropPreset: ['Your Post','8:3']
+        });
+        return false;
+    }
+
+    function openAviary(ur) {
+      completeURL = "http://"+window.location.hostname + "/avemilgua/" + ur;
+      // alert(completeURL);
+      launchEditor("im",completeURL);
+    }
+
+    function saveFoto(newURL){
+      var img = document.getElementById(im).src;
+
+    }
+
+
 </script>
 <!-- Finaliza Area Scripts Locales * -->
 

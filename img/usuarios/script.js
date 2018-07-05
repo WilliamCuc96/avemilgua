@@ -1,9 +1,3 @@
-/*
-    Tomar una fotografía y guardarla en un archivo
-    @date 2017-11-22
-    @author parzibyte
-    @web parzibyte.me/blog
-*/
 function tieneSoporteUserMedia() {
     return !!(navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia)
 }
