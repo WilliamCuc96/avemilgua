@@ -726,7 +726,7 @@ if (!monster.get('cookieConsent')) {
 
 <script type="text/javascript">
 function readURL(url) {
-  completeURL = "http://"+window.location.hostname + "/avemilgua/" + url;
+  completeURL = "http://"+window.location.hostname + "/av/" + url;
   document.getElementById('im').src=completeURL;
   }
     jQuery.noConflict();
@@ -796,7 +796,7 @@ function readURL(url) {
     }
 
     function openAviary(ur) {
-      completeURL = "http://"+window.location.hostname + "/avemilgua/" + ur;
+      completeURL = "http://"+window.location.hostname + "/av/" + ur;
       // alert(completeURL);
       launchEditor("im",completeURL);
     }

@@ -42,7 +42,7 @@ if (tieneSoporteUserMedia()) {
 				    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
 				        console.log("La foto fue enviada correctamente");
 				        console.log(xhr);
-                var completeURL1 = "http://"+window.location.hostname + "/avemilgua/img/temp/" + xhr.responseText;
+                var completeURL1 = "http://"+window.location.hostname + "/av/img/temp/" + xhr.responseText;
                 document.getElementById('im').src= completeURL1;
                 openAviaryWC(completeURL1);
 

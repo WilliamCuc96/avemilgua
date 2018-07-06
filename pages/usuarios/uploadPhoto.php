@@ -1,7 +1,7 @@
 <?php
 include_once 'class_upload.php';
 
-$url_p= "http://".$_SERVER['HTTP_HOST']."/"."avemilgua/";
+$url_p= "http://".$_SERVER['HTTP_HOST']."/"."av/";
 $temporal = $_REQUEST['temporal'];//trae la url de la imagein editada, donde la guarda el editor (no sirve)
 $imgDelete = $_REQUEST['img'];
 
@@ -20,7 +20,7 @@ $imagen2->file_new_name_ext = 'png';
 $imagen2->png_compression = 9;
 $imagen2->file_new_name_body   = $nuevo_nombre."_crop";
 $image_blog = $imagen2;
-$image_blog->process('../../../avemilgua/img/usuarios/');
+$image_blog->process('../../../av/img/usuarios/');
 if($image_blog->processed) {
     unlink("../../".$imgDelete);
     $img_b = $url_p . "img/usuarios/" . $nuevo_nombre . "_crop.png";
