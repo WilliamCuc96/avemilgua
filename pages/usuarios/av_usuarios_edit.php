@@ -726,7 +726,10 @@ if (!monster.get('cookieConsent')) {
 
 <script type="text/javascript">
 function readURL(url) {
+  var port = window.location.port;
+
   if (port) {
+    port =  ":"+port;
     completeURL = "http://"+window.location.hostname + port + "/av/" + url;
   }else {
     completeURL = "http://"+window.location.hostname + "/av/" + url;
@@ -800,8 +803,9 @@ function readURL(url) {
     }
 
     function openAviary(ur) {
-      var port = ":"+window.location.port;
+      var port = window.location.port;
       if (port) {
+        port = ":"+port;
         completeURL = "http://"+window.location.hostname + port + "/av/" + ur;
       }else {
         completeURL = "http://"+window.location.hostname + "/av/" + ur;
