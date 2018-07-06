@@ -796,7 +796,10 @@ function readURL(url) {
     }
 
     function openAviary(ur) {
-      completeURL = "http://"+window.location.hostname + "/av/" + ur;
+      var url = window.location.href
+      var arr = url.split("/");
+      var result = arr[0] + "//" + arr[2]
+      completeURL = result + "/av/" + ur;
       // alert(completeURL);
       launchEditor("im",completeURL);
     }
