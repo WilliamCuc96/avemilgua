@@ -726,7 +726,11 @@ if (!monster.get('cookieConsent')) {
 
 <script type="text/javascript">
 function readURL(url) {
-  completeURL = "http://"+window.location.hostname + "/av/" + url;
+  if (port) {
+    completeURL = "http://"+window.location.hostname + port + "/av/" + url;
+  }else {
+    completeURL = "http://"+window.location.hostname + "/av/" + url;
+  }
   document.getElementById('im').src=completeURL;
   }
     jQuery.noConflict();
@@ -796,10 +800,12 @@ function readURL(url) {
     }
 
     function openAviary(ur) {
-      var url = window.location.href
-      var arr = url.split("/");
-      var result = arr[0] + "//" + arr[2]
-      completeURL = result + "/av/" + ur;
+      var port = ":"+window.location.port;
+      if (port) {
+        completeURL = "http://"+window.location.hostname + port + "/av/" + ur;
+      }else {
+        completeURL = "http://"+window.location.hostname + "/av/" + ur;
+      }
       // alert(completeURL);
       launchEditor("im",completeURL);
     }
