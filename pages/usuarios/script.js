@@ -34,7 +34,7 @@ if (tieneSoporteUserMedia()) {
 				var foto = $canvas.toDataURL(); //Esta es la foto, en base 64
 				// $estado.innerHTML = "Enviando foto. Por favor, espera...";
 				var xhr = new XMLHttpRequest();
-				xhr.open("POST", "../img/temp/guardar_foto.php", true);
+				xhr.open("POST", "../guardar_foto.php", true);
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				xhr.send(encodeURIComponent(foto)); //Codificar y enviar
 
