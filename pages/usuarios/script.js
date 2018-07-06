@@ -1,3 +1,4 @@
+
 function tieneSoporteUserMedia() {
     return !!(navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia)
 }
@@ -31,9 +32,9 @@ if (tieneSoporteUserMedia()) {
 				contexto.drawImage($video, 0, 0, $canvas.width, $canvas.height);
 
 				var foto = $canvas.toDataURL(); //Esta es la foto, en base 64
-				$estado.innerHTML = "Enviando foto. Por favor, espera...";
+				// $estado.innerHTML = "Enviando foto. Por favor, espera...";
 				var xhr = new XMLHttpRequest();
-				xhr.open("POST", "./guardar_foto.php", true);
+				xhr.open("POST", "../img/temp/guardar_foto.php", true);
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				xhr.send(encodeURIComponent(foto)); //Codificar y enviar
 
@@ -41,8 +42,11 @@ if (tieneSoporteUserMedia()) {
 				    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
 				        console.log("La foto fue enviada correctamente");
 				        console.log(xhr);
-				        $estado.innerHTML = "Foto guardada con éxito. Puedes verla <a target='_blank' href='./" + xhr.responseText + "'> aquí</a>";
-				    }
+                var completeURL1 = "http://"+window.location.hostname + "/avemilgua/img/temp/" + xhr.responseText;
+                document.getElementById('im').src= completeURL1;
+                openAviaryWC(completeURL1);
+
+            }
 				}
 
 				//Reanudar reproducción

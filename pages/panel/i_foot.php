@@ -12,6 +12,8 @@
 <script src="../bower_components/bootstrap-calendar/jstz.min.js" type="text/javascript"></script>
 <script src="../bower_components/bootstrap-calendar/js/language/es-MX.js" type="text/javascript"></script>
 <script src="../bower_components/bootstrap-calendar/js/calendar.js" type="text/javascript"></script>
+<script src="../js/notify.js" type="text/javascript"></script>
+
 
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>

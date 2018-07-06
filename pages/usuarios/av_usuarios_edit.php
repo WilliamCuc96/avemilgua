@@ -232,7 +232,7 @@
                                     <?php
                                         while($row2=mysql_fetch_assoc($resp2)){
                                             echo "<option value='".$row2['departamento']."'>".$row2['departamento']."</option>";
-                                            
+
                                         }
                                     ?>
                                 </select>
@@ -391,15 +391,23 @@
                             <div class="col-sm-9">
                                 <input type="file" class="form-control" id="image_to_upload"
                                 placeholder="Seleccione una foto" name="foto" value="<?php echo $foto; ?>">
-                                <img style="display:none" id="im" src="" alt="your image" />
+                                <img style="display:none" id="im" src="" alt="image" />
                                 <input type="hidden" id="image_aviary" name="image_aviary" value="">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="foto" class="col-sm-2 control-label">Tomar Fotografía</label>
                             <div class="col-sm-9">
-                            <?php include_once '../img/usuarios/foto.html'; ?>
+                            <?php include_once '../img/foto.html'; ?>
                             </div>
+                            <br>
+                            <br>
+                            <p id="msj_im"></p>
+                            <div class="col-sm-9">
+                              <img id="im2" style="display:none" src="" alt="image" />
+                            </div>
+                            <br>
+
                             <!--
                             <div class="col-sm-9">
                                 <video id="video"></video>
@@ -752,17 +760,22 @@ function readURL(url) {
         onSave: function(imageID, newURL) {
             var img = document.getElementById(imageID);
             img.src = newURL;
+            $.notify("Guardando foto, por favor espera.", "success");
             $.ajax({
                 method: "POST",
                 url: "usuarios/uploadPhoto.php",
                 data: {
                     temporal: newURL,
-                    actual: completeURL,
                     img: newImage
                 }
             })
             .done(function( msg ) {
                 $('#image_aviary').val(msg);
+                var img2 = document.getElementById('im2');
+                var msj = document.getElementById("msj_im");
+                msj.innerHTML = '<label class="col-sm-2 control-label">Fotografía recortada: </label>';
+                img2.src = msg;
+                img2.style.display = "";
             });
         featherEditor.close();
         },
@@ -772,7 +785,6 @@ function readURL(url) {
     });
 
     function launchEditor(id,src) {
-
         //alert("ENTRE A LA FUNCION");
         featherEditor.launch({
             image: id,
@@ -788,6 +800,14 @@ function readURL(url) {
       // alert(completeURL);
       launchEditor("im",completeURL);
     }
+    function openAviaryWC(ur) {
+      var url = ur.split("/");
+      try {
+          newImage = "img/temp/" + url[6];
+      } catch (e) {
+      }
+      launchEditor("im",ur);
+    }
 
     function saveFoto(newURL){
       var img = document.getElementById(im).src;
@@ -795,6 +815,8 @@ function readURL(url) {
 
 
 </script>
+
+<!-- script webcam -->
 <script src="usuarios/script.js"></script>
 
 <!-- Finaliza Area Scripts Locales * -->

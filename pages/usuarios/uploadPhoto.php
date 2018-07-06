@@ -3,11 +3,8 @@ include_once 'class_upload.php';
 
 $url_p= "http://".$_SERVER['HTTP_HOST']."/"."avemilgua/";
 $temporal = $_REQUEST['temporal'];//trae la url de la imagein editada, donde la guarda el editor (no sirve)
-$actual = $_REQUEST['actual'];//ruta de la primer image (hay que eliminarla)
 $imgDelete = $_REQUEST['img'];
 
-$image_old = str_replace($url_p,'', $actual);
-unlink($image_old);
 // echo $image_old;
 $tmpfname = tempnam("/tmp", "UL_IMAGE");//$tmpfname = nombre del archivo temporal donde vamos a descargar la imagen editada
 $img = file_get_contents($temporal); //$img = es la variable donde descargamos la imagen desde la url $temporal
