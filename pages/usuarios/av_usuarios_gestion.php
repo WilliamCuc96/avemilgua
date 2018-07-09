@@ -15,6 +15,7 @@ include_once('../class.upload.php');
     $mensaje1 = '';
     $mensaje2 = '';
     $mensaje3 = '';
+    $mensaje4 = 'Para generar un PDF es necesario agregar una imagen en la información del usuario';
     // av_datos_personales
     $id = '';
     $codigo = '';
@@ -244,9 +245,18 @@ $sqlpdf = "SELECT codigo,
                 <div class="col-md-12 text-center">
                     <div class="">
                         <h3><?php echo $mensaje2; ?></h3>
+                    <?php if($data['foto'] == null or $data['foto'] == ""): ?>
                         <p>
                             <?php echo $mensaje3; ?>
                         </p>
+                        <h3>
+                            <?php echo $mensaje4; ?>
+                        </h3>
+                    <?php else: ?>
+                        <p>
+                            <?php echo $mensaje3; ?>
+                        </p>
+                    <?php endif; ?>
                     </div>
                 </div>
             <?php else: ?>
@@ -275,15 +285,28 @@ $sqlpdf = "SELECT codigo,
             </div>
             <?php endif; ?>
 
-
-            <div class="col-md-12 text-center">
-                <div class="">
-                    <h3></h3>
-                    <div class="btn-group">
-                        <a href="index.php?p=usuarios/av_usuarios_list.php" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Listado de Veteranos</a>
+            <?php if($data['foto'] == null or $data['foto'] == ""): ?>
+                    <div class="col-md-12 text-center">
+                        <div class="">
+                            <h3></h3>
+                            <div class="btn-group">
+                                <a href="index.php?p=usuarios/av_usuarios_list.php" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Listado de Veteranos</a>
+                            </div>
+                            <div class="btn-group">
+                                <a href='index.php?p=usuarios/av_usuarios_edit.php&id=<?php echo $id ?>' class="btn btn-danger"><i class="fa fa-pencil"></i> Editar Informacion</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+            <?php else: ?>
+                    <div class="col-md-12 text-center">
+                        <div class="">
+                            <h3></h3>
+                            <div class="btn-group">
+                                <a href="index.php?p=usuarios/av_usuarios_list.php" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Listado de Veteranos</a>
+                            </div>
+                        </div>
+                    </div>
+            <?php endif; ?>
         </div>
         <!-- /.row -->
     </div>
