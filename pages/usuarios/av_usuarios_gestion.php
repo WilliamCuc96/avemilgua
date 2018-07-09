@@ -275,7 +275,7 @@ $sqlpdf = "SELECT codigo,
                             <?php echo $mensaje3; ?>
                         </p>
                         <?php
-                        $parametros = "nombre=".$data['nombre']."nombre2=".$data['nombre2']."apellido=".$data['apellido']."apellido2=".$data['apellido2']."dpi=".$data['dpi']."codigo=".$data['codigo']."foto=".$data['foto']."fecha_vencimiento_carnet=".$data['fecha_vencimiento_carnet'];
+                        $parametros = "nombre=".$data['nombre']."&nombre2=".$data['nombre2']."&apellido=".$data['apellido']."&apellido2=".$data['apellido2']."&dpi=".$data['dpi']."&codigo=".$data['codigo']."&foto=".$data['foto']."&fecha_vencimiento_carnet=".$data['fecha_vencimiento_carnet'];
                         ?>
                     <div class="btn-group">
                         <a href="../pdf/carnet/carnet1.php?<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
