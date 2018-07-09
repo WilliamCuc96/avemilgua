@@ -237,15 +237,28 @@ $sqlpdf = "SELECT codigo,
                 <h1 class="page-header"><i class="fa fa-ambulance"></i> Gestión de Veteranos</h1>
             </div>
             <!-- /.col-lg-12 -->
+            <?php if($foto == null or $foto == ""): ?>
+                <div class="col-md-12 text-center">
+                        <?php echo $mensaje1; ?>
+                </div>
+                <div class="col-md-12 text-center">
+                    <div class="">
+                        <h3><?php echo $mensaje2; ?></h3>
+                        <p>
+                            <?php echo $mensaje3; ?>
+                        </p>
+                    </div>
+                </div>
+            <?php else: ?>
             <div class="col-md-12 text-center">
-                    <?php echo $mensaje1; ?>
-            </div>
-            <div class="col-md-12 text-center">
-                <div class="">
-                    <h3><?php echo $mensaje2; ?></h3>
-                    <p>
-                        <?php echo $mensaje3; ?>
-                    </p>
+                        <?php echo $mensaje1; ?>
+                </div>
+                <div class="col-md-12 text-center">
+                    <div class="">
+                        <h3><?php echo $mensaje2; ?></h3>
+                        <p>
+                            <?php echo $mensaje3; ?>
+                        </p>       
                     <div class="btn-group">
                         <a href="../pdf/carnet/carnet1.php?nombre=<?php echo $data['nombre']; ?>&nombre2=<?php echo $data['nombre2']; ?>&apellido=<?php echo $data['apellido']; ?>&apellido2=<?php echo $data['apellido2']; ?>&dpi=<?php echo $data['dpi']; ?>&codigo=<?php echo $data['codigo']; ?>&foto=<?php echo $data['foto']; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
                     </div>
@@ -260,6 +273,9 @@ $sqlpdf = "SELECT codigo,
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
+
+            
             <div class="col-md-12 text-center">
                 <div class="">
                     <h3></h3>
