@@ -302,9 +302,6 @@ $sqlpdf = "SELECT codigo,
                                 <a href="index.php?p=usuarios/av_usuarios_list.php" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Listado de Veteranos</a>
                             </div>
                             <div class="btn-group">
-                        <a href="../pdf/carnet/carnet1.php?<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
-                    </div>
-                            <div class="btn-group">
                                 <a href='index.php?p=usuarios/av_usuarios_edit.php&id=<?php echo $id ?>' class="btn btn-danger"><i class="fa fa-pencil"></i> Editar Informacion</a>
                             </div>
                         </div>
