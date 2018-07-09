@@ -15,6 +15,7 @@ $apellido2 = $_REQUEST['apellido2'];
 $dpi = $_REQUEST['dpi'];
 $codigo = $_REQUEST['codigo'];
 $foto = $_REQUEST['foto'];
+$fecha_vencimiento_carnet = $_REQUEST['fecha_vencimiento_carnet'];
 
 
 $sql1 = "SELECT id,
@@ -111,6 +112,10 @@ $pdf->SetXY(5,37);
 $pdf->Write(0,"Codigo:");
 $pdf->SetXY(19,37);
 $pdf->Write(0,$codigo);
+$pdf->SetXY(5,41);
+$pdf->Write(0,"Fecha de Vencimiento:");
+$pdf->SetXY(19,41);
+$pdf->Write(0,$fecha_vencimiento_carnet);
 $pdf->writeHTMLCell(30, 15, 54, 18, '<img src="'.$foto.'">');
 //---------------------Text----------------------
 

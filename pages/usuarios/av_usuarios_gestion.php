@@ -5,7 +5,7 @@ include_once('../class.upload.php');
 
 //Definición de Variables locales *
     // av_datos_personales
-    global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $genero; $fecha_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $foto; //$nacionalidad;
+    global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $genero; $fecha_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $foto; $fecha_vencimiento_carnet; //$nacionalidad;
 
     // av_datos_servicios
     global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $img_edited;
@@ -26,6 +26,9 @@ include_once('../class.upload.php');
     $apellido3 = '';
     $dpi = '';
     $foto ='';
+    $fecha_vencimiento_carnet = date("Y-m-d H:i:s");
+    $nuevafecha = strtotime ( '+2 year' , strtotime ( $fecha_vencimiento_carnet ) ) ;
+    $nuevafecha = date("Y-m-d H:i:s" , $nuevafecha );
     //$nacionalidad = '';
     $genero = '';
     $beneficiario = '';
@@ -61,6 +64,7 @@ include_once('../class.upload.php');
     if (!$apellido3) { $apellido3 = isset_or('apellido3', ''); };
     if (!$dpi) { $dpi = isset_or('dpi', ''); };
     if (!$foto) { $foto = isset_or('foto', ''); };
+    if (!$fecha_vencimiento_carnet) { $fecha_vencimiento_carnet = isset_or('fecha_vencimiento_carnet', ''); };
     //if (!$nacionalidad) { $nacionalidad = isset_or('nacionalidad', ''); };
     if (!$genero) { $genero = isset_or('genero', ''); };
     if (!$beneficiario) { $beneficiario = isset_or('beneficiario', ''); };
@@ -102,7 +106,7 @@ include_once('../class.upload.php');
             $sql1 = "INSERT INTO av_datos_personales (codigo, nombre, nombre2,
                     apellido, apellido2, apellido3, dpi, genero, beneficiario,
                     fecha_nacimiento, lugar_nacimiento, vecindad, estado_civil,
-                    profesion, direccion, telefono, correo, nit, foto) VALUES (
+                    profesion, direccion, telefono, correo, nit, foto, fecha_vencimiento_carnet) VALUES (
                     '".utf8_decode($codigo)."', '".utf8_decode($nombre)."',
                     '".utf8_decode($nombre2)."', '".utf8_decode($apellido)."',
                     '".utf8_decode($apellido2)."', '".utf8_decode($apellido3)."',
@@ -110,7 +114,7 @@ include_once('../class.upload.php');
                     '".$fecha_nacimiento."', '".$lugar_nacimiento."', '".$vecindad."',
                     '".$estado_civil."', '".$profesion."',
                     '".utf8_decode($direccion)."', '".utf8_decode($telefono)."',
-                    '".utf8_decode($correo)."', '".utf8_decode($nit)."', '".utf8_decode($img_edited)."');";
+                    '".utf8_decode($correo)."', '".utf8_decode($nit)."', '".utf8_decode($img_edited)."', '".utf8_decode($nuevafecha)."');";
 
             $sql2 = "INSERT INTO av_datos_servicios (id, grado_militar,
                     compania, puesto, fecha_alta, fecha_baja, motivo_baja,
@@ -224,7 +228,8 @@ $sqlpdf = "SELECT codigo,
                 apellido2,
                 apellido3,
                 dpi,
-                foto
+                foto,
+                fecha_vencimiento_carnet
         FROM av_datos_personales
         WHERE id = ".$id;
         $data = mysql_query($sqlpdf);
@@ -269,17 +274,20 @@ $sqlpdf = "SELECT codigo,
                         <p>
                             <?php echo $mensaje3; ?>
                         </p>
+                        <?php
+                        $parametros = "nombre=".$data['nombre']."nombre2=".$data['nombre2']."apellido=".$data['apellido']."apellido2=".$data['apellido2']."dpi=".$data['dpi']."codigo=".$data['codigo']."foto=".$data['foto']."fecha_vencimiento_carnet=".$data['fecha_vencimiento_carnet'];
+                        ?>
                     <div class="btn-group">
-                        <a href="../pdf/carnet/carnet1.php?nombre=<?php echo $data['nombre']; ?>&nombre2=<?php echo $data['nombre2']; ?>&apellido=<?php echo $data['apellido']; ?>&apellido2=<?php echo $data['apellido2']; ?>&dpi=<?php echo $data['dpi']; ?>&codigo=<?php echo $data['codigo']; ?>&foto=<?php echo $data['foto']; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
+                        <a href="../pdf/carnet/carnet1.php?<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
                     </div>
                     <div class="btn-group">
-                        <a href="../pdf/carnet/carnet2.php?nombre=<?php echo $data['nombre']; ?>&nombre2=<?php echo $data['nombre2']; ?>&apellido=<?php echo $data['apellido']; ?>&apellido2=<?php echo $data['apellido2']; ?>&dpi=<?php echo $data['dpi']; ?>&codigo=<?php echo $data['codigo']; ?>&foto=<?php echo $data['foto']; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 2</a>
+                        <a href="../pdf/carnet/carnet2.php<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 2</a>
                     </div>
                     <div class="btn-group">
-                        <a href="../pdf/carnet/carnet3.php?nombre=<?php echo $data['nombre']; ?>&nombre2=<?php echo $data['nombre2']; ?>&apellido=<?php echo $data['apellido']; ?>&apellido2=<?php echo $data['apellido2']; ?>&dpi=<?php echo $data['dpi']; ?>&codigo=<?php echo $data['codigo']; ?>&foto=<?php echo $data['foto']; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 3</a>
+                        <a href="../pdf/carnet/carnet3.php?<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 3</a>
                     </div>
                     <div class="btn-group">
-                        <a href="../pdf/carnet/carnet4.php?nombre=<?php echo $data['nombre']; ?>&nombre2=<?php echo $data['nombre2']; ?>&apellido=<?php echo $data['apellido']; ?>&apellido2=<?php echo $data['apellido2']; ?>&dpi=<?php echo $data['dpi']; ?>&codigo=<?php echo $data['codigo']; ?>&foto=<?php echo $data['foto']; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 4</a>
+                        <a href="../pdf/carnet/carnet4.php?<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 4</a>
                     </div>
                 </div>
             </div>
