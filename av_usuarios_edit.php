@@ -1,6 +1,7 @@
 <script type="text/javascript" src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
 <!-- PHP -->
 <?php
+
 //Definición de Variables locales *
     // av_datos_personales
     global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi;$genero; $fecha_nacimiento;$vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $departamento_id; $foto; //$nacionalidad;
@@ -732,7 +733,6 @@ function readURL(url) {
     formdata = new FormData();
     jQuery("#image_to_upload").on("change", function() {
         var file = this.files[0];
-        // console.log(file);
         if (formdata) {
             formdata.append("image", file);
             jQuery.ajax({

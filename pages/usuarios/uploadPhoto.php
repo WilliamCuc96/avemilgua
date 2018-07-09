@@ -22,7 +22,11 @@ $imagen2->file_new_name_body   = $nuevo_nombre."_crop";
 $image_blog = $imagen2;
 $image_blog->process('../../../av/img/usuarios/');
 if($image_blog->processed) {
+  try {
     unlink("../../".$imgDelete);
+  } catch (\Exception $e) {
+    unlink("../".$imgDelete);
+  }
     $img_b = $url_p . "img/usuarios/" . $nuevo_nombre . "_crop.png";
     $val = 1;
     echo $img_b;

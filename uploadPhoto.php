@@ -28,7 +28,7 @@ if ($_FILES["image"]["size"] > 500000) {
 // Allow certain file formats
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
     $msj = "Solo se admiten archivos JPG, JPEG, PNG";
-    $uploadOk = 0;
+    $uploadOk = 1;
 }
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
