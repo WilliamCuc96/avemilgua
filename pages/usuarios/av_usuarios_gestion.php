@@ -206,6 +206,7 @@ include_once('../class.upload.php');
         $last_id = mysql_insert_id();
           if (mysql_query($sql2)) {
               success_msg();
+              options($last_id);
           } else {
               error_msg();
           }
@@ -217,102 +218,108 @@ include_once('../class.upload.php');
 
 <?php
 //query for PDF
-$sqlpdf = "SELECT codigo,
-                nombre,
-                nombre2,
-                apellido,
-                apellido2,
-                apellido3,
-                dpi,
-                foto
-        FROM av_datos_personales
-        WHERE id = ".$id;
-        $data = mysql_query($sqlpdf);
-        $data = mysql_fetch_assoc($data);
+function options($last_id){
 
- ?>
-<div id="page-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header"><i class="fa fa-ambulance"></i> Gestión de Veteranos</h1>
-            </div>
-            <!-- /.col-lg-12 -->
-            <?php if($data['foto'] == null or $data['foto'] == ""): ?>
-                <div class="col-md-12 text-center">
-                        <?php echo $mensaje1; ?>
-                </div>
-                <div class="col-md-12 text-center">
-                    <div class="">
-                        <h3><?php echo $mensaje2; ?></h3>
-                    <?php if($data['foto'] == null or $data['foto'] == ""): ?>
-                        <p>
-                            <?php echo $mensaje3; ?>
-                        </p>
-                        <h3>
-                            <?php echo $mensaje4; ?>
-                        </h3>
-                    <?php else: ?>
-                        <p>
-                            <?php echo $mensaje3; ?>
-                        </p>
-                    <?php endif; ?>
-                    </div>
-                </div>
-            <?php else: ?>
-            <div class="col-md-12 text-center">
-                        <?php echo $mensaje1; ?>
-                </div>
-                <div class="col-md-12 text-center">
-                    <div class="">
-                        <h3><?php echo $mensaje2; ?></h3>
-                        <p>
-                            <?php echo $mensaje3; ?>
-                        </p>
-                    <div class="btn-group">
-                        <a href="../pdf/carnet/carnet1.php?nombre=<?php echo $data['nombre']; ?>&nombre2=<?php echo $data['nombre2']; ?>&apellido=<?php echo $data['apellido']; ?>&apellido2=<?php echo $data['apellido2']; ?>&dpi=<?php echo $data['dpi']; ?>&codigo=<?php echo $data['codigo']; ?>&foto=<?php echo $data['foto']; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
-                    </div>
-                    <div class="btn-group">
-                        <a href="../pdf/carnet/carnet2.php?nombre=<?php echo $data['nombre']; ?>&nombre2=<?php echo $data['nombre2']; ?>&apellido=<?php echo $data['apellido']; ?>&apellido2=<?php echo $data['apellido2']; ?>&dpi=<?php echo $data['dpi']; ?>&codigo=<?php echo $data['codigo']; ?>&foto=<?php echo $data['foto']; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 2</a>
-                    </div>
-                    <div class="btn-group">
-                        <a href="../pdf/carnet/carnet3.php?nombre=<?php echo $data['nombre']; ?>&nombre2=<?php echo $data['nombre2']; ?>&apellido=<?php echo $data['apellido']; ?>&apellido2=<?php echo $data['apellido2']; ?>&dpi=<?php echo $data['dpi']; ?>&codigo=<?php echo $data['codigo']; ?>&foto=<?php echo $data['foto']; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 3</a>
-                    </div>
-                    <div class="btn-group">
-                        <a href="../pdf/carnet/carnet4.php?nombre=<?php echo $data['nombre']; ?>&nombre2=<?php echo $data['nombre2']; ?>&apellido=<?php echo $data['apellido']; ?>&apellido2=<?php echo $data['apellido2']; ?>&dpi=<?php echo $data['dpi']; ?>&codigo=<?php echo $data['codigo']; ?>&foto=<?php echo $data['foto']; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 4</a>
-                    </div>
-                </div>
-            </div>
-            <?php endif; ?>
+  if (!$id) {
+    $id = $last_id;
+  }
+  $sqlpdf = "SELECT codigo,
+                  nombre,
+                  nombre2,
+                  apellido,
+                  apellido2,
+                  apellido3,
+                  dpi,
+                  foto
+          FROM av_datos_personales
+          WHERE id = ".$id;
+          $data = mysql_query($sqlpdf);
+          $data = mysql_fetch_assoc($data);
 
-            <?php if($data['foto'] == null or $data['foto'] == ""): ?>
-                    <div class="col-md-12 text-center">
-                        <div class="">
-                            <h3></h3>
-                            <div class="btn-group">
-                                <a href="index.php?p=usuarios/av_usuarios_list.php" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Listado de Veteranos</a>
-                            </div>
-                            <div class="btn-group">
-                                <a href='index.php?p=usuarios/av_usuarios_edit.php&id=<?php echo $id ?>' class="btn btn-danger"><i class="fa fa-pencil"></i> Editar Informacion</a>
-                            </div>
-                        </div>
-                    </div>
-            <?php else: ?>
-                    <div class="col-md-12 text-center">
-                        <div class="">
-                            <h3></h3>
-                            <div class="btn-group">
-                                <a href="index.php?p=usuarios/av_usuarios_list.php" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Listado de Veteranos</a>
-                            </div>
-                        </div>
-                    </div>
-            <?php endif; ?>
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
-</div>
-<!-- /#page-wrapper -->
+   ?>
+  <div id="page-wrapper">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-lg-12">
+                  <h1 class="page-header"><i class="fa fa-ambulance"></i> Gestión de Veteranos</h1>
+              </div>
+              <!-- /.col-lg-12 -->
+              <?php if($data['foto'] == null or $data['foto'] == ""): ?>
+                  <div class="col-md-12 text-center">
+                          <?php echo $mensaje1; ?>
+                  </div>
+                  <div class="col-md-12 text-center">
+                      <div class="">
+                          <h3><?php echo $mensaje2; ?></h3>
+                      <?php if($data['foto'] == null or $data['foto'] == ""): ?>
+                          <p>
+                              <?php echo $mensaje3; ?>
+                          </p>
+                          <h3>
+                              <?php echo $mensaje4; ?>
+                          </h3>
+                      <?php else: ?>
+                          <p>
+                              <?php echo $mensaje3; ?>
+                          </p>
+                      <?php endif; ?>
+                      </div>
+                  </div>
+              <?php else: ?>
+              <div class="col-md-12 text-center">
+                          <?php echo $mensaje1; ?>
+                  </div>
+                  <div class="col-md-12 text-center">
+                      <div class="">
+                          <h3><?php echo $mensaje2; ?></h3>
+                          <p>
+                              <?php echo $mensaje3; ?>
+                          </p>
+                      <div class="btn-group">
+                          <a href="../pdf/carnet/carnet1.php?nombre=<?php echo $data['nombre']; ?>&nombre2=<?php echo $data['nombre2']; ?>&apellido=<?php echo $data['apellido']; ?>&apellido2=<?php echo $data['apellido2']; ?>&dpi=<?php echo $data['dpi']; ?>&codigo=<?php echo $data['codigo']; ?>&foto=<?php echo $data['foto']; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
+                      </div>
+                      <div class="btn-group">
+                          <a href="../pdf/carnet/carnet2.php?nombre=<?php echo $data['nombre']; ?>&nombre2=<?php echo $data['nombre2']; ?>&apellido=<?php echo $data['apellido']; ?>&apellido2=<?php echo $data['apellido2']; ?>&dpi=<?php echo $data['dpi']; ?>&codigo=<?php echo $data['codigo']; ?>&foto=<?php echo $data['foto']; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 2</a>
+                      </div>
+                      <div class="btn-group">
+                          <a href="../pdf/carnet/carnet3.php?nombre=<?php echo $data['nombre']; ?>&nombre2=<?php echo $data['nombre2']; ?>&apellido=<?php echo $data['apellido']; ?>&apellido2=<?php echo $data['apellido2']; ?>&dpi=<?php echo $data['dpi']; ?>&codigo=<?php echo $data['codigo']; ?>&foto=<?php echo $data['foto']; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 3</a>
+                      </div>
+                      <div class="btn-group">
+                          <a href="../pdf/carnet/carnet4.php?nombre=<?php echo $data['nombre']; ?>&nombre2=<?php echo $data['nombre2']; ?>&apellido=<?php echo $data['apellido']; ?>&apellido2=<?php echo $data['apellido2']; ?>&dpi=<?php echo $data['dpi']; ?>&codigo=<?php echo $data['codigo']; ?>&foto=<?php echo $data['foto']; ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 4</a>
+                      </div>
+                  </div>
+              </div>
+              <?php endif; ?>
 
+              <?php if($data['foto'] == null or $data['foto'] == ""): ?>
+                      <div class="col-md-12 text-center">
+                          <div class="">
+                              <h3></h3>
+                              <div class="btn-group">
+                                  <a href="index.php?p=usuarios/av_usuarios_list.php" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Listado de Veteranos</a>
+                              </div>
+                              <div class="btn-group">
+                                  <a href='index.php?p=usuarios/av_usuarios_edit.php&id=<?php echo $id ?>' class="btn btn-danger"><i class="fa fa-pencil"></i> Editar Informacion</a>
+                              </div>
+                          </div>
+                      </div>
+              <?php else: ?>
+                      <div class="col-md-12 text-center">
+                          <div class="">
+                              <h3></h3>
+                              <div class="btn-group">
+                                  <a href="index.php?p=usuarios/av_usuarios_list.php" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Listado de Veteranos</a>
+                              </div>
+                          </div>
+                      </div>
+              <?php endif; ?>
+          </div>
+          <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+  </div>
+  <!-- /#page-wrapper -->
+
+}
 <?php include_once 'panel/i_foot.php'; ?>
 <!-- *: indica que es material/comentarios del cascaron inicial de webappbase -->
