@@ -16,7 +16,13 @@
                 </form>
             </li>
             -->
-            <li><a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Tablero de Administración</a></li>
+            <!-- <li><a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Tablero de Administración</a></li> -->
+            <li>
+                <a href="index.php?p=usuarios/av_usuarios_edit.php"><i class = "fa fa-user-plus fa-fw"></i> Inscripción de Veterano</a>
+            </li>
+            <li>
+              <a href="index.php?p=usuarios/av_usuarios_list.php"><i class = "fa fa-list fa-fw"></i> Lista de Veteranos</a>
+            </li>
             <!--<li><a href="index.php?p=proceso/indicadores_busc.php"><i class="fa fa-search-plus fa-fw"></i> Búsqueda Personalizada</a></li>-->
             <?php if ($_SESSION['usuario_nivel'] == 1 OR $_SESSION['usuario_nivel'] == 4) { ?>
 
@@ -35,7 +41,7 @@
 
             <?php }; ?>
 
-            <li>
+            <!-- <li>
                 <a href="#"><i class="fa fa-file-excel-o fa-fw"></i> Reportes (.XLS)<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
 
@@ -52,13 +58,13 @@
                     <?php }; ?>
                     <?php if ($_SESSION['usuario_nivel'] <= 5) { ?>
                         <li><a href="index.php?p=reportes/indicadores_go.php">Indicadores</a></li>
-                        <li><a href="index.php?p=reportes/topten_go.php">Top 10</a></li>
+                        <li><a href="index.php?p=reportes/topten_go.php">Top 10</a></li> -->
                         <!--
                         <li><a href="index.php?p=soporte/sql_gestion.php&sqltext=select * from cy_topten">Top 10</a></li>
                         -->
                     <?php }; ?>
-                </ul>
-            </li>
+                <!-- </ul>
+            </li> -->
 
             <?php if ($_SESSION['usuario_nivel'] != 3) { ?>
             <li>
@@ -122,20 +128,11 @@
             </li>
 
             <!-- ---------------------------------------------EXTRA AVEMILGUA---------------------------------- --><?php if ($_SESSION['usuario_nivel'] <= 5) { ?>
-            <li>
-                <a href="#"><i class = "fa fa-users fa-fw"></i> Avemilgua<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <!-- Ahorita cualquier nivel de usuario puede accesar estas opciones -->
-                    <?php if($_SESSION['usuario_nivel'] <= 5) { ?>
-                        <li><a href="index.php?p=usuarios/av_usuarios_edit.php">Inscripción de Veterano</a></li>
-                        <li><a href="index.php?p=usuarios/av_usuarios_list.php">Lista de Veteranos</a></li>
-                    <?php }; ?>
-                </ul>
-            </li>
+
             <?php }; ?>
             <!-- ---------------------------------------------EXTRA AVEMILGUA---------------------------------- -->
 
-            <li><a href="index.php?p=soporte/reportarfalla_go.php"><i class="fa fa-ambulance fa-fw"></i> Solicitud de Soporte</a></li>
+            <!-- <li><a href="index.php?p=soporte/reportarfalla_go.php"><i class="fa fa-ambulance fa-fw"></i> Solicitud de Soporte</a></li> -->
 
 
             <li class="sidebar-search">

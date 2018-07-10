@@ -16,6 +16,7 @@ $imagen2 = new upload($tmpfname);
 // echo "funciona classe";
 $imagen2->dir_auto_chmod = true;
 $imagen2->image_convert = 'png';
+$imagen2->image_greyscale = true;
 $imagen2->file_new_name_ext = 'png';
 $imagen2->png_compression = 9;
 $imagen2->file_new_name_body   = $nuevo_nombre."_crop";
