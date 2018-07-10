@@ -194,8 +194,8 @@ include_once('../class.upload.php');
                   }
              break;
         case "Borrar":
+        $sql1 = "DELETE FROM av_datos_personales WHERE id = '".$id."'";
         if (mysql_query($sql1)) {
-            $sql1 = "DELETE FROM av_datos_personales WHERE id = '".$id."'";
             $sql2 = "DELETE FROM av_datos_servicios WHERE id = '".$id."'";
             if (mysql_query($sql2)) {
                 success_msg();
