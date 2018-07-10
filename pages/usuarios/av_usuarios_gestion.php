@@ -303,7 +303,7 @@ $sqlpdf = "SELECT codigo,
                         <a href="../pdf/carnet/carnet1.php?<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
                     </div>
                     <div class="btn-group">
-                        <a href="../pdf/carnet/carnet2.php<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 2</a>
+                        <a href="../pdf/carnet/carnet2.php?<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 2</a>
                     </div>
                     <div class="btn-group">
                         <a href="../pdf/carnet/carnet3.php?<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 3</a>
