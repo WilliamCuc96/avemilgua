@@ -23,6 +23,9 @@
             <li>
               <a href="index.php?p=usuarios/av_usuarios_list.php"><i class = "fa fa-list fa-fw"></i> Lista de Veteranos</a>
             </li>
+            <li>
+              <a href="index.php?p=usuarios/av_usuarios_busc.php"><i class = "fa fa-search-plus fa-fw"></i> Búsqueda Personalizada</a>
+            </li>
             <!--<li><a href="index.php?p=proceso/indicadores_busc.php"><i class="fa fa-search-plus fa-fw"></i> Búsqueda Personalizada</a></li>-->
             <?php if ($_SESSION['usuario_nivel'] == 1 OR $_SESSION['usuario_nivel'] == 4) { ?>
 
