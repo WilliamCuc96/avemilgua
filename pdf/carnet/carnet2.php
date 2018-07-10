@@ -95,7 +95,7 @@ $pdf->SetXY(5,42);
 $pdf->Write(0,"Vence:");
 $pdf->SetXY(15,42);
 $pdf->Write(0,$fecha_vencimiento_carnet);
-$pdf->writeHTMLCell(30, 15, 55, 18, '<img src="../../img/'.$foto.'">');
+$pdf->writeHTMLCell(30, 15, 54, 18, '<img src="'.$foto.'">');
 //---------------------Text----------------------
 
 // restore auto-page-break status
