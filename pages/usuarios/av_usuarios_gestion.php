@@ -276,9 +276,13 @@ $sqlpdf = "SELECT codigo,
                         <p>
                             <?php echo $mensaje3; ?>
                         </p>
-                        <h3>
-                            <?php echo $mensaje4; ?>
-                        </h3>
+                        <?php if($btn == "Borrar"): ?>
+                            
+                        <?php else: ?>
+                            <h3>
+                                <?php echo $mensaje4; ?>
+                            </h3>
+                        <?php endif; ?>    
                     <?php else: ?>
                         <p>
                             <?php echo $mensaje3; ?>
@@ -325,9 +329,13 @@ $sqlpdf = "SELECT codigo,
                             <div class="btn-group">
                                 <a href="index.php?p=usuarios/av_usuarios_list.php" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Listado de Veteranos</a>
                             </div>
+                            <?php if($btn == "Borrar"): ?>
+
+                            <?php else: ?>
                             <div class="btn-group">
                                 <a href='index.php?p=usuarios/av_usuarios_edit.php&id=<?php echo $id ?>' class="btn btn-danger"><i class="fa fa-pencil"></i> Editar Informacion</a>
                             </div>
+                            <?php endif; ?>
                         </div>
                     </div>
             <?php else: ?>
