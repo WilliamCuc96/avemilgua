@@ -8,7 +8,19 @@
     // av_datos_servicios
     global $grado_militar; $compañia; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar;
 
-    $sql1 = "SELECT a.id as vid, a.nombre, a.nombre2, a.apellido, a.apellido2, a.codigo, b.grado_militar, b.fecha_baja, a.vecindad, a.telefono, (select b.nombre from ap_municipios b where b.id = a.vecindad) as municipio FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id";
+    $sql1 = "SELECT a.id as vid, 
+                    a.nombre, 
+                    a.nombre2, 
+                    a.apellido, 
+                    a.apellido2, 
+                    a.codigo, 
+                    (select c.nombre from ap_catalogos c WHERE tipo_catalogo = 39 AND grado_militar = id) as gradoMilitar, 
+                    b.grado_militar, 
+                    b.fecha_baja, 
+                    a.vecindad, 
+                    a.telefono, 
+                    (select b.nombre from ap_municipios b where b.id = a.vecindad) as municipio 
+                    FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id";
 
     $resp1 = mysql_query($sql1);
 ?>
@@ -74,7 +86,7 @@ if (!$resp1) { // Error en la ejecución del query
         print "<tr class=''>";
         print "  <td>".utf8_encode($row['nombre'])." ".utf8_encode($row['nombre2'])." ".utf8_encode($row['apellido'])." ".utf8_encode($row['apellido2'])."</td>";
         print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['codigo'])."</td>";
-        print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['grado_militar'])."</td>";
+        print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['gradoMilitar'])."</td>";
         print "  <td class='hidden-xs'>".utf8_encode($row['fecha_baja'])."</td>";
         print "  <td class='hidden-xs'>".utf8_encode($row['municipio'])."</td>";
         print "  <td class='hidden-xs' nowrap>".utf8_encode($row['telefono'])."</td>";

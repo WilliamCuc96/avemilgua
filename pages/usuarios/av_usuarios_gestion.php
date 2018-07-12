@@ -8,7 +8,7 @@ include_once('../class.upload.php');
     global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $genero; $fecha_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $foto; $fecha_vencimiento_carnet; //$nacionalidad;
 
     // av_datos_servicios
-    global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $img_edited;
+    global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $img_edited; $armas_servicios;
 
 
 //Inicialización de Variables locales *
@@ -26,9 +26,9 @@ include_once('../class.upload.php');
     $apellido3 = '';
     $dpi = '';
     $foto ='';
-    $fecha_vencimiento_carnet = date("Y-m-d H:i:s");
+    $fecha_vencimiento_carnet = date("Y-m-d");
     $nuevafecha = strtotime ( '+2 year' , strtotime ( $fecha_vencimiento_carnet ) ) ;
-    $nuevafecha = date("Y-m-d H:i:s" , $nuevafecha );
+    $nuevafecha = date("Y-m-d" , $nuevafecha );
     //$nacionalidad = '';
     $genero = '';
     $beneficiario = '';
@@ -53,6 +53,7 @@ include_once('../class.upload.php');
     $sueldo_mensual = '';
     $zona_militar = '';
     $img_edited = '';
+    $armas_servicios = '';
 
     // Asignar el valor que viene en el request a variables *
     if (!$id) { $id  = isset_or('id', '0'); };
@@ -87,6 +88,7 @@ include_once('../class.upload.php');
     if (!$computo_servicios) { $computo_servicios = isset_or('computo_servicios', ''); };
     if (!$sueldo_mensual) { $sueldo_mensual = isset_or('sueldo_mensual', ''); };
     if (!$zona_militar) { $zona_militar = isset_or('zona_militar', ''); };
+    if (!$armas_servicios) { $armas_servicios = isset_or('armas_servicios', ''); };
     if (!$img_edited) { $img_edited = isset_or('image_aviary', ''); };
 
 
@@ -135,12 +137,12 @@ include_once('../class.upload.php');
 
             $sql2 = "INSERT INTO av_datos_servicios (id, grado_militar,
                     compania, puesto, fecha_alta, fecha_baja, motivo_baja,
-                    computo_servicios, sueldo_mensual, zona_militar) VALUES ('".$last_id."',
+                    computo_servicios, sueldo_mensual, zona_militar, armas_servicios) VALUES ('".$last_id."',
                     '".utf8_decode($grado_militar)."', '".utf8_decode($compania)."',
                     '".utf8_decode($puesto)."', '".utf8_decode($fecha_alta)."',
                     '".utf8_decode($fecha_baja)."', '".utf8_decode($motivo_baja)."',
                     '".utf8_decode($computo_servicios)."', '".$sueldo_mensual."',
-                    '".utf8_decode($zona_militar)."');";
+                    '".utf8_decode($zona_militar)."', '".utf8_decode($armas_servicios)."');";
                 if (mysql_query($sql2)) {
                     success_msg();
                 } else {
@@ -182,7 +184,8 @@ include_once('../class.upload.php');
                     motivo_baja = '".utf8_decode($motivo_baja)."',
                     computo_servicios = '".utf8_decode($computo_servicios)."',
                     sueldo_mensual = '".$sueldo_mensual."',
-                    zona_militar = '".utf8_decode($zona_militar)."'
+                    zona_militar = '".utf8_decode($zona_militar)."',
+                    armas_servicios = '".utf8_decode($armas_servicios)."'
                     WHERE id = '".$id."'";
                     if (mysql_query($sql2)) {
                         success_msg();
@@ -243,16 +246,17 @@ if(!$id){
 $id = $last_id;
 }
 //query for PDF
-$sqlpdf = "SELECT codigo,
-                nombre,
-                nombre2,
-                apellido,
-                apellido2,
-                apellido3,
-                dpi,
-                foto,
-                fecha_vencimiento_carnet
-        FROM av_datos_personales
+$sqlpdf = "SELECT   codigo,
+                    nombre,
+                    nombre2,
+                    apellido,
+                    apellido2,
+                    apellido3,
+                    dpi,
+                    foto,
+                    fecha_vencimiento_carnet,
+                    (SELECT nombre from ap_catalogos WHERE tipo_catalogo = 37 AND beneficiario = id) as beneficiario
+                    FROM av_datos_personales
         WHERE id = ".$id;
         $data = mysql_query($sqlpdf);
         $data = mysql_fetch_assoc($data);
@@ -301,7 +305,7 @@ $sqlpdf = "SELECT codigo,
                             <?php echo $mensaje3; ?>
                         </p>
                         <?php
-                        $parametros = "nombre=".$data['nombre']."&nombre2=".$data['nombre2']."&apellido=".$data['apellido']."&apellido2=".$data['apellido2']."&dpi=".$data['dpi']."&codigo=".$data['codigo']."&foto=".$data['foto']."&fecha_vencimiento_carnet=".$data['fecha_vencimiento_carnet'];
+                        $parametros = "nombre=".$data['nombre']."&nombre2=".$data['nombre2']."&apellido=".$data['apellido']."&apellido2=".$data['apellido2']."&dpi=".$data['dpi']."&codigo=".$data['codigo']."&foto=".$data['foto']."&fecha_vencimiento_carnet=".$data['fecha_vencimiento_carnet']."&beneficiario=".$data['beneficiario'];
                         ?>
                     <div class="btn-group">
                         <a href="../pdf/carnet/carnet1.php?<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
