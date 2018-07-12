@@ -19,7 +19,7 @@
                         <form class="form-horizontal" role="form" action="index.php" method="get">
 <!-- Inicia Formulario (Peledahe) -->
                             <!-- -->
-                            <input class="text" name="p" type="hidden" value="inmuebles/casas_list.php"/>
+                            <input class="text" name="p" type="hidden" value="usuarios/veteranos_list.php"/>
                             <!-- -->
 
                             <div class="form-group">
@@ -36,12 +36,12 @@
                             <div class="form-group">
                                 <label for="nit" class="col-sm-3 control-label">Código Veterano</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" id="nit" placeholder="Código" name="nit" value="<?php echo utf8_encode($codigo); ?>">
+                                    <input type="text" class="form-control" id="codigo" placeholder="Código" name="codigo" value="<?php echo utf8_encode($codigo); ?>">
                                 </div>
 
                                 <label for="cliente" class="col-sm-2 control-label">D.P.I.</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" id="cliente" placeholder="Número de D.P.I." name="cliente" value="<?php echo utf8_encode($dpi); ?>">
+                                    <input type="text" class="form-control" id="dpi" placeholder="Número de D.P.I." name="dpi" value="<?php echo utf8_encode($dpi); ?>">
                                 </div>
                             </div>
 
@@ -112,7 +112,7 @@
                                 <label for="fecha_nacimiento" class="col-sm-2 control-label">Fecha de Nacimiento</label>
                                 <div class="col-sm-3">
                                       <div class="form-group input-group">
-                                        <input name="fecha_nacimiento" class="form-control" id="dpYears" data-date="1940-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years" size="16" type="text" value="<?php if(!$fecha_nacimiento){echo "1940-01-01";}else {echo $fecha_nacimiento;}?>">
+                                        <input name="fecha_nacimiento" class="form-control" id="dpYears" data-date="1940-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years" size="16" type="text" value="<?php if(!$fecha_nacimiento){echo "";}else {echo $fecha_nacimiento;}?>">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                       </div>
                                 </div>
@@ -194,7 +194,7 @@
                             </div>
                             <label for="compania" class="col-sm-2 control-label">Compañia</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" id="compania" placeholder="compania" name="compania" value="<?php echo $compania; ?>">
+                                <input type="text" class="form-control" id="compania" placeholder="Compañia" name="compania" value="<?php echo $compania; ?>">
                             </div>
                         </div>
 
@@ -217,22 +217,22 @@
                             <label for="fecha_alta" class="col-sm-3 control-label">Fecha de Alta</label>
                             <div class="col-sm-3">
                                 <div class="form-group input-group">
-                                    <input name="fecha_alta" class="form-control" id="dpYears2" data-date="1960-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years" size="16" type="text" value="<?php if(!$fecha_alta){echo "1960-01-01";}else {echo $fecha_alta;}?>">
+                                    <input name="fecha_alta" class="form-control" id="dpYears2" data-date="1960-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years" size="16" type="text" value="<?php if(!$fecha_alta){echo "";}else {echo $fecha_alta;}?>">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
                             <label for="fecha_baja" class="col-sm-2 control-label">Fecha de Baja</label>
                             <div class="col-sm-3">
                                 <div class="form-group input-group">
-                                    <input name="fecha_baja" class="form-control" id="dpYears3" data-date="1980-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years" size="16" type="text" value="<?php if(!$fecha_baja){echo "1980-01-01";}else {echo $fecha_baja;}?>">
+                                    <input name="fecha_baja" class="form-control" id="dpYears3" data-date="1980-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years" size="16" type="text" value="<?php if(!$fecha_baja){echo "";}else {echo $fecha_baja;}?>">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
                         </div>
                         <!-- Motivo Baja/Computos Servicios -->
                         <div class ="form-group">
-                        <label for="motivo_baja" class="col-sm-2 control-label">Motivo de Baja</label>
-                            <div class="col-sm-4">
+                        <label for="motivo_baja" class="col-sm-3 control-label">Motivo de Baja</label>
+                            <div class="col-sm-3">
                                 <textarea class="form-control" rows="2" id="motivo_baja" placeholder="" name="motivo_baja"><?php echo $motivo_baja; ?></textarea>
                             </div>
                         <label for="computo_servicios" class="col-sm-2 control-label">Computos de Servicios</label>
@@ -263,3 +263,159 @@
 <?php include_once 'panel/i_foot.php'; ?>
 
 <!-- Finaliza Area Scripts Locales -->
+<script src="../bower_components/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<!-- Inicia Area Scripts Locales * -->
+    <script type="text/javascript">
+        // DatePicker *
+        $(".datepicker").datepicker({
+            format: 'yyyy-mm-dd'
+        });
+    </script>
+
+<script>
+var monster = {
+    set: function(name, value, days, path, secure) {
+        var date = new Date(),
+            expires = '',
+            type = typeof(value),
+            valueToUse = '',
+            secureFlag = '';
+        path = path || "/";
+        if (days) {
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        if (type === "object" && type !== "undefined") {
+            if (!("JSON" in window)) throw "Bummer, your browser doesn't support JSON parsing.";
+            valueToUse = encodeURIComponent(JSON.stringify({
+                v: value
+            }));
+        }
+        else {
+            valueToUse = encodeURIComponent(value);
+        }
+        if (secure) {
+            secureFlag = "; secure";
+        }
+        document.cookie = name + "=" + valueToUse + expires + "; path=" + path + secureFlag;
+    },
+    get: function(name) {
+        var nameEQ = name + "=",
+            ca = document.cookie.split(';'),
+            value = '',
+            firstChar = '',
+            parsed = {};
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) {
+                value = decodeURIComponent(c.substring(nameEQ.length, c.length));
+                firstChar = value.substring(0, 1);
+                if (firstChar == "{") {
+                    try {
+                        parsed = JSON.parse(value);
+                        if ("v" in parsed) return parsed.v;
+                    }
+                    catch (e) {
+                        return value;
+                    }
+                }
+                if (value == "undefined") return undefined;
+                return value;
+            }
+        }
+        return null;
+    }
+};
+if (!monster.get('cookieConsent')) {
+    var cookieConsentAct = function() {
+            document.getElementById('cookieConsent').style.display = 'none';
+            monster.set('cookieConsent', 1, 360, '/');
+        };
+    document.getElementById('cookieConsent').style.display = 'block';
+    var cookieConsentEl = document.getElementById('cookieConsentAgree');
+    if (cookieConsentEl.addEventListener) {
+        cookieConsentEl.addEventListener('click', cookieConsentAct, false);
+    }
+    else if (cookieConsentEl.attachEvent) {
+        cookieConsentEl.attachEvent("onclick", cookieConsentAct);
+    }
+    else {
+        cookieConsentEl["onclick"] = cookieConsentAct;
+    }
+}
+</script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script>
+    if (top.location != location) {
+    top.location.href = document.location.href ;
+  }
+        $(function(){
+            window.prettyPrint && prettyPrint();
+            $('#dp1').datepicker({
+                format: 'mm-dd-yyyy'
+            });
+            $('#dp2').datepicker();
+            $('#dp3').datepicker();
+            $('#dp3').datepicker();
+            $('#dpYears').datepicker();
+            $('#dpYears2').datepicker();
+            $('#dpYears3').datepicker();
+            $('#dpMonths').datepicker();
+
+
+            var startDate = new Date(2012,1,20);
+            var endDate = new Date(2012,1,25);
+            $('#dp4').datepicker()
+                .on('changeDate', function(ev){
+                    if (ev.date.valueOf() > endDate.valueOf()){
+                        $('#alert').show().find('strong').text('The start date can not be greater then the end date');
+                    } else {
+                        $('#alert').hide();
+                        startDate = new Date(ev.date);
+                        $('#startDate').text($('#dp4').data('date'));
+                    }
+                    $('#dp4').datepicker('hide');
+                });
+            $('#dp5').datepicker()
+                .on('changeDate', function(ev){
+                    if (ev.date.valueOf() < startDate.valueOf()){
+                        $('#alert').show().find('strong').text('The end date can not be less then the start date');
+                    } else {
+                        $('#alert').hide();
+                        endDate = new Date(ev.date);
+                        $('#endDate').text($('#dp5').data('date'));
+                    }
+                    $('#dp5').datepicker('hide');
+                });
+
+        // disabling dates
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+        var checkin = $('#dpd1').datepicker({
+          onRender: function(date) {
+            return date.valueOf() < now.valueOf() ? 'disabled' : '';
+          }
+        }).on('changeDate', function(ev) {
+          if (ev.date.valueOf() > checkout.date.valueOf()) {
+            var newDate = new Date(ev.date)
+            newDate.setDate(newDate.getDate() + 1);
+            checkout.setValue(newDate);
+          }
+          checkin.hide();
+          $('#dpd2')[0].focus();
+        }).data('datepicker');
+        var checkout = $('#dpd2').datepicker({
+          onRender: function(date) {
+            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+          }
+        }).on('changeDate', function(ev) {
+          checkout.hide();
+        }).data('datepicker');
+        });
+    </script>
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
