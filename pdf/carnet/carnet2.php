@@ -13,6 +13,7 @@ $dpi = $_REQUEST['dpi'];
 $codigo = $_REQUEST['codigo'];
 $foto = $_REQUEST['foto'];
 $fecha_vencimiento_carnet = $_REQUEST['fecha_vencimiento_carnet'];
+$beneficiario = $_REQUEST['beneficiario'];
 
 // create new PDF document
 $custom_layout = array(85.5, 54);
@@ -71,29 +72,37 @@ $pdf->SetAutoPageBreak(false, 0);
 // set bacground image
 //---------------------Text----------------------
 
+$pdf->SetFont('helvetica', 'B', 12);
 $pdf->SetXY(5,22);
-$pdf->Write(0,"Nombre:");
+$pdf->Cell(45, 0, $nombre." ".$nombre2, 0, 1, 'C', 0, '', 1);
+//$pdf->Cell(45, 0, "William Osveli", 0, 1, 'C', 0, '', 1);
+//$pdf->Write(0,"Nombre:");
 $pdf->SetXY(19,22);
-$pdf->Write(0,$nombre);$pdf->Write(0,"   ");$pdf->Write(0,$nombre2);
+//$pdf->Write(0,$nombre);$pdf->Write(0,"   ");$pdf->Write(0,$nombre2);
 //$pdf->SetXY(17,22);
 //$pdf->Write(0,$nombre2);
 $pdf->SetXY(5,27);
-$pdf->Write(0,"Apellido:");
+$pdf->Cell(45, 0, $apellido." ".$apellido2, 0, 1, 'C', 0, '', 1);
 $pdf->SetXY(19,27);
 $pdf->Write(0,$apellido);$pdf->Write(0,"   ");$pdf->Write(0,$apellido2);
 //$pdf->SetXY(17,27);
 //$pdf->Write(0,$apellido2);
-$pdf->SetXY(5,32);
-$pdf->Write(0,"DPI:");
-$pdf->SetXY(19,32);
-$pdf->Write(0,$dpi);
+$pdf->SetFont('helvetica', 'B', 7);
 $pdf->SetXY(5,37);
-$pdf->Write(0,"Codigo:");
+$pdf->Write(0,"DPI:");
 $pdf->SetXY(19,37);
+$pdf->Write(0,$dpi);
+$pdf->SetXY(5,41);
+$pdf->Write(0,"Codigo:");
+$pdf->SetXY(19,41);
 $pdf->Write(0,$codigo);
-$pdf->SetXY(5,42);
+$pdf->SetXY(5,45);
+$pdf->Write(0,"Beneficiario:");
+$pdf->SetXY(19,45);
+$pdf->Write(0,$beneficiario);
+$pdf->SetXY(5,49);
 $pdf->Write(0,"Vence:");
-$pdf->SetXY(15,42);
+$pdf->SetXY(15,49);
 $pdf->Write(0,$fecha_vencimiento_carnet);
 $pdf->writeHTMLCell(30, 15, 54, 18, '<img src="'.$foto.'">');
 //---------------------Text----------------------
