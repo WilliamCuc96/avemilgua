@@ -13,6 +13,7 @@ $dpi = $_REQUEST['dpi'];
 $codigo = $_REQUEST['codigo'];
 $foto = $_REQUEST['foto'];
 $fecha_vencimiento_carnet = $_REQUEST['fecha_vencimiento_carnet'];
+$beneficiario = $_REQUEST['beneficiario'];
 
 // create new PDF document
 $custom_layout = array(85.5, 54);
