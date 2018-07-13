@@ -27,9 +27,9 @@ $sql_host           = "localhost";  // Host, nombre del servidor o IP del servid
 // Desarrollo local------
 $sql_db             = "avemilgua";  //impulsar_gescon Base de datos que se usario
 $sql_usuario        = "root";   // Usuario de Mysql
-$sql_pass           = "root";     // contrasenia de Mysql
-$ap_nombre_ct       = "AVEMILGUA - Local";  // Nombre de la aplicación Corto <i class='fa fa-key'></i>
-$ap_nombre_lg       = "<i class='fa fa-key'></i> PDV Titon - Local";  // Nombre de la aplicación Largo
+$sql_pass           = "R1icardoG21998";     // contrasenia de Mysql
+$ap_nombre_ct       = "AVEMILGUA - Consola";  // Nombre de la aplicación Corto <i class='fa fa-key'></i>
+$ap_nombre_lg       = "<i class='fa address-card'></i> AVEMILGUA - Consola";  // Nombre de la aplicación Largo
 //$entorno            = 1;  // 1 / 0
 // Desarrollo insayd.com ------
 //$sql_db           = "insayd_cyber";	//impulsar_gescon Base de datos que se usario
