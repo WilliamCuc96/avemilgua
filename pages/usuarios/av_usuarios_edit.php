@@ -474,7 +474,7 @@
                         <!-- Grado Militar/compania/Puesto-->
                         <div class="form-group">
                             <label for="grado_militar" class="col-sm-2 control-label">Grado Militar</label>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 <select id="grado_militar" class="form-control col-md-12" name="grado_militar" >
                                     <?php
                                         $sql2="SELECT  id, nombre
@@ -493,13 +493,9 @@
                                     ?>
                                 </select>
                             </div>
-                            <label for="zona_militar" class="col-sm-2 control-label">Zona Militar</label>
-                            <div class="col-sm-2">
-                                <input type="text" class="form-control" id="zona_militar" placeholder="Zona" name="zona_militar" value="<?php echo $zona_militar; ?>">
-                            </div>
                             <div class="form-group">
                             <label for="armas_servicios" class="col-sm-2 control-label">Armas y Servicios</label>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <select id="armas_servicios" class="form-control col-md-12" name="armas_servicios" >
                                     <?php
                                         $sql2="SELECT  id, nombre
@@ -520,13 +516,19 @@
                             </div>
                         </div>
                     </div>
-                        <div class="form-group">
-                            <label for="compania" class="col-sm-2 control-label">Compañia/Unidad</label>
+                        <div class="form-group">   
+                        <label for="zona_militar" class="col-sm-2 control-label">Dependencia Militar</label>
                             <div class="col-sm-4">
+                                <input type="text" class="form-control" id="zona_militar" placeholder="Zona" name="zona_militar" value="<?php echo $zona_militar; ?>">
+                            </div>
+                            <label for="compania" class="col-sm-2 control-label">Compañia/Unidad</label>
+                            <div class="col-sm-3">
                                 <input type="text" class="form-control" id="compania" placeholder="Compañia/Unidad" name="compania" value="<?php echo $compania; ?>">
                             </div>
+                        </div>
+                        <div class="form-group">
                             <label for="puesto" class="col-sm-2 control-label">Ultimo Puesto</label>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <input type="text" class="form-control" id="puesto" placeholder="Puesto" name="puesto" value="<?php echo $puesto; ?>">
                             </div>
                         </div>

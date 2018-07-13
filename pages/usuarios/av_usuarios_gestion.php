@@ -265,6 +265,21 @@ $sqlpdf = "SELECT   codigo,
         $data = mysql_query($sqlpdf);
         $data = mysql_fetch_assoc($data);
 
+        //echo date_format($date, 'd/m/Y H:i:s');
+
+        $fecha = $data['fecha_vencimiento_carnet'];
+
+        
+
+        $date = new DateTime($fecha);
+        $timestamp = $date->getTimestamp();
+
+        $nuevafecha = date("jS F Y", $timestamp);
+        
+        
+
+        //$mensaje5 =  $nuevafecha;
+
  ?>
 <div id="page-wrapper">
     <div class="container-fluid">
@@ -276,6 +291,7 @@ $sqlpdf = "SELECT   codigo,
             <?php if($data['foto'] == null or $data['foto'] == ""): ?>
                 <div class="col-md-12 text-center">
                         <?php echo $mensaje1; ?>
+                        <?php echo $mensaje5; ?>
                 </div>
                 <div class="col-md-12 text-center">
                     <div class="">
@@ -309,7 +325,7 @@ $sqlpdf = "SELECT   codigo,
                             <?php echo $mensaje3; ?>
                         </p>
                         <?php
-                        $parametros = "nombre=".$data['nombre']."&nombre2=".$data['nombre2']."&apellido=".$data['apellido']."&apellido2=".$data['apellido2']."&dpi=".$data['dpi']."&codigo=".$data['codigo']."&foto=".$data['foto']."&fecha_vencimiento_carnet=".$data['fecha_vencimiento_carnet']."&beneficiario=".$data['beneficiario'];
+                        $parametros = "nombre=".$data['nombre']."&nombre2=".$data['nombre2']."&apellido=".$data['apellido']."&apellido2=".$data['apellido2']."&dpi=".$data['dpi']."&codigo=".$data['codigo']."&foto=".$data['foto']."&fecha_vencimiento_carnet=".$nuevafecha."&beneficiario=".$data['beneficiario'];
                         ?>
                     <div class="btn-group">
                         <a href="../pdf/carnet/carnet1.php?<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
