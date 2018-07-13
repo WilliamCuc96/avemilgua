@@ -274,11 +274,11 @@ $sqlpdf = "SELECT   codigo,
         $date = new DateTime($fecha);
         $timestamp = $date->getTimestamp();
 
-        $nuevafecha = date("jS F Y", $timestamp);
+        $nuevafecha = date("d-m-Y", $timestamp);
         
-        
+        //$dia = date("F", $nuevafecha);
 
-        //$mensaje5 =  $nuevafecha;
+        $mensaje5 =  $nuevafecha;
 
  ?>
 <div id="page-wrapper">
