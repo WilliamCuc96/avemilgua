@@ -114,7 +114,8 @@
                         a.apellido2, 
                         a.apellido3, 
                         a.dpi, 
-                        a.genero, 
+                        a.genero,
+                        a.beneficiario, 
                         a.fecha_nacimiento, 
                         a.lugar_nacimiento, 
                         a.vecindad, 
@@ -163,6 +164,7 @@
                 $apellido3 = utf8_encode($row['apellido3']);
                 $dpi = $row['dpi'];
                 $foto = $row['foto'];
+                $beneficiario = $row['beneficiario'];
                 //$nacionalidad = utf8_encode($row['nacionalidad']);
                 $genero = $row['genero'];
                 $fecha_nacimiento = $row['fecha_nacimiento'];
@@ -331,7 +333,7 @@
                                     <?php
                                         while($row2=mysql_fetch_assoc($resp2)){
                                             print '<option value="'.$row2['id'].'" ';
-                                            if ($beneficiario == $row2['comodin']) { print ' selected="selected" '; };
+                                            if ($beneficiario == $row2['nombre']) { print ' selected="selected" '; };
                                             print ' >'.utf8_encode($row2['nombre']).'</option>';
                                         }
                                     ?>

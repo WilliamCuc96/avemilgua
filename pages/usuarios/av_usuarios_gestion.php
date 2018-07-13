@@ -167,6 +167,7 @@ include_once('../class.upload.php');
                     apellido3 = '".utf8_decode($apellido3)."',
                     dpi = '".$dpi."', nacionalidad = '".utf8_decode($nacionalidad)."',
                     genero = '".$genero."',
+                    beneficiario = '".$beneficiario."',
                     fecha_nacimiento = '".$fecha_nacimiento."',
                     lugar_nacimiento = '".utf8_decode($lugar_nacimiento)."',
                     vecindad = '".utf8_decode($vecindad)."',
@@ -278,7 +279,7 @@ $sqlpdf = "SELECT   codigo,
         
         //$dia = date("F", $nuevafecha);
 
-        //$mensaje5 =  $nuevafecha;
+        $mensaje5 =  $data['beneficiario'];
 
  ?>
 <div id="page-wrapper">
