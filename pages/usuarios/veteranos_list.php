@@ -1,7 +1,7 @@
 <?php
 //Definición de Variables locales *
     // av_datos_personales
-    global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $genero; $fecha_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $foto; $fecha_vencimiento_carnet;
+    global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $genero; $fecha_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $foto; $fecha_vencimiento_carnet; $armas_servicios;
 
     // av_datos_servicios
     global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $img_edited;
@@ -42,6 +42,7 @@
     $sueldo_mensual = '';
     $zona_militar = '';
     $img_edited = '';
+    $armas_servicios = '';
 
 
     // Asignar el valor que viene en el request a variables *
@@ -77,16 +78,20 @@
     if (!$sueldo_mensual) { $sueldo_mensual = isset_or('sueldo_mensual', ''); };
     if (!$zona_militar) { $zona_militar = isset_or('zona_militar', ''); };
     if (!$img_edited) { $img_edited = isset_or('image_aviary', ''); };
+    if (!$armas_servicios) { $armas_servicios = isset_or('armas_servicios', ''); };
 
     $var_where1 = ' ';
     // Datos personales
 
     if ($nombre) {
-        $var_where1 = $var_where1 . "AND UPPER(a.nombre) = _utf8  '" . $nombre . "' COLLATE utf8_general_ci "
-                                  . "OR UPPER(a.nombre2) = _utf8 '" . $nombre . "' COLLATE utf8_general_ci "
-                                  . "OR UPPER(a.apellido) = _utf8 '" . $nombre . "' COLLATE utf8_general_ci "
-                                  . "OR UPPER(a.apellido2) = _utf8 '" . $nombre . "' COLLATE utf8_general_ci "
-                                  . "OR UPPER(a.apellido3) = _utf8 '" . $nombre . "' COLLATE utf8_general_ci ";
+        $var_where1 = $var_where1 . "AND UPPER(a.nombre) LIKE _utf8  '" . $nombre . "' COLLATE utf8_general_ci "
+                                  . "OR UPPER(a.nombre2) LIKE _utf8 '" . $nombre . "' COLLATE utf8_general_ci ";
+    };
+
+    if ($apellido) {
+        $var_where1 = $var_where1 . "AND UPPER(a.apellido) LIKE _utf8  '" . $apellido . "' COLLATE utf8_general_ci "
+                                  . "OR UPPER(a.apellido2) LIKE _utf8 '" . $apellido . "' COLLATE utf8_general_ci "
+                                  . "OR UPPER(a.apellido3) LIKE _utf8 '" . $apellido . "' COLLATE utf8_general_ci ";
     };
 
     if ($codigo) {
@@ -116,7 +121,14 @@
     if ($profesion) {
         $var_where1 = $var_where1 . "AND a.profesion = '" . $profesion . "'";
     }
-    //correo o telefono
+
+    if ($armas_servicios) {
+        $var_where1 = $var_where1 . "AND b.armas_servicios = '" . $armas_servicios . "'";
+    }
+
+    if ($correo) {
+        $var_where1 = $var_where1 . "AND UPPER(a.correo) LIKE UPPER('%" . $correo . "%') ";
+    }
 
     // Datos servicios
     if ($grado_militar) {
@@ -140,7 +152,7 @@
         $var_where1 = $computo_servicios . " AND UPPER(b.motivo_baja) LIKE UPPER('%" . $computo_servicios . "%') ";
     };
 
-    $sql1 = "SELECT a.id as vid, a.nombre, a.nombre2, a.apellido, a.apellido2, a.codigo, b.grado_militar, b.fecha_baja, a.direccion, a.vecindad, a.telefono, (select b.nombre from ap_municipios b where b.id = a.vecindad) as municipio FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id
+    $sql1 = "SELECT a.id as vid, a.nombre, a.nombre2, a.apellido, a.apellido2, a.codigo, b.grado_militar, b.fecha_baja, a.vecindad, a.telefono, (select b.nombre from ap_municipios b where b.id = a.vecindad) as municipio FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id
                 ".$var_where1." ";
     $resp1 = mysql_query($sql1);
 ?>
@@ -199,7 +211,6 @@ if (!$resp1) { // Error en la ejecución del query
                                     <th class="hidden-xs hidden-sm">Código</th>
                                     <th class="hidden-xs hidden-sm">Grado Militar</th>
                                     <th class="hidden-xs">Fecha de Baja</th>
-                                    <th class="hidden-xs">Dirección</th>
                                     <th class="hidden-xs">Vecindad</th>
                                     <th class="hidden-xs">Teléfono</th>
                                     <th class=""><i class="fa fa-cogs"></i></th>
@@ -215,7 +226,6 @@ if (!$resp1) { // Error en la ejecución del query
         print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['codigo'])."</td>";
         print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['grado_militar'])."</td>";
         print "  <td class='hidden-xs'>".utf8_encode($row['fecha_baja'])."</td>";
-        print "  <td class='hidden-xs'>".utf8_encode($row['direccion'])."</td>";
         print "  <td class='hidden-xs'>".utf8_encode($row['municipio'])."</td>";
         print "  <td class='hidden-xs' nowrap>".utf8_encode($row['telefono'])."</td>";
         print "  <td class='center' align='center' nowrap>

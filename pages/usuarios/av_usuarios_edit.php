@@ -8,6 +8,10 @@
     // av_datos_servicios
     global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $armas_servicios;
 
+    // av_archivo
+
+    global $archivo;
+
 //Inicialización de Variables locales *
     // datos_personales
     $id = '';
@@ -565,12 +569,12 @@
                         </div>
                     </div>
                     <!-- Carpeta 4 -->
-                    <form action="sube.php" method="post" enctype="multipart/form-data">
+                    <form action="uploader.php" method="post" enctype="multipart/form-data">
                         <div class="tab-pane fade" id="box_tab4">
                             <div class="form-group">
                                 <label for="archivo" class="col-sm-3 control-label">Archivo</label>
                                 <div class="col-sm-9">
-                                    <input type="file" class="file-input" id="archivo" placeholder="Archivo" name="archivo" value=""  >
+                                    <input type="file" class="file-input" id="archivo" placeholder="Archivo" name="archivo" value="<?php echo $archivo; ?>"  >
                                 </div>
                             </div>
 
@@ -590,7 +594,7 @@
 
                             <center>
                             <div class='btn-group' >
-                                <button type="file" class="btn btn-success" value="Upload" name="archivo" >Subir Archivo</button>
+                                <button type="submit" class="btn btn-success" value="Upload" name="btn_archivo" >Subir Archivo</button>
                                 <button type="reset" class="btn btn-default" value="Cancelar">Cancelar</button>
                             </div>
                         </div>

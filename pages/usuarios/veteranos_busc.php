@@ -1,3 +1,5 @@
+
+
 <!-- Page wrapper -->
 <div id="page-wrapper">
     <div class="container-fluid">
@@ -27,9 +29,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="nombre" class="col-sm-3 control-label">Nombre Veterano</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombres/Apellidos" value="<?php echo $nombre; ?>"  >
+                                <label for="nombre" class="col-sm-3 control-label">Nombre</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresar un solo nombre" value="<?php echo $nombre; ?>"  >
+                                </div>
+                                <label for="apellido" class="col-sm-2 control-label">Apellido</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingresar un solo apellido" value="<?php echo $apellido; ?>"  >
                                 </div>
                             </div>
 
@@ -189,24 +195,62 @@
 
                             <div class="form-group">
                             <label for="grado_militar" class="col-sm-3 control-label">Grado Militar</label>
-                            <div class="col-sm-3">
-                                <input type="text" class="form-control" id="grado_militar" placeholder="Grado" name="grado_militar" value="<?php echo $grado_militar; ?>">
+                            <div class="col-sm-2">
+                                <select id="grado_militar" class="form-control col-md-12" name="grado_militar" >
+                                    <?php
+                                        $sql2="SELECT  id, nombre
+                                                FROM ap_catalogos
+                                                WHERE tipo_catalogo = 39 AND institucion = 1
+                                                ORDER BY id";
+                                        $resp2 = mysql_query($sql2);
+                                    ?>
+                                    <option value="" selected="selected" >Seleccionar</option>
+                                    <?php
+                                        while($row2=mysql_fetch_assoc($resp2)){
+                                            print '<option value="'.$row2['id'].'" ';
+                                            if ($grado_militar == $row2['id']) { print ' selected="selected" '; };
+                                            print ' >'.utf8_encode($row2['nombre']).'</option>';
+                                        }
+                                    ?>
+                                </select>
                             </div>
-                            <label for="compania" class="col-sm-2 control-label">Compañia</label>
-                            <div class="col-sm-3">
-                                <input type="text" class="form-control" id="compania" placeholder="Compañia" name="compania" value="<?php echo $compania; ?>">
+                            <label for="zona_militar" class="col-sm-1 control-label">Zona Militar</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="zona_militar" placeholder="Zona" name="zona_militar" value="<?php echo $zona_militar; ?>">
                             </div>
+                            <label for="armas_servicios" class="col-sm-1 control-label">Armas y Servicios</label>
+                            <div class="col-sm-2">
+                                <select id="armas_servicios" class="form-control col-md-12" name="armas_servicios" >
+                                    <?php
+                                        $sql2="SELECT  id, nombre
+                                                FROM ap_catalogos
+                                                WHERE tipo_catalogo = 40 AND institucion = 1
+                                                ORDER BY nombre";
+                                        $resp2 = mysql_query($sql2);
+                                    ?>
+                                    <option value="" selected="selected" >Seleccionar</option>
+                                    <?php
+                                        while($row2=mysql_fetch_assoc($resp2)){
+                                            print '<option value="'.$row2['id'].'" ';
+                                            if ($armas_servicios == $row2['id']) { print ' selected="selected" '; };
+                                            print ' >'.utf8_encode($row2['nombre']).'</option>';
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+
                         </div>
 
 
                         <div class="form-group">
-                            <label for="puesto" class="col-sm-3 control-label">Puesto</label>
+                            <label for="compania" class="col-sm-3 control-label">Compañia/Unidad</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="compania" placeholder="Compañia" name="compania" value="<?php echo $compania; ?>">
+                            </div>
+
+                            <label for="puesto" class="col-sm-2 control-label">Último Puesto</label>
                             <div class="col-sm-3">
                                 <input type="text" class="form-control" id="puesto" placeholder="Puesto" name="puesto" value="<?php echo $puesto; ?>">
-                            </div>
-                            <label for="zona_militar" class="col-sm-2 control-label">Zona Militar</label>
-                            <div class="col-sm-3">
-                                <input type="text" class="form-control" id="zona_militar" placeholder="Zona" name="zona_militar" value="<?php echo $zona_militar; ?>">
                             </div>
 
                         </div>
@@ -241,6 +285,14 @@
                             </div>
 
                         </div>
+
+                        <div class="form-group">
+                                <h3>&nbsp;&nbsp; Opciones de Administración</h3>
+                        </div>
+
+
+
+                        <!----------------------------------------------------------------------------------------->
                         <br>
                             <center>
                                 <div class='btn-group' >
