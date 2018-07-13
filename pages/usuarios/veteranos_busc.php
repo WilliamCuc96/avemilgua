@@ -290,6 +290,35 @@
                                 <h3>&nbsp;&nbsp; Opciones de Administración</h3>
                         </div>
 
+                        <div class="form-group">
+                            <label for="user_registro" class="col-sm-3 control-label">Usuario Registro</label>
+                                <div class="col-sm-3">
+                                    <select id="user_registro" class="form-control col-md-12" name="user_registro" >
+                                        <?php
+                                            $sql2="SELECT  id, nombre, apellido
+                                                    FROM ap_usuarios
+                                                    WHERE permiso = 3
+                                                    ORDER BY id";
+                                            $resp2 = mysql_query($sql2);
+                                        ?>
+                                        <option value="" selected="selected" >Seleccionar</option>
+                                        <?php
+                                            while($row2=mysql_fetch_assoc($resp2)){
+                                                print '<option value="'.$row2['id'].'" ';
+                                                if ($user_registro== $row2['id']) { print ' selected="selected" '; };
+                                                print ' >'.utf8_encode($row2['nombre']). ' ' .utf8_encode($row2['apellido']). '</option>';
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <label for="fecha_registro" class="col-sm-2 control-label">Fecha de Registro</label>
+                                <div class="col-sm-3">
+                                    <div class="form-group input-group">
+                                        <input name="fecha_registro" class="form-control" id="dpYears4" data-date="1980-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years" size="16" type="text" value="<?php if(!$fecha_registro){echo "";}else {echo $fecha_registro;}?>">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                            </div>
+                        </div>
 
 
                         <!----------------------------------------------------------------------------------------->
@@ -412,9 +441,11 @@ if (!monster.get('cookieConsent')) {
             $('#dp2').datepicker();
             $('#dp3').datepicker();
             $('#dp3').datepicker();
+            $('#dp4').datepicker();
             $('#dpYears').datepicker();
             $('#dpYears2').datepicker();
             $('#dpYears3').datepicker();
+            $('#dpYears4').datepicker();
             $('#dpMonths').datepicker();
 
 

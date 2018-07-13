@@ -4,8 +4,7 @@
     global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $genero; $fecha_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $foto; $fecha_vencimiento_carnet; $armas_servicios;
 
     // av_datos_servicios
-    global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $img_edited;
-
+    global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $img_edited; $user_registro; $fecha_registro;
 
     //Inicialización de Variables locales
     // av_datos_personales
@@ -44,6 +43,9 @@
     $img_edited = '';
     $armas_servicios = '';
 
+    $user_registro = '';
+    $fecha_registro = '';
+
 
     // Asignar el valor que viene en el request a variables *
     if (!$id) { $id  = isset_or('id', '0'); };
@@ -79,6 +81,9 @@
     if (!$zona_militar) { $zona_militar = isset_or('zona_militar', ''); };
     if (!$img_edited) { $img_edited = isset_or('image_aviary', ''); };
     if (!$armas_servicios) { $armas_servicios = isset_or('armas_servicios', ''); };
+
+    if (!$user_registro) { $user_registro = isset_or('user_registro', ''); };
+    if (!$fecha_registro) { $fecha_registro = isset_or('fecha_registro', ''); };
 
     $var_where1 = ' ';
     // Datos personales
@@ -151,6 +156,16 @@
     if ($computo_servicios) {
         $var_where1 = $computo_servicios . " AND UPPER(b.motivo_baja) LIKE UPPER('%" . $computo_servicios . "%') ";
     };
+
+    // Opciones Administracion
+    if ($user_registro) {
+        $var_where1 = $var_where1 . "AND a.user_registro = '" . $user_registro . "' ";
+    };
+
+    if ($fecha_registro) {
+        $var_where1 = $var_where1 . "AND a.fecha_registro = '" . $fecha_registro . "' ";
+    };
+
 
     $sql1 = "SELECT a.id as vid, a.nombre, a.nombre2, a.apellido, a.apellido2, a.codigo, b.grado_militar, b.fecha_baja, a.vecindad, a.telefono, (select b.nombre from ap_municipios b where b.id = a.vecindad) as municipio FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id
                 ".$var_where1." ";
