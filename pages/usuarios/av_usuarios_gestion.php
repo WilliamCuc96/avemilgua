@@ -278,7 +278,7 @@ $sqlpdf = "SELECT   codigo,
         
         //$dia = date("F", $nuevafecha);
 
-        $mensaje5 =  $nuevafecha;
+        //$mensaje5 =  $nuevafecha;
 
  ?>
 <div id="page-wrapper">
