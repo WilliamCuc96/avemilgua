@@ -27,7 +27,7 @@ $sql_host           = "localhost";  // Host, nombre del servidor o IP del servid
 // Desarrollo local------
 $sql_db             = "avemilgua";  //impulsar_gescon Base de datos que se usario
 $sql_usuario        = "root";   // Usuario de Mysql
-$sql_pass           = "R1icardoG21998";     // contrasenia de Mysql
+$sql_pass           = "root";     // contrasenia de Mysql
 $ap_nombre_ct       = "AVEMILGUA - Local";  // Nombre de la aplicación Corto <i class='fa fa-key'></i>
 $ap_nombre_lg       = "<i class='fa fa-key'></i> PDV Titon - Local";  // Nombre de la aplicación Largo
 //$entorno            = 1;  // 1 / 0
@@ -50,7 +50,7 @@ $entorno            = 0;
 $ap_cuenta_mail     = "envio@crm.e.gt";     //Correo de envio de mails;
 $ap_pass_mail       = "Javirala24.gt";                       //Password de mail;
 $ap_correo_mail     = "soporte@crm.e.gt";                 //Correo a mostrar en el envio y destino de correos de clientes;
-$ap_nombre_mail     = "CyberSeg";                    //Nombre a mostrar en el envio;
+$ap_nombre_mail     = "AVEMILGUA";                    //Nombre a mostrar en el envio;
 //$ap_forma_mail      = "ssl";                              //Forma de envio envio de mails;
 $ap_forma_mail      = "";                              //Forma de envio envio de mails;
 $ap_smtpauth_mail   = true;                               //Requiere autenticacion smtp
@@ -62,7 +62,7 @@ $ap_error_mail      = "El mensaje no pudo ser enviado, llame al +502.41786940"; 
 
 // Generales de Aplicación -------
 //$ap_nombre_ct       = "Apolo - ig3.0";	// Nombre de la aplicación Corto <i class='fa fa-key'></i>
-//$ap_nombre_lg       = "<i class='fa fa-key'></i> Apolo - ig3.0";	// Nombre de la aplicación Largo
+//$ap_nombre_lg       = "<i class='fa address-card'></i> Apolo - ig3.0";	// Nombre de la aplicación Largo
 $ap_ico             = "img/logo/cyber-ico.png";
 $ap_logo_login      = "img/logo/cyber_bl.png";
 $ap_logo_interno    = "img/logo/cyber_ng.png";

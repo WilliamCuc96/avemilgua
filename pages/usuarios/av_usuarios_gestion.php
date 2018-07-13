@@ -8,7 +8,7 @@ include_once('../class.upload.php');
     global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $genero; $fecha_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $foto; $fecha_vencimiento_carnet; //$nacionalidad;
 
     // av_datos_servicios
-    global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $img_edited; $armas_servicios;
+    global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $img_edited; $armas_servicios; $fecha_registro; $user_registro;
 
 
 //Inicialización de Variables locales *
@@ -41,6 +41,8 @@ include_once('../class.upload.php');
     $telefono = '';
     $correo = '';
     $nit = '';
+    $fecha_registro = '';
+    $user_registro;
 
     // av_datos_servicios
     $grado_militar = '';
@@ -78,6 +80,7 @@ include_once('../class.upload.php');
     if (!$telefono) { $telefono = isset_or('telefono', ''); };
     if (!$correo) { $correo = isset_or('correo', ''); };
     if (!$nit) { $nit = isset_or('nit', ''); };
+    if (!$fecha_registro) { $fecha_registro = isset_or('fecha_registro', ''); };
 
     if (!$grado_militar) { $grado_militar = isset_or('grado_militar', ''); };
     if (!$compania) { $compania = isset_or('compania', ''); };
@@ -123,7 +126,7 @@ include_once('../class.upload.php');
             $sql1 = "INSERT INTO av_datos_personales (codigo, nombre, nombre2,
                     apellido, apellido2, apellido3, dpi, genero, beneficiario,
                     fecha_nacimiento, lugar_nacimiento, vecindad, estado_civil,
-                    profesion, direccion, telefono, correo, nit, foto, fecha_vencimiento_carnet) VALUES (
+                    profesion, direccion, telefono, correo, nit, foto, fecha_vencimiento_carnet, fecha_registro, user_registro) VALUES (
                     '".utf8_decode($codigo)."', '".utf8_decode($nombre)."',
                     '".utf8_decode($nombre2)."', '".utf8_decode($apellido)."',
                     '".utf8_decode($apellido2)."', '".utf8_decode($apellido3)."',
@@ -131,7 +134,8 @@ include_once('../class.upload.php');
                     '".$fecha_nacimiento."', '".$lugar_nacimiento."', '".$vecindad."',
                     '".$estado_civil."', '".$profesion."',
                     '".utf8_decode($direccion)."', '".utf8_decode($telefono)."',
-                    '".utf8_decode($correo)."', '".utf8_decode($nit)."', '".utf8_decode($img_edited)."', '".utf8_decode($nuevafecha)."');";
+                    '".utf8_decode($correo)."', '".utf8_decode($nit)."', '".utf8_decode($img_edited)."', 
+                    '".utf8_decode($nuevafecha)."', now(), '".utf8_decode($_SESSION['usuario_id'])."');";
             if (mysql_query($sql1)) {
                 $last_id = mysql_insert_id();
 
@@ -163,6 +167,7 @@ include_once('../class.upload.php');
                     apellido3 = '".utf8_decode($apellido3)."',
                     dpi = '".$dpi."', nacionalidad = '".utf8_decode($nacionalidad)."',
                     genero = '".$genero."',
+                    beneficiario = '".$beneficiario."',
                     fecha_nacimiento = '".$fecha_nacimiento."',
                     lugar_nacimiento = '".utf8_decode($lugar_nacimiento)."',
                     vecindad = '".utf8_decode($vecindad)."',
@@ -261,6 +266,21 @@ $sqlpdf = "SELECT   codigo,
         $data = mysql_query($sqlpdf);
         $data = mysql_fetch_assoc($data);
 
+        //echo date_format($date, 'd/m/Y H:i:s');
+
+        $fecha = $data['fecha_vencimiento_carnet'];
+
+        
+
+        $date = new DateTime($fecha);
+        $timestamp = $date->getTimestamp();
+
+        $nuevafecha = date("d-m-Y", $timestamp);
+        
+        //$dia = date("F", $nuevafecha);
+
+        $mensaje5 =  $data['beneficiario'];
+
  ?>
 <div id="page-wrapper">
     <div class="container-fluid">
@@ -272,6 +292,7 @@ $sqlpdf = "SELECT   codigo,
             <?php if($data['foto'] == null or $data['foto'] == ""): ?>
                 <div class="col-md-12 text-center">
                         <?php echo $mensaje1; ?>
+                        <?php echo $mensaje5; ?>
                 </div>
                 <div class="col-md-12 text-center">
                     <div class="">
@@ -305,7 +326,7 @@ $sqlpdf = "SELECT   codigo,
                             <?php echo $mensaje3; ?>
                         </p>
                         <?php
-                        $parametros = "nombre=".$data['nombre']."&nombre2=".$data['nombre2']."&apellido=".$data['apellido']."&apellido2=".$data['apellido2']."&dpi=".$data['dpi']."&codigo=".$data['codigo']."&foto=".$data['foto']."&fecha_vencimiento_carnet=".$data['fecha_vencimiento_carnet']."&beneficiario=".$data['beneficiario'];
+                        $parametros = "nombre=".$data['nombre']."&nombre2=".$data['nombre2']."&apellido=".$data['apellido']."&apellido2=".$data['apellido2']."&dpi=".$data['dpi']."&codigo=".$data['codigo']."&foto=".$data['foto']."&fecha_vencimiento_carnet=".$nuevafecha."&beneficiario=".$data['beneficiario'];
                         ?>
                     <div class="btn-group">
                         <a href="../pdf/carnet/carnet1.php?<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
