@@ -8,18 +8,18 @@
     // av_datos_servicios
     global $grado_militar; $compañia; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar;
 
-    $sql1 = "SELECT a.id as vid, 
-                    a.nombre, 
-                    a.nombre2, 
-                    a.apellido, 
-                    a.apellido2, 
-                    a.codigo, 
-                    (select c.nombre from ap_catalogos c WHERE tipo_catalogo = 39 AND grado_militar = id) as gradoMilitar, 
-                    b.grado_militar, 
-                    b.fecha_baja, 
-                    a.vecindad, 
-                    a.telefono, 
-                    (select b.nombre from ap_municipios b where b.id = a.vecindad) as municipio 
+    $sql1 = "SELECT a.id as vid,
+                    a.nombre,
+                    a.nombre2,
+                    a.apellido,
+                    a.apellido2,
+                    a.codigo,
+                    (select c.nombre from ap_catalogos c WHERE tipo_catalogo = 39 AND grado_militar = id) as gradoMilitar,
+                    b.grado_militar,
+                    b.fecha_baja,
+                    a.vecindad,
+                    a.telefono,
+                    (select b.nombre from ap_municipios b where b.id = a.vecindad) as municipio
                     FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id";
 
     $resp1 = mysql_query($sql1);

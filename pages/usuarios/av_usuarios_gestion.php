@@ -340,12 +340,12 @@ $sqlpdf = "SELECT   codigo,
                             <?php echo $mensaje3; ?>
                         </p>
                         <?php if($btn == "Borrar"): ?>
-                            
+
                         <?php else: ?>
                             <h3>
                                 <?php echo $mensaje4; ?>
                             </h3>
-                        <?php endif; ?>    
+                        <?php endif; ?>
                     <?php else: ?>
                         <p>
                             <?php echo $mensaje3; ?>
