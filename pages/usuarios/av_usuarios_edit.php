@@ -436,19 +436,15 @@
                     <!-- Carpeta 2* -->
                     <div class="tab-pane fade" id="box_tab2">
                         <!-- Foto -->
-                        <div class="form-group">
-                            <label for="foto" class="col-sm-2 control-label">Subir Fotografía</label>
-                            <div class="col-sm-9">
-                                <input type="file" class="form-control" id="image_to_upload"
-                                placeholder="Seleccione una foto" name="foto" value="<?php echo $foto; ?>">
-                                <img style="display:none" id="im" src="" alt="image" />
-                                <input type="hidden" id="image_aviary" name="image_aviary" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
+                    <div class="form-group">
+
+                        <!-- tomar foto-->
+                        <div class="form-group" id="foto">
+
                             <label for="foto" class="col-sm-2 control-label">Tomar Fotografía</label>
-                            <div class="col-sm-9">
-                            <?php include_once '../img/foto.html'; ?>
+                            
+                            <div class="col-sm-2 control-label">
+                                <?php include_once '../img/foto.html'; ?>
                             </div>
                             <br>
                             <br>
@@ -456,8 +452,8 @@
                             <div class="col-sm-9">
                               <img id="im2" style="display:none" src="" alt="image" />
                             </div>
+                        </div>    
                             <br>
-
                             <!--
                             <div class="col-sm-9">
                                 <video id="video"></video>
@@ -467,7 +463,14 @@
                                 <canvas id="canvas" style="display: none;"></canvas>
                             </div>
                             -->
-
+                        </div>
+                        <div class="form-group">
+                            <label for="foto" class="col-sm-2 control-label">Subir Fotografía</label>
+                            <div class="col-sm-4">
+                                <input type="file" id="image_to_upload" placeholder="Seleccione una foto" name="foto" value="<?php echo $foto; ?>">
+                                <img style="display:none" id="im" src="" alt="image" />
+                                <input type="hidden" id="image_aviary" name="image_aviary" value="">
+                            </div>
                         </div>
                     </div>
 
