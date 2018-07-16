@@ -24,8 +24,8 @@ $imagen2->file_new_name_body   = $nuevo_nombre."_crop";
 //manejando el brillo y el tamano
 //$imagen2->image_brightness = 100;
 $imagen2->image_resize         = true;
-$imagen2->image_x              = 530;
-$imagen2->image_y              = 600;
+$imagen2->image_x              = 200;
+$imagen2->image_y              = 200;
 $imagen2->image_ratio_y        = false;
 
 $image_blog = $imagen2;
