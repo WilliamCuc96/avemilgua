@@ -29,7 +29,7 @@ $sql_db             = "insayd_avemilgua";  //impulsar_gescon Base de datos que s
 $sql_usuario        = "insayd_avemilgua";   // Usuario de Mysql
 $sql_pass           = "Javirala24.gt";     // contrasenia de Mysql
 $ap_nombre_ct       = "AVEMILGUA - Consola";  // Nombre de la aplicación Corto <i class='fa fa-key'></i>
-$ap_nombre_lg       = "<i class='fa address-card'></i> AVEMILGUA - Consola";  // Nombre de la aplicación Largo
+$ap_nombre_lg       = "<i class='fa user'></i> AVEMILGUA - Consola";  // Nombre de la aplicación Largo
 //$entorno            = 1;  // 1 / 0
 // Desarrollo insayd.com ------
 //$sql_db           = "insayd_cyber";	//impulsar_gescon Base de datos que se usario
