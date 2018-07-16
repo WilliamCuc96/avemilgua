@@ -114,7 +114,8 @@
                         a.apellido2, 
                         a.apellido3, 
                         a.dpi, 
-                        a.genero, 
+                        a.genero,
+                        a.beneficiario, 
                         a.fecha_nacimiento, 
                         a.lugar_nacimiento, 
                         a.vecindad, 
@@ -163,6 +164,7 @@
                 $apellido3 = utf8_encode($row['apellido3']);
                 $dpi = $row['dpi'];
                 $foto = $row['foto'];
+                $beneficiario = $row['beneficiario'];
                 //$nacionalidad = utf8_encode($row['nacionalidad']);
                 $genero = $row['genero'];
                 $fecha_nacimiento = $row['fecha_nacimiento'];
@@ -331,7 +333,7 @@
                                     <?php
                                         while($row2=mysql_fetch_assoc($resp2)){
                                             print '<option value="'.$row2['id'].'" ';
-                                            if ($beneficiario == $row2['comodin']) { print ' selected="selected" '; };
+                                            if ($beneficiario == $row2['nombre']) { print ' selected="selected" '; };
                                             print ' >'.utf8_encode($row2['nombre']).'</option>';
                                         }
                                     ?>
@@ -434,19 +436,15 @@
                     <!-- Carpeta 2* -->
                     <div class="tab-pane fade" id="box_tab2">
                         <!-- Foto -->
-                        <div class="form-group">
-                            <label for="foto" class="col-sm-2 control-label">Subir Fotografía</label>
-                            <div class="col-sm-9">
-                                <input type="file" class="form-control" id="image_to_upload"
-                                placeholder="Seleccione una foto" name="foto" value="<?php echo $foto; ?>">
-                                <img style="display:none" id="im" src="" alt="image" />
-                                <input type="hidden" id="image_aviary" name="image_aviary" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
+                    <div class="form-group">
+
+                        <!-- tomar foto-->
+                        <div class="form-group" id="foto">
+
                             <label for="foto" class="col-sm-2 control-label">Tomar Fotografía</label>
-                            <div class="col-sm-9">
-                            <?php include_once '../img/foto.html'; ?>
+                            
+                            <div class="col-sm-2 control-label">
+                                <?php include_once '../img/foto.html'; ?>
                             </div>
                             <br>
                             <br>
@@ -454,8 +452,8 @@
                             <div class="col-sm-9">
                               <img id="im2" style="display:none" src="" alt="image" />
                             </div>
+                        </div>    
                             <br>
-
                             <!--
                             <div class="col-sm-9">
                                 <video id="video"></video>
@@ -465,7 +463,14 @@
                                 <canvas id="canvas" style="display: none;"></canvas>
                             </div>
                             -->
-
+                        </div>
+                        <div class="form-group">
+                            <label for="foto" class="col-sm-2 control-label">Subir Fotografía</label>
+                            <div class="col-sm-4">
+                                <input type="file" id="image_to_upload" placeholder="Seleccione una foto" name="foto" value="<?php echo $foto; ?>">
+                                <img style="display:none" id="im" src="" alt="image" />
+                                <input type="hidden" id="image_aviary" name="image_aviary" value="">
+                            </div>
                         </div>
                     </div>
 
@@ -474,7 +479,7 @@
                         <!-- Grado Militar/compania/Puesto-->
                         <div class="form-group">
                             <label for="grado_militar" class="col-sm-2 control-label">Grado Militar</label>
-                            <div class="col-sm-2">
+                            <div class="col-sm-4">
                                 <select id="grado_militar" class="form-control col-md-12" name="grado_militar" >
                                     <?php
                                         $sql2="SELECT  id, nombre
@@ -493,13 +498,9 @@
                                     ?>
                                 </select>
                             </div>
-                            <label for="zona_militar" class="col-sm-2 control-label">Zona Militar</label>
-                            <div class="col-sm-2">
-                                <input type="text" class="form-control" id="zona_militar" placeholder="Zona" name="zona_militar" value="<?php echo $zona_militar; ?>">
-                            </div>
                             <div class="form-group">
                             <label for="armas_servicios" class="col-sm-2 control-label">Armas y Servicios</label>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <select id="armas_servicios" class="form-control col-md-12" name="armas_servicios" >
                                     <?php
                                         $sql2="SELECT  id, nombre
@@ -520,13 +521,19 @@
                             </div>
                         </div>
                     </div>
-                        <div class="form-group">
-                            <label for="compania" class="col-sm-2 control-label">Compañia/Unidad</label>
+                        <div class="form-group">   
+                        <label for="zona_militar" class="col-sm-2 control-label">Dependencia Militar</label>
                             <div class="col-sm-4">
+                                <input type="text" class="form-control" id="zona_militar" placeholder="Zona" name="zona_militar" value="<?php echo $zona_militar; ?>">
+                            </div>
+                            <label for="compania" class="col-sm-2 control-label">Compañia/Unidad</label>
+                            <div class="col-sm-3">
                                 <input type="text" class="form-control" id="compania" placeholder="Compañia/Unidad" name="compania" value="<?php echo $compania; ?>">
                             </div>
+                        </div>
+                        <div class="form-group">
                             <label for="puesto" class="col-sm-2 control-label">Ultimo Puesto</label>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <input type="text" class="form-control" id="puesto" placeholder="Puesto" name="puesto" value="<?php echo $puesto; ?>">
                             </div>
                         </div>

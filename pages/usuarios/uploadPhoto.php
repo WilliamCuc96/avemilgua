@@ -20,6 +20,14 @@ $imagen2->image_greyscale = true;
 $imagen2->file_new_name_ext = 'png';
 $imagen2->png_compression = 9;
 $imagen2->file_new_name_body   = $nuevo_nombre."_crop";
+
+//manejando el brillo y el tamano
+$imagen2->image_brightness = 100;
+$imagen2->image_resize         = true;
+$imagen2->image_x              = 1130;
+$imagen2->image_y              = 1210;
+$imagen2->image_ratio_y        = false;
+
 $image_blog = $imagen2;
 $image_blog->process('../../../av/img/usuarios/');
 if($image_blog->processed) {

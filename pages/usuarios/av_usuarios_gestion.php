@@ -10,6 +10,9 @@ include_once('../class.upload.php');
     // av_datos_servicios
     global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $img_edited; $armas_servicios; $fecha_registro; $user_registro;
 
+    // av_archivo
+    global $id_archivo; $id_personal; $nombre_archivo; $descripcion; $observaciones; $fecha_registro_archivo; $user_registro_archivo;
+
 
 //Inicialización de Variables locales *
     $mensaje1 = '';
@@ -57,6 +60,14 @@ include_once('../class.upload.php');
     $img_edited = '';
     $armas_servicios = '';
 
+    // av_archivo
+    $id_personal = '';
+    $nombre_archivo ='';
+    $descripcion ='';
+    $observaciones ='';
+    $fecha_registro_archivo ='';
+    $user_registro_archivo ='';
+
     // Asignar el valor que viene en el request a variables *
     if (!$id) { $id  = isset_or('id', '0'); };
     if (!$codigo) { $codigo  = isset_or('codigo', ''); };
@@ -81,6 +92,13 @@ include_once('../class.upload.php');
     if (!$correo) { $correo = isset_or('correo', ''); };
     if (!$nit) { $nit = isset_or('nit', ''); };
     if (!$fecha_registro) { $fecha_registro = isset_or('fecha_registro', ''); };
+
+    if (!$id_personal) { $id_personal = isset_or('id_personal', ''); };
+    if (!$nombre_archivo) { $nombre_archivo = isset_or('nombre_archivo', ''); };
+    if (!$descripcion) { $descripcion = isset_or('descripcion', ''); };
+    if (!$observaciones) { $observaciones = isset_or('observaciones', ''); };
+    if (!$user_registro_archivo) { $user_registro_archivo = isset_or('user_registro_archivo', ''); };
+    if (!$fecha_registro_archivo) { $fecha_registro_archivo = isset_or('fecha_registro_archivo', ''); };
 
     if (!$grado_militar) { $grado_militar = isset_or('grado_militar', ''); };
     if (!$compania) { $compania = isset_or('compania', ''); };
@@ -155,6 +173,18 @@ include_once('../class.upload.php');
               } else {
                   error_msg();
               }
+              subirArchivo($nombre_archivo);
+              $sql3 = "INSERT INTO av_archivo (id, id_persona,
+                    nombre_archivo, descripcion, observaciones, fecha_registro, user_registro)
+                     VALUES 
+                     ('".$id_archivo."', '".utf8_decode($last_id)."', '".utf8_decode($nombre_archivo)."',
+                    '".utf8_decode($descripcion)."', '".utf8_decode($observaciones)."',
+                    now(), '".utf8_decode($_SESSION['usuario_id'])."');";
+                    if (mysql_query($sql3)) {
+                        success_msg();
+                    } else {
+                        error_msg();
+                    }
             break;
 
         case "Actualizar":
@@ -167,6 +197,7 @@ include_once('../class.upload.php');
                     apellido3 = '".utf8_decode($apellido3)."',
                     dpi = '".$dpi."', nacionalidad = '".utf8_decode($nacionalidad)."',
                     genero = '".$genero."',
+                    beneficiario = '".$beneficiario."',
                     fecha_nacimiento = '".$fecha_nacimiento."',
                     lugar_nacimiento = '".utf8_decode($lugar_nacimiento)."',
                     vecindad = '".utf8_decode($vecindad)."',
@@ -214,6 +245,14 @@ include_once('../class.upload.php');
           }
 
             break;
+    }
+
+    function subirArchivo($nombre_archivo){
+        $carpeta = "archivos/";
+        opendir($carpeta);
+        $destino = $carpeta.$FILES['nombre_archivo']['name'];
+        copy($FILES['nombre_archivo']['tmp_name'],$destino);
+        $nombre_archivo=$_FILES['nombre_archivo']['name'];
     }
 
     function subirFoto($nfoto){
@@ -265,6 +304,21 @@ $sqlpdf = "SELECT   codigo,
         $data = mysql_query($sqlpdf);
         $data = mysql_fetch_assoc($data);
 
+        //echo date_format($date, 'd/m/Y H:i:s');
+
+        $fecha = $data['fecha_vencimiento_carnet'];
+
+        
+
+        $date = new DateTime($fecha);
+        $timestamp = $date->getTimestamp();
+
+        $nuevafecha = date("d-m-Y", $timestamp);
+        
+        //$dia = date("F", $nuevafecha);
+
+        $mensaje5 =  $data['beneficiario'];
+
  ?>
 <div id="page-wrapper">
     <div class="container-fluid">
@@ -276,6 +330,7 @@ $sqlpdf = "SELECT   codigo,
             <?php if($data['foto'] == null or $data['foto'] == ""): ?>
                 <div class="col-md-12 text-center">
                         <?php echo $mensaje1; ?>
+                        <?php echo $mensaje5; ?>
                 </div>
                 <div class="col-md-12 text-center">
                     <div class="">
@@ -285,12 +340,12 @@ $sqlpdf = "SELECT   codigo,
                             <?php echo $mensaje3; ?>
                         </p>
                         <?php if($btn == "Borrar"): ?>
-                            
+
                         <?php else: ?>
                             <h3>
                                 <?php echo $mensaje4; ?>
                             </h3>
-                        <?php endif; ?>    
+                        <?php endif; ?>
                     <?php else: ?>
                         <p>
                             <?php echo $mensaje3; ?>
@@ -309,7 +364,7 @@ $sqlpdf = "SELECT   codigo,
                             <?php echo $mensaje3; ?>
                         </p>
                         <?php
-                        $parametros = "nombre=".$data['nombre']."&nombre2=".$data['nombre2']."&apellido=".$data['apellido']."&apellido2=".$data['apellido2']."&dpi=".$data['dpi']."&codigo=".$data['codigo']."&foto=".$data['foto']."&fecha_vencimiento_carnet=".$data['fecha_vencimiento_carnet']."&beneficiario=".$data['beneficiario'];
+                        $parametros = "nombre=".$data['nombre']."&nombre2=".$data['nombre2']."&apellido=".$data['apellido']."&apellido2=".$data['apellido2']."&dpi=".$data['dpi']."&codigo=".$data['codigo']."&foto=".$data['foto']."&fecha_vencimiento_carnet=".$nuevafecha."&beneficiario=".$data['beneficiario'];
                         ?>
                     <div class="btn-group">
                         <a href="../pdf/carnet/carnet1.php?<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
