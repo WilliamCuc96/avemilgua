@@ -333,7 +333,7 @@
                                     <?php
                                         while($row2=mysql_fetch_assoc($resp2)){
                                             print '<option value="'.$row2['id'].'" ';
-                                            if ($beneficiario == $row2['nombre']) { print ' selected="selected" '; };
+                                            if ($beneficiario == $row2['id']) { print ' selected="selected" '; };
                                             print ' >'.utf8_encode($row2['nombre']).'</option>';
                                         }
                                     ?>
@@ -376,7 +376,7 @@
                                     <?php
                                         while($row2=mysql_fetch_assoc($resp2)){
                                             print '<option value="'.$row2['id'].'" ';
-                                            if ($profesion == $row2['nombre']) { print ' selected="selected" '; };
+                                            if ($profesion == $row2['id']) { print ' selected="selected" '; };
                                             print ' >'.utf8_encode($row2['nombre']).'</option>';
                                         }
                                     ?>

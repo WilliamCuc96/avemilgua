@@ -330,7 +330,6 @@ $sqlpdf = "SELECT   codigo,
             <?php if($data['foto'] == null or $data['foto'] == ""): ?>
                 <div class="col-md-12 text-center">
                         <?php echo $mensaje1; ?>
-                        <?php echo $mensaje5; ?>
                 </div>
                 <div class="col-md-12 text-center">
                     <div class="">
