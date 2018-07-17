@@ -12,7 +12,7 @@ $apellido2 = $_REQUEST['apellido2'];
 $dpi = $_REQUEST['dpi'];
 $codigo = $_REQUEST['codigo'];
 $foto = $_REQUEST['foto'];
-$fecha_vencimiento_carnet = $_REQUEST['fecha_vencimiento_carnet'];
+$fechafinal = $_REQUEST['fecha_vencimiento_carnet'];
 $beneficiario = $_REQUEST['beneficiario'];
 
 // create new PDF document
