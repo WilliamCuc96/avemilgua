@@ -75,7 +75,7 @@ $pdf->Image($img_file, 0, 0, 85.5, 54, '', '', '', false, 300, '', false, false,
 //---------------------Text----------------------
 
 $pdf->SetFont('helvetica', 'B', 12);
-$pdf->SetXY(5,18);
+$pdf->SetXY(5,13);
 $pdf->Cell(45, 0, $nombre." ".$nombre2, 0, 1, 'C', 0, '', 1);
 //$pdf->Cell(45, 0, "William Osveli", 0, 1, 'C', 0, '', 1);
 //$pdf->Write(0,"Nombre:");
@@ -83,7 +83,7 @@ $pdf->Cell(45, 0, $nombre." ".$nombre2, 0, 1, 'C', 0, '', 1);
 //$pdf->Write(0,$nombre);$pdf->Write(0,"   ");$pdf->Write(0,$nombre2);
 //$pdf->SetXY(17,22);
 //$pdf->Write(0,$nombre2);
-$pdf->SetXY(5,23);
+$pdf->SetXY(5,28);
 $pdf->Cell(45, 0, $apellido." ".$apellido2, 0, 1, 'C', 0, '', 1);
 //$pdf->SetXY(19,27);
 //$pdf->Write(0,$apellido);$pdf->Write(0,"   ");$pdf->Write(0,$apellido2);
