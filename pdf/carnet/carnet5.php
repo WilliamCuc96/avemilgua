@@ -12,7 +12,7 @@ $apellido2 = $_REQUEST['apellido2'];
 $dpi = $_REQUEST['dpi'];
 $codigo = $_REQUEST['codigo'];
 $foto = $_REQUEST['foto'];
-$fecha_vencimiento_carnet = $_REQUEST['fecha_vencimiento_carnet'];
+$fechafinal = $_REQUEST['fecha_vencimiento_carnet'];
 $beneficiario = $_REQUEST['beneficiario'];
 
 // create new PDF document
@@ -75,37 +75,38 @@ $pdf->Image($img_file, 0, 0, 85.5, 54, '', '', '', false, 300, '', false, false,
 //---------------------Text----------------------
 
 $pdf->SetFont('helvetica', 'B', 12);
-$pdf->SetXY(5,22);
+$pdf->SetXY(5,20);
 $pdf->Cell(45, 0, $nombre." ".$nombre2, 0, 1, 'C', 0, '', 1);
 //$pdf->Cell(45, 0, "William Osveli", 0, 1, 'C', 0, '', 1);
 //$pdf->Write(0,"Nombre:");
-$pdf->SetXY(19,22);
+//$pdf->SetXY(19,22);
 //$pdf->Write(0,$nombre);$pdf->Write(0,"   ");$pdf->Write(0,$nombre2);
 //$pdf->SetXY(17,22);
 //$pdf->Write(0,$nombre2);
-$pdf->SetXY(5,27);
+$pdf->SetXY(5,25);
 $pdf->Cell(45, 0, $apellido." ".$apellido2, 0, 1, 'C', 0, '', 1);
 //$pdf->SetXY(19,27);
 //$pdf->Write(0,$apellido);$pdf->Write(0,"   ");$pdf->Write(0,$apellido2);
 //$pdf->SetXY(17,27);
 //$pdf->Write(0,$apellido2);
-$pdf->SetFont('helvetica', 'B', 9);
-$pdf->SetXY(4,37);
-$pdf->Write(0,"DPI:");
-$pdf->SetXY(13,37);
-$pdf->Write(0,$dpi);
-$pdf->SetXY(4,41);
-$pdf->Write(0,"Codigo:");
-$pdf->SetXY(17,41);
-$pdf->Write(0,$codigo);
-$pdf->SetXY(4,45);
-$pdf->Write(0,"Grado Militar:");
-$pdf->SetXY(24,45);
+$pdf->SetFont('helvetica', 'B', 8);
+$pdf->SetXY(2,30);
+$pdf->Write(0,"GRADO:");
+$pdf->SetXY(17,30);
 $pdf->Write(0,$beneficiario);
-$pdf->SetXY(4,50);
-$pdf->Write(0,"Vencimiento:");
-$pdf->SetXY(24,50);
-$pdf->Write(0,$fecha_vencimiento_carnet);
+$pdf->SetXY(2,36);
+$pdf->Write(0,"DPI:");
+$pdf->SetXY(10,36);
+$pdf->Write(0,$dpi);
+$pdf->SetXY(2,42);
+$pdf->Write(0,"NO. DE REGISTRO:");
+$pdf->SetXY(30,42);
+$pdf->Write(0,$codigo);
+$pdf->SetFont('helvetica', 'B', 9);
+$pdf->SetXY(2,49);
+$pdf->Write(0,"VENCIMIENTO:");
+$pdf->SetXY(30,49);
+$pdf->Write(0,$fechafinal);
 $pdf->writeHTMLCell(30, 15, 54, 18, '<img src="'.$foto.'">');
 //---------------------Text----------------------
 
