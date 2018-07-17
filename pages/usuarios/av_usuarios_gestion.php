@@ -152,7 +152,7 @@ include_once('../class.upload.php');
                     '".$fecha_nacimiento."', '".$lugar_nacimiento."', '".$vecindad."',
                     '".$estado_civil."', '".$profesion."',
                     '".utf8_decode($direccion)."', '".utf8_decode($telefono)."',
-                    '".utf8_decode($correo)."', '".utf8_decode($nit)."', '".utf8_decode($img_edited)."', 
+                    '".utf8_decode($correo)."', '".utf8_decode($nit)."', '".utf8_decode($img_edited)."',
                     '".utf8_decode($nuevafecha)."', now(), '".utf8_decode($_SESSION['usuario_id'])."');";
             if (mysql_query($sql1)) {
                 $last_id = mysql_insert_id();
@@ -176,7 +176,7 @@ include_once('../class.upload.php');
               subirArchivo($nombre_archivo);
               $sql3 = "INSERT INTO av_archivo (id, id_persona,
                     nombre_archivo, descripcion, observaciones, fecha_registro, user_registro)
-                     VALUES 
+                     VALUES
                      ('".$id_archivo."', '".utf8_decode($last_id)."', '".utf8_decode($nombre_archivo)."',
                     '".utf8_decode($descripcion)."', '".utf8_decode($observaciones)."',
                     now(), '".utf8_decode($_SESSION['usuario_id'])."');";
@@ -308,13 +308,13 @@ $sqlpdf = "SELECT   codigo,
 
         $fecha = $data['fecha_vencimiento_carnet'];
 
-        
+
 
         $date = new DateTime($fecha);
         $timestamp = $date->getTimestamp();
 
         $nuevafecha = date("d-m-Y", $timestamp);
-        
+
         //$dia = date("F", $nuevafecha);
 
         $mensaje5 =  $data['beneficiario'];

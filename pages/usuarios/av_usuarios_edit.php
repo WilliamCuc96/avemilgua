@@ -106,37 +106,37 @@
         $var_where1 = " ";
     } else {
         $var_where1 = " AND a.id = '" . $id . "' ";
-        $sql1 = "SELECT a.id, 
-                        a.codigo, 
-                        a.nombre, 
-                        a.nombre2, 
-                        a.apellido, 
-                        a.apellido2, 
-                        a.apellido3, 
-                        a.dpi, 
+        $sql1 = "SELECT a.id,
+                        a.codigo,
+                        a.nombre,
+                        a.nombre2,
+                        a.apellido,
+                        a.apellido2,
+                        a.apellido3,
+                        a.dpi,
                         a.genero,
-                        a.beneficiario, 
-                        a.fecha_nacimiento, 
-                        a.lugar_nacimiento, 
-                        a.vecindad, 
-                        a.estado_civil, 
-                        a.profesion, 
-                        a.direccion, 
-                        a.telefono, 
-                        a.correo, 
-                        a.nit, 
-                        a.foto, 
-                        b.grado_militar, 
-                        b.compania, 
-                        b.puesto, 
-                        b.fecha_alta, 
-                        b.fecha_baja, 
-                        b.motivo_baja, 
-                        b.computo_servicios, 
-                        b.sueldo_mensual, 
-                        b.zona_militar, 
-                        b.armas_servicios 
-                        FROM av_datos_personales a, av_datos_servicios b 
+                        a.beneficiario,
+                        a.fecha_nacimiento,
+                        a.lugar_nacimiento,
+                        a.vecindad,
+                        a.estado_civil,
+                        a.profesion,
+                        a.direccion,
+                        a.telefono,
+                        a.correo,
+                        a.nit,
+                        a.foto,
+                        b.grado_militar,
+                        b.compania,
+                        b.puesto,
+                        b.fecha_alta,
+                        b.fecha_baja,
+                        b.motivo_baja,
+                        b.computo_servicios,
+                        b.sueldo_mensual,
+                        b.zona_militar,
+                        b.armas_servicios
+                        FROM av_datos_personales a, av_datos_servicios b
                         WHERE a.id = b.id ". $var_where1 ." ";
 
         $resp1 = mysql_query($sql1);
@@ -442,7 +442,7 @@
                         <div class="form-group" id="foto">
 
                             <label for="foto" class="col-sm-2 control-label">Tomar Fotografía</label>
-                            
+
                             <div class="col-sm-2 control-label">
                                 <?php include_once '../img/foto.html'; ?>
                             </div>
@@ -452,7 +452,7 @@
                             <div class="col-sm-9">
                               <img id="im2" style="display:none" src="" alt="image" />
                             </div>
-                        </div>    
+                        </div>
                             <br>
                             <!--
                             <div class="col-sm-9">
@@ -521,7 +521,7 @@
                             </div>
                         </div>
                     </div>
-                        <div class="form-group">   
+                        <div class="form-group">
                         <label for="zona_militar" class="col-sm-2 control-label">Dependencia Militar</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" id="zona_militar" placeholder="Zona" name="zona_militar" value="<?php echo $zona_militar; ?>">
