@@ -290,11 +290,11 @@ $id = $last_id;
 }
 //query for PDF
 $sqlpdf = "SELECT   codigo,
-                    nombre,
-                    nombre2,
-                    apellido,
-                    apellido2,
-                    apellido3,
+                    CONVERT(nombre USING utf8) as nombre,
+                    CONVERT(nombre2 USING utf8) as nombre2,
+                    CONVERT(apellido USING utf8) as apellido,
+                    CONVERT(apellido2 USING utf8) as apellido2,
+                    CONVERT(apellido3 USING utf8) as apellido3,
                     dpi,
                     foto,
                     fecha_vencimiento_carnet,
@@ -314,13 +314,10 @@ $sqlpdf = "SELECT   codigo,
         $timestamp = $date->getTimestamp();
 
         $nuevafecha = date("d-m-Y", $timestamp);
-<<<<<<< HEAD
 
         //$dia = date("F", $nuevafecha);
-=======
         
         $year = date("Y", strtotime($nuevafecha));
->>>>>>> 5c8efdd5962a8d7a1e2496d1b703e7961c9e09a0
 
         $dia = date("d", strtotime($nuevafecha));
 
