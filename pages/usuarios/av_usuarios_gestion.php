@@ -303,6 +303,7 @@ $sqlpdf = "SELECT   codigo,
         WHERE id = ".$id;
         $data = mysql_query($sqlpdf);
         $data = mysql_fetch_assoc($data);
+        
 
         //echo date_format($date, 'd/m/Y H:i:s');
 
@@ -456,7 +457,7 @@ $sqlpdf = "SELECT   codigo,
                             <?php echo $mensaje3; ?>
                         </p>
                         <?php
-                        $parametros = "nombre=".$data['nombre']."&nombre2=".$data['nombre2']."&apellido=".$data['apellido']."&apellido2=".$data['apellido2']."&dpi=".$data['dpi']."&codigo=".$data['codigo']."&foto=".$data['foto']."&fecha_vencimiento_carnet=".$fechafinal."&beneficiario=".$data['beneficiario'];
+                        $parametros = "nombre=".utf8_encode( $data['nombre'])."&nombre2=".utf8_encode( $data['nombre2'])."&apellido=".utf8_encode( $data['apellido'])."&apellido2=".utf8_encode( $data['apellido2'])."&dpi=".$data['dpi']."&codigo=".$data['codigo']."&foto=".$data['foto']."&fecha_vencimiento_carnet=".$fechafinal."&beneficiario=".$data['beneficiario'];
                         ?>
                     <div class="btn-group">
                         <a href="../pdf/carnet/carnet1.php?<?php echo $parametros;?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
@@ -482,6 +483,7 @@ $sqlpdf = "SELECT   codigo,
                         <div class="">
                             <h3></h3>
                             <div class="btn-group">
+                            <?php print($nombre)?>
                                 <a href="index.php?p=usuarios/av_usuarios_list.php" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Listado de Veteranos</a>
                             </div>
                             <?php if($btn == "Borrar"): ?>
