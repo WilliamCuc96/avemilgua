@@ -3,10 +3,13 @@
 
 //Definición de Variables locales *
     // av_datos_personales
-    global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $nacionalidad; $genero; $fecha_nacimiento; $lugar_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $nit; $beneficiario;
+    global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $nacionalidad; $genero; $fecha_nacimiento; $lugar_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $nit; $beneficiario; $foto;
 
     // av_datos_servicios
     global $grado_militar; $compañia; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar;
+
+
+    $imagen = "fa fa-users";
 
     $sql1 = "SELECT a.id as vid,
                     a.nombre,
@@ -14,6 +17,7 @@
                     a.apellido,
                     a.apellido2,
                     a.codigo,
+                    a.foto,
                     (select nombre from ap_catalogos WHERE tipo_catalogo = 39 AND grado_militar = id) as gradoMilitar,
                     b.fecha_baja,
                     a.vecindad,
@@ -68,12 +72,13 @@ if (!$resp1) { // Error en la ejecución del query
                             <thead>
                                 <tr>
                                     <!-- PENDIENTE ESTE CAMBIO -->
-                                    <th>Nombre</th>
-                                    <th class="hidden-xs hidden-sm">Código</th>
+                                    <th>Código</th>
+                                    <th class="hidden-xs hidden-sm">Nombre</th>
                                     <th class="hidden-xs hidden-sm">Grado Militar</th>
                                     <th class="hidden-xs">Fecha de Baja</th>
                                     <th class="hidden-xs">Vecindad</th>
                                     <th class="hidden-xs">Teléfono</th>
+                                    <th class="hidden-xs">Foto</th>
                                     <th class=""><i class="fa fa-cogs"></i></th>
                                 </tr>
                             </thead>
@@ -83,12 +88,17 @@ if (!$resp1) { // Error en la ejecución del query
 <?php
     while($row=mysql_fetch_assoc($resp1)){
         print "<tr class=''>";
-        print "  <td>".utf8_encode($row['nombre'])." ".utf8_encode($row['nombre2'])." ".utf8_encode($row['apellido'])." ".utf8_encode($row['apellido2'])."</td>";
         print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['codigo'])."</td>";
+        print "  <td>".utf8_encode($row['nombre'])." ".utf8_encode($row['nombre2'])." ".utf8_encode($row['apellido'])." ".utf8_encode($row['apellido2'])."</td>";
         print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['gradoMilitar'])."</td>";
         print "  <td class='hidden-xs'>".utf8_encode($row['fecha_baja'])."</td>";
         print "  <td class='hidden-xs'>".utf8_encode($row['municipio'])."</td>";
         print "  <td class='hidden-xs' nowrap>".utf8_encode($row['telefono'])."</td>";
+        if ($row['foto']) { ?>
+             <td class='hidden-xs' nowrap align='center'><i class="fa fa-check"></i></td>
+        <?php } else { ?>
+            <td class='hidden-xs' nowrap align='center'><i class="fa fa-times"></i></td>
+        <?php } 
         print "  <td class='center' align='center' nowrap>
                     <a href='index.php?p=usuarios/av_usuarios_edit.php&id=".$row['vid']."' title='Editar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-pencil'></i></button></a>
                     <a href='index.php?p=usuarios/av_usuarios_gestion.php&id=".$row['vid']."&btn=Borrar' title='Borrar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-times'></i></button></a>
