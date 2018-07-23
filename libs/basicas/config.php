@@ -24,7 +24,7 @@ $registros          = 25;  		            // cantidad de registros a mostrar por 
 $db_motor           = "mysql";            // Tipo de Servidor de Base de datos (mysql,postgresql,oracle,etc).
 $sql_host           = "localhost";        // Host, nombre del servidor o IP del servidor de base de datos.
 
-$entorno            = 2;                  // 1 / 2 / 3
+$entorno            = 1;                  // 1 / 2 / 3
 
 switch ($entorno) {
   case 1: // Desarrollo local------
