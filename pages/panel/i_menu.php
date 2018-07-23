@@ -148,7 +148,7 @@
             <li class="sidebar-search">
                 <center>
 
-                    <small class="text-primary"><i class="fa fa-copyright"></i> 2015 - Desarrollado por: </small><img src="../img/logo/logo_linedin.png" height="" alt="Desarrollado por insayd.com" />
+                    <small class="text-primary"><i class="fa fa-copyright"></i> 2015 - Desarrollado por: </small><img src="../img/logo/titonsoftpq.png" height="" alt="Desarrollado por titonsoft.com" />
                 </center>
                 <!-- /input-group -->
             </li>
