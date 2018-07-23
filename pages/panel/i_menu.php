@@ -23,8 +23,8 @@
             <li>
               <a><i class = "fa fa-plus-circle fa-fw"></i> Veteranos<span class="fa arrow"></span></a>
               <ul class="nav nav-second-level">
+              <li><a href="index.php?p=usuarios/av_usuarios_list.php"><i class = "fa fa-list fa-fw"></i> Lista de Veteranos</a></li>
                 <li><a href="index.php?p=usuarios/veteranos_busc.php"><i class = "fa fa-search-plus fa-fw"></i> Búsqueda Personalizada</a></li>
-                <li><a href="index.php?p=usuarios/av_usuarios_list.php"><i class = "fa fa-list fa-fw"></i> Lista de Veteranos</a></li>
               </ul>
             </li>
             <li>
