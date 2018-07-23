@@ -85,21 +85,6 @@
 
 ?>
 
-<!-- ******************************************************* -->
-
-<!-- HTML -->
-
-<!-- Page Content * -->
-<div id="page-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header"><i class="fa fa-user"></i> Administración de Veteranos</h1>
-            </div>
-            <!-- /.col-lg-12 * -->
-        </div>
-        <!-- /.row * -->
-
 <!-- PHP -->
 <?php
     if ($id == "0" or $id == "") {
@@ -192,6 +177,33 @@
         }; // toma en cuenta en el contenido el html
     };
 ?>
+
+<!-- HTML -->
+
+<!-- Page Content * -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+<?php
+    if ($foto) {
+        echo '<img src="'.$foto.'" alt="Foto" class="img-circle" width="" height="80"> ';
+    } else {
+        echo '<span class="fa-stack fa-1x">
+                    <i class="fas fa-portrait fa-stack-1x"></i>
+                    <i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i>
+              </span> ';
+    }
+?>
+                    
+                    Administración de Veteranos
+                </h1>
+            </div>
+            <!-- /.col-lg-12 * -->
+        </div>
+        <!-- /.row * -->
+
         <!-- BOX TABS * -->
         <div class="row">
             <div class="col-lg-12">

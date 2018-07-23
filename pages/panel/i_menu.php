@@ -148,7 +148,7 @@
             <li class="sidebar-search">
                 <center>
 
-                    <small class="text-primary"><i class="fa fa-copyright"></i> 2015 - Desarrollado por: </small><img src="../img/logo/titonsoftpq.png" height="" alt="Desarrollado por titonsoft.com" />
+                    <small class="text-primary"><i class="fa fa-copyright"></i> 2018 - Desarrollado por: </small><br><img src="../img/logo/titonsoft_w.svg" height="25" alt="Desarrollado por titonsoft.com" border="0"/>
                 </center>
                 <!-- /input-group -->
             </li>

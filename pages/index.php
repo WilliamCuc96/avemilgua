@@ -45,8 +45,8 @@
         include_once ''.$_REQUEST["p"];
 
     } else {
-       // include_once 'panel/intro.php';
-        include_once 'panel/info.php';
+        include_once 'panel/intro.php';
+       // include_once 'panel/info.php';
     }
 ?>
 
