@@ -95,9 +95,18 @@ if (!$resp1) { // Error en la ejecución del query
         print "  <td class='hidden-xs'>".utf8_encode($row['municipio'])."</td>";
         print "  <td class='hidden-xs' nowrap>".utf8_encode($row['telefono'])."</td>";
         if ($row['foto']) { ?>
-             <td class='hidden-xs' nowrap align='center'><i class="fa fa-check"></i></td>
+             <td class='hidden-xs' nowrap align='center'>
+                <span class="fa-stack fa-1x">
+                    <i class="fas fa-portrait fa-stack-1x"></i>
+                </span>
+            </td>
         <?php } else { ?>
-            <td class='hidden-xs' nowrap align='center'><i class="fa fa-times"></i></td>
+            <td class='hidden-xs' nowrap align='center'>
+                <span class="fa-stack fa-1x">
+                    <i class="fas fa-portrait fa-stack-1x"></i>
+                    <i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i>
+                </span>
+            </td>
         <?php } 
         print "  <td class='center' align='center' nowrap>
                     <a href='index.php?p=usuarios/av_usuarios_edit.php&id=".$row['vid']."' title='Editar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-pencil'></i></button></a>

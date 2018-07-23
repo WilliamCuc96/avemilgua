@@ -21,34 +21,34 @@
                 <a href="index.php?p=usuarios/av_usuarios_edit.php"><i class = "fa fa-user-plus fa-fw"></i> Inscripción de Veterano</a>
             </li>
             <li>
-              <a href="index.php?p=usuarios/av_usuarios_list.php"><i class = "fa fa-list fa-fw"></i> Lista de Veteranos</a>
-            </li>
-            <li>
-              <a href="index.php?p=usuarios/veteranos_busc.php"><i class = "fa fa-search-plus fa-fw"></i> Búsqueda Personalizada</a>
-            </li>
-            <li>
-              <a><i class = "fa fa-plus-circle fa-fw"></i> Inscripción IPM<span class="fa arrow"></span></a>
+              <a><i class = "fa fa-plus-circle fa-fw"></i> Veteranos<span class="fa arrow"></span></a>
               <ul class="nav nav-second-level">
-                <li><a href="index.php?p=usuarios/av_ipm_edit.php"><i class = "fa fa-user-plus fa-fw"></i> Nuevo Ingreso </a></li>
-                <li><a href="index.php?p=usuarios/av_ipm_list.php"><i class = "fa fa-list fa-fw"></i> Lista de Ingresados </a></li>
+                <li><a href="index.php?p=usuarios/veteranos_busc.php"><i class = "fa fa-search-plus fa-fw"></i> Búsqueda Personalizada</a></li>
+                <li><a href="index.php?p=usuarios/av_usuarios_list.php"><i class = "fa fa-list fa-fw"></i> Lista de Veteranos</a></li>
               </ul>
             </li>
-            <!--<li><a href="index.php?p=proceso/indicadores_busc.php"><i class="fa fa-search-plus fa-fw"></i> Búsqueda Personalizada</a></li>-->
+            <li>
+              <a><i class = "fa fa-plus-circle fa-fw"></i> Descuentos IPM<span class="fa arrow"></span></a>
+              <ul class="nav nav-second-level">
+                <li><a href="index.php?p=usuarios/av_ipm_edit.php"><i class = "fa fa-user-plus fa-fw"></i> Nuevo Donante </a></li>
+                <li><a href="index.php?p=usuarios/av_ipm_list.php"><i class = "fa fa-list fa-fw"></i> Lista de Donantes </a></li>
+              </ul>
+            </li>
             <?php if ($_SESSION['usuario_nivel'] == 1 OR $_SESSION['usuario_nivel'] == 4) { ?>
 
             <?php }; ?>
 
             <?php if ($_SESSION['usuario_nivel'] == 1 OR $_SESSION['usuario_nivel'] == 2 OR $_SESSION['usuario_nivel'] == 4) { ?>
+            <!--
             <li>
                 <a href="#"><i class="fa fa-briefcase fa-fw"></i> Administración<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <!--<li><a href="index.php?p=proceso/indicadores_edit.php">Ingreso de Datos</a></li>-->
                     <li><a href="index.php?p=proceso/indicadores_go.php">Ingreso de Indicadores</a></li>
                     <li><a href="index.php?p=proceso/subirarchivo_go.php">Subir Archivo</a></li>
                 </ul>
 
             </li>
-
+            -->
             <?php }; ?>
 
             <!-- <li>
