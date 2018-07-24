@@ -126,6 +126,21 @@
 
         $resp1 = mysql_query($sql1);
 
+        $sqlpdf = "SELECT   codigo,
+                    CONVERT(nombre USING utf8) as nombre,
+                    CONVERT(nombre2 USING utf8) as nombre2,
+                    CONVERT(apellido USING utf8) as apellido,
+                    CONVERT(apellido2 USING utf8) as apellido2,
+                    CONVERT(apellido3 USING utf8) as apellido3,
+                    dpi,
+                    foto,
+                    fecha_vencimiento_carnet,
+                    (SELECT nombre from ap_catalogos WHERE tipo_catalogo = 37 AND beneficiario = id) as beneficiario
+                    FROM av_datos_personales
+        WHERE id = ".$id;
+        $data = mysql_query($sqlpdf);
+        $data = mysql_fetch_assoc($data);
+
         if (!$resp1) { // Error en la ejecución del query*
                     echo "<div class='alert alert-block alert-danger fade in'>
                             <a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a>
@@ -483,6 +498,32 @@
                                 <img style="display:none" id="im" src="" alt="image" />
                                 <input type="hidden" id="image_aviary" name="image_aviary" value="">
                             </div>
+                            <?php if ($data['foto']) { ?>
+                            <div class="col-md-12 text-center">
+                                    <div class="">
+                                        <?php
+                                        $parametros = "nombre=".utf8_encode( $data['nombre'])."&nombre2=".utf8_encode( $data['nombre2'])."&apellido=".utf8_encode( $data['apellido'])."&apellido2=".utf8_encode( $data['apellido2'])."&dpi=".$data['dpi']."&codigo=".$data['codigo']."&foto=".$data['foto']."&fecha_vencimiento_carnet=".$fechafinal."&beneficiario=".$data['beneficiario'];
+                                        ?>
+                                    <div class="btn-group">
+                                        <a href="../pdf/carnet/carnet1.php?<?php echo $parametros;?>" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="../pdf/carnet/carnet2.php?<?php echo $parametros;?>" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Generar PDF 2</a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="../pdf/carnet/carnet3.php?<?php echo $parametros;?>" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Generar PDF 3</a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="../pdf/carnet/carnet4.php?<?php echo $parametros;?>" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Generar PDF 4</a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="../pdf/carnet/carnet5.php?<?php echo $parametros;?>" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Generar PDF 5</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } else { ?>
+
+                        <?php } ?>
                         </div>
                     </div>
 
