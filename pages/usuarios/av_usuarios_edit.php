@@ -141,6 +141,112 @@
         $data = mysql_query($sqlpdf);
         $data = mysql_fetch_assoc($data);
 
+        $fecha = $data['fecha_vencimiento_carnet'];
+
+
+
+        $date = new DateTime($fecha);
+        $timestamp = $date->getTimestamp();
+
+        $nuevafecha = date("d-m-Y", $timestamp);
+
+        //$dia = date("F", $nuevafecha);
+        
+        $year = date("Y", strtotime($nuevafecha));
+
+        $dia = date("d", strtotime($nuevafecha));
+
+        $mes = date("m", strtotime($nuevafecha));
+
+        //$mensaje5 =  $year." ".$dia." ".$mes;
+
+        switch ($mes){
+
+            case "01":
+
+            $month = "ENERO";
+            $fechafinal = $dia." DE ".$month." DEL ".$year;
+
+            break;
+            case "02":
+
+            $month = "FEBRERO";
+            $fechafinal = $dia." DE ".$month." DEL ".$year;
+
+            break;
+
+            case "03":
+
+            $month = "MARZO";
+            $fechafinal = $dia." DE ".$month." DEL ".$year;
+
+            break;
+
+            case "04":
+
+            $month = "ABRIL";
+            $fechafinal = $dia." DE ".$month." DEL ".$year;
+
+            break;
+
+            case "05":
+
+            $month = "MAYO";
+            $fechafinal = $dia." DE ".$month." DEL ".$year;
+
+            break;
+
+            case "06":
+
+            $month = "JUNIO";
+            $fechafinal = $dia." DE ".$month." DEL ".$year;
+
+            break;
+
+            case "07":
+
+            $month = "JULIO";
+            $fechafinal = $dia." DE ".$month." DEL ".$year;
+
+            break;
+            case "08":
+
+            $month = "AGOSTO";
+            $fechafinal = $dia." DE ".$month." DEL ".$year;
+
+            break;
+
+            case "09":
+
+            $month = "SEPTIEMBRE";
+            $fechafinal = $dia." DE ".$month." DEL ".$year;
+
+            break;
+
+            case "10":
+
+            $month = "OCTUBRE";
+            $fechafinal = $dia." DE ".$month." DEL ".$year;
+
+            break;
+
+            case "11":
+
+            $month = "NOVIEMBRE";
+            $fechafinal = $dia." DE ".$month." DEL ".$year;
+
+            break;
+
+            case "12":
+
+            $month = "DICIEMBRE";
+            $fechafinal = $dia." DE ".$month." DEL ".$year;
+
+        break;
+
+
+        }
+
         if (!$resp1) { // Error en la ejecución del query*
                     echo "<div class='alert alert-block alert-danger fade in'>
                             <a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a>
@@ -505,19 +611,19 @@
                                         $parametros = "nombre=".utf8_encode( $data['nombre'])."&nombre2=".utf8_encode( $data['nombre2'])."&apellido=".utf8_encode( $data['apellido'])."&apellido2=".utf8_encode( $data['apellido2'])."&dpi=".$data['dpi']."&codigo=".$data['codigo']."&foto=".$data['foto']."&fecha_vencimiento_carnet=".$fechafinal."&beneficiario=".$data['beneficiario'];
                                         ?>
                                     <div class="btn-group">
-                                        <a href="../pdf/carnet/carnet1.php?<?php echo $parametros;?>" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
+                                        <a href="../pdf/carnet/carnet1.php?<?php echo $parametros;?>" class="btn btn-success" target="_blank"><i class="fa fa-file-pdf-o"></i> Generar PDF 1</a>
                                     </div>
                                     <div class="btn-group">
-                                        <a href="../pdf/carnet/carnet2.php?<?php echo $parametros;?>" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Generar PDF 2</a>
+                                        <a href="../pdf/carnet/carnet2.php?<?php echo $parametros;?>" class="btn btn-success" target="_blank"><i class="fa fa-file-pdf-o"></i> Generar PDF 2</a>
                                     </div>
                                     <div class="btn-group">
-                                        <a href="../pdf/carnet/carnet3.php?<?php echo $parametros;?>" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Generar PDF 3</a>
+                                        <a href="../pdf/carnet/carnet3.php?<?php echo $parametros;?>" class="btn btn-success" target="_blank"><i class="fa fa-file-pdf-o"></i> Generar PDF 3</a>
                                     </div>
                                     <div class="btn-group">
-                                        <a href="../pdf/carnet/carnet4.php?<?php echo $parametros;?>" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Generar PDF 4</a>
+                                        <a href="../pdf/carnet/carnet4.php?<?php echo $parametros;?>" class="btn btn-success" target="_blank"><i class="fa fa-file-pdf-o"></i> Generar PDF 4</a>
                                     </div>
                                     <div class="btn-group">
-                                        <a href="../pdf/carnet/carnet5.php?<?php echo $parametros;?>" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Generar PDF 5</a>
+                                        <a href="../pdf/carnet/carnet5.php?<?php echo $parametros;?>" class="btn btn-success" target="_blank"><i class="fa fa-file-pdf-o"></i> Generar PDF 5</a>
                                     </div>
                                 </div>
                             </div>
