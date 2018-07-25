@@ -1,6 +1,6 @@
 <?php
 //Definición de Variables locales *
-    global $id; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $grado_militar; $numero_catalogo; $dpi; $direccion; $municipio; $correo; $telefono; $cantidad;
+    global $id; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $grado_militar; $numero_catalogo; $dpi; $direccion; $municipio; $correo; $telefono; $cantidad; $fecha_inicio; $fecha_registro; $usuario_registro;
 
 //Inicialización de Variables locales *
     // datos_personales
@@ -18,6 +18,9 @@
     $correo = '';
     $telefono = '';
     $cantidad = '';
+    $fecha_inicio = '';
+    $fecha_registro = '';
+    $usuario_registro = '';
 
     // Asignar el valor que viene en el request a variables *
     if (!$id) { $id  = isset_or('id', '0'); };
@@ -34,6 +37,9 @@
     if (!$correo) { $correo = isset_or('correo', ''); };
     if (!$telefono) { $telefono = isset_or('telefono', ''); };
     if (!$cantidad) { $cantidad = isset_or('cantidad', ''); };
+    if (!$fecha_inicio) { $fecha_inicio = isset_or('fecha_inicio', ''); };
+    if (!$fecha_registro) { $fecha_registro = isset_or('fecha_registro', ''); };
+    if (!$usuario_registro) { $usuario_registro = isset_or('usuario_registro', ''); };
 ?>
 <!-- Page wrapper -->
 <div id="page-wrapper">
@@ -63,7 +69,8 @@
                         a.municipio,
                         a.correo,
                         a.telefono,
-                        a.cantidad
+                        a.cantidad,
+                        a.fecha_inicio
                         FROM av_datos_ipm a
                         WHERE 1 = 1 ". $var_where1 ." ";
 
@@ -97,6 +104,7 @@
                 $telefono = utf8_encode($row['telefono']);
                 $correo = utf8_encode($row['correo']);
                 $cantidad = $row['cantidad'];
+                $fecha_inicio = $row['fecha_inicio'];
             };
             mysql_free_result($resp1);
         }; // toma en cuenta en el contenido el html
@@ -229,6 +237,15 @@
                                 <input type="text" class="form-control" id="cantidad" placeholder="" name="cantidad" value="<?php echo $cantidad; ?>">
                             </div>
                         </div>
+                        <div class="form-group">
+                        <label for="fecha_inicio" class="col-sm-2 control-label">Fecha de Inicio</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    <input name="fecha_inicio" class="form-control" id="dpYears" data-date="2000-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years" size="16" type="text" value="<?php if(!$fecha_inicio){echo "2000-01-01";}else {echo $fecha_inicio;}?>">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                        </div>
 
                         <!----------------------------------------------------------------------------------------->
                         <br>
@@ -259,3 +276,287 @@
     <!-- /.container-fluid * -->
 </div>
 <!-- /#page-wrapper -->
+<?php include_once 'panel/i_foot.php'; ?>
+
+<script src="script.js"></script>
+<!--
+<script type= "text/javascript">
+    var featherEditor = new Aviary.Feather({
+    apiKey: 'e35234ad291345d79a844bb964dc51ec',
+    tools: ['orientation', 'crop', 'resize'],
+    displayImageSize: true,
+    theme: 'minimum',
+    appendTo: '',
+    onSave: function(imageID, newURL) {
+        var img = document.getElementById(imageID);
+        img.src = newURL;
+
+        //aqui puede ir ajax para subir imagen
+
+          .done(function( msg ) {
+            alert( "Data Saved: " + msg );
+            //location.reload();
+           // $( "#result" ).html(  msg );
+          });
+        featherEditor.close();
+    }
+});
+</script>
+-->
+<script src="../bower_components/datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<!-- Inicia Area Scripts Locales * -->
+<script type="text/javascript">
+    // DatePicker *
+    $(".datepicker").datepicker({
+        format: 'yyyy-mm-dd'
+    });
+</script>
+<script>
+    var monster = {
+        set: function(name, value, days, path, secure) {
+            var date = new Date(),
+                expires = '',
+                type = typeof(value),
+                valueToUse = '',
+                secureFlag = '';
+            path = path || "/";
+            if (days) {
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            if (type === "object" && type !== "undefined") {
+                if (!("JSON" in window)) throw "Bummer, your browser doesn't support JSON parsing.";
+                valueToUse = encodeURIComponent(JSON.stringify({
+                    v: value
+                }));
+            }
+            else {
+                valueToUse = encodeURIComponent(value);
+            }
+            if (secure) {
+                secureFlag = "; secure";
+            }
+            document.cookie = name + "=" + valueToUse + expires + "; path=" + path + secureFlag;
+        },
+        get: function(name) {
+            var nameEQ = name + "=",
+                ca = document.cookie.split(';'),
+                value = '',
+                firstChar = '',
+                parsed = {};
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) {
+                    value = decodeURIComponent(c.substring(nameEQ.length, c.length));
+                    firstChar = value.substring(0, 1);
+                    if (firstChar == "{") {
+                        try {
+                            parsed = JSON.parse(value);
+                            if ("v" in parsed) return parsed.v;
+                        }
+                        catch (e) {
+                            return value;
+                        }
+                    }
+                    if (value == "undefined") return undefined;
+                    return value;
+                }
+            }
+            return null;
+        }
+    };
+    if (!monster.get('cookieConsent')) {
+        var cookieConsentAct = function() {
+                document.getElementById('cookieConsent').style.display = 'none';
+                monster.set('cookieConsent', 1, 360, '/');
+            };
+        document.getElementById('cookieConsent').style.display = 'block';
+        var cookieConsentEl = document.getElementById('cookieConsentAgree');
+        if (cookieConsentEl.addEventListener) {
+            cookieConsentEl.addEventListener('click', cookieConsentAct, false);
+        }
+        else if (cookieConsentEl.attachEvent) {
+            cookieConsentEl.attachEvent("onclick", cookieConsentAct);
+        }
+        else {
+            cookieConsentEl["onclick"] = cookieConsentAct;
+        }
+    }
+</script>
+<script src="js/google-code-prettify/prettify.js"></script>
+<!--<script src="js/jquery.js"></script>-->
+<script src="js/bootstrap-datepicker.js"></script>
+<script>
+    if (top.location != location) {
+        top.location.href = document.location.href ;
+    }
+        $(function(){
+            window.prettyPrint && prettyPrint();
+            $('#dp1').datepicker({
+                format: 'mm-dd-yyyy'
+            });
+            $('#dp2').datepicker();
+            $('#dp3').datepicker();
+            $('#dp3').datepicker();
+            $('#dpYears').datepicker();
+            $('#dpYears2').datepicker();
+            $('#dpYears3').datepicker();
+            $('#dpMonths').datepicker();
+
+
+            var startDate = new Date(2012,1,20);
+            var endDate = new Date(2012,1,25);
+            $('#dp4').datepicker()
+                .on('changeDate', function(ev){
+                    if (ev.date.valueOf() > endDate.valueOf()){
+                        $('#alert').show().find('strong').text('The start date can not be greater then the end date');
+                    } else {
+                        $('#alert').hide();
+                        startDate = new Date(ev.date);
+                        $('#startDate').text($('#dp4').data('date'));
+                    }
+                    $('#dp4').datepicker('hide');
+                });
+            $('#dp5').datepicker()
+                .on('changeDate', function(ev){
+                    if (ev.date.valueOf() < startDate.valueOf()){
+                        $('#alert').show().find('strong').text('The end date can not be less then the start date');
+                    } else {
+                        $('#alert').hide();
+                        endDate = new Date(ev.date);
+                        $('#endDate').text($('#dp5').data('date'));
+                    }
+                    $('#dp5').datepicker('hide');
+                });
+
+        // disabling dates
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+        var checkin = $('#dpd1').datepicker({
+          onRender: function(date) {
+            return date.valueOf() < now.valueOf() ? 'disabled' : '';
+          }
+        }).on('changeDate', function(ev) {
+          if (ev.date.valueOf() > checkout.date.valueOf()) {
+            var newDate = new Date(ev.date)
+            newDate.setDate(newDate.getDate() + 1);
+            checkout.setValue(newDate);
+          }
+          checkin.hide();
+          $('#dpd2')[0].focus();
+        }).data('datepicker');
+        var checkout = $('#dpd2').datepicker({
+          onRender: function(date) {
+            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+          }
+        }).on('changeDate', function(ev) {
+          checkout.hide();
+        }).data('datepicker');
+        });
+</script>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript" src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    function readURL(url) {
+        completeURL = "http://"+window.location.hostname + "/av/" + url;
+        document.getElementById('im').src=completeURL;
+    }
+    jQuery.noConflict();
+    formdata = new FormData();
+    jQuery("#image_to_upload").on("change", function() {
+        var file = this.files[0];
+        // console.log(file);
+        if (formdata) {
+            formdata.append("image", file);
+            jQuery.ajax({
+                url: "../uploadPhoto.php",
+                type: "POST",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success:function(data){
+                  newImage = data;
+                  readURL(newImage);
+                  openAviary(newImage);
+                }
+            });
+        }
+    });
+
+
+    var featherEditor = new Aviary.Feather({
+        apiKey: '1620c74b36464cfc857eb4b2d3e555cf',
+        apiVersion: 3,
+        theme: 'minimum', // Check out our new 'light' and 'dark' themes!
+        tools: 'all',
+        appendTo: '',
+        onSave: function(imageID, newURL) {
+            var img = document.getElementById(imageID);
+            img.src = newURL;
+            $.notify("Guardando foto, por favor espera.", "success");
+            $.ajax({
+                method: "POST",
+                url: "usuarios/uploadPhoto.php",
+                data: {
+                    temporal: newURL,
+                    img: newImage
+                }
+            })
+            .done(function( msg ) {
+                $('#image_aviary').val(msg);
+                var img2 = document.getElementById('im2');
+                var msj = document.getElementById("msj_im");
+                msj.innerHTML = '<label class="col-sm-2 control-label">Fotografía recortada: </label>';
+                img2.src = msg;
+                img2.style.display = "";
+            });
+        featherEditor.close();
+        },
+        onError: function(errorObj) {
+            // alert(errorObj.message);
+        }
+    });
+
+    function launchEditor(id,src) {
+        //alert("ENTRE A LA FUNCION");
+        featherEditor.launch({
+            image: id,
+            url: src,
+            forceCropPreset: ['Foto de carnet','7:7'],
+            forceCropMessage: 'Por favor cortar la imagen'
+        });
+        return false;
+    }
+
+    function openAviary(ur) {
+      completeURL = "http://"+window.location.hostname + "/av/" + ur;
+      // alert(completeURL);
+      launchEditor("im",completeURL);
+    }
+    function openAviaryWC(ur) {
+      var url = ur.split("/");
+      try {
+          newImage = url[4];
+      } catch (e) {
+      }
+      launchEditor("im",ur);
+    }
+
+    function saveFoto(newURL){
+      var img = document.getElementById(im).src;
+    }
+
+</script>
+
+<?php if ($_SESSION['usuario_nivel'] <= 2 OR $_SESSION['usuario_nivel'] == 4) { ?>
+    <!-- script webcam -->
+    <script src="usuarios/script.js"></script>
+<?php } ?>
+
+<!-- Finaliza Area Scripts Locales * -->
+
+<!-- *: indica que es material/comentarios del cascaron inicial de webappbase -->

@@ -867,7 +867,7 @@
     }
 </script>
 <script src="js/google-code-prettify/prettify.js"></script>
-<script src="js/jquery.js"></script>
+<!--<script src="js/jquery.js"></script>-->
 <script src="js/bootstrap-datepicker.js"></script>
 <script>
     if (top.location != location) {
