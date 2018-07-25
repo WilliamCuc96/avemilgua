@@ -274,9 +274,9 @@ if (!$resp1) { // Error en la ejecución del query
         print "  <td class='center' align='center' nowrap>";
         print "     <a href='index.php?p=usuarios/av_usuarios_edit.php&id=".$row['vid']."' title='Editar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-pencil'></i></button></a>";
         if ($_SESSION['usuario_nivel'] <= 1 OR $_SESSION['usuario_nivel'] == 2) { 
-            print "     <a href='index.php?p=usuarios/av_usuarios_gestion.php&id=".$row['vid']."&nombre=".$row['nombre']."&btn=Borrar' title='Borrar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-times'></i></button></a>";
+            print "     <a href='index.php?p=usuarios/av_usuarios_gestion.php&id=".$row['vid']."&btn=Borrar' title='Borrar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-times'></i></button></a>";
         }
-        //print "     <a href='../pdf/carnet/reporte.php' title='Editar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-file-pdf'></i></button></a>";
+        print "     <a href='../pdf/carnet/reporte.php' title='Editar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-file-pdf'></i></button></a>";
         print "  </td>";
         print "</tr>";
     }
