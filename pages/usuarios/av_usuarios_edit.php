@@ -3,7 +3,7 @@
 <?php
     //Definición de Variables locales *
     // av_datos_personales
-    global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi;$genero; $fecha_nacimiento;$vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $departamento_id; $foto; //$nacionalidad;
+    global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi;$genero; $fecha_nacimiento;$vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $departamento_id; $foto; $tiempo_caducidad;//$nacionalidad;
 
     // av_datos_servicios
     global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $armas_servicios;
@@ -35,6 +35,7 @@
     $correo = '';
     $nit = '';
     $departamento_id = '';
+    $tiempo_caducidad = '';
 
     // datos_servicios
     $grado_militar = '';
@@ -71,6 +72,7 @@
     if (!$correo) { $correo = isset_or('correo', ''); };
     if (!$nit) { $nit = isset_or('nit', ''); };
     if (!$departamento_id) { $departamento_id = isset_or('departamento_id', ''); };
+    if (!$tiempo_caducidad) { $tiempo_caducidad = isset_or('tiempo_caducidad', ''); };
 
     if (!$grado_militar) { $grado_militar = isset_or('grado_militar', ''); };
     if (!$compania) { $compania = isset_or('compania', ''); };
@@ -105,7 +107,8 @@
                         a.telefono, 
                         a.correo, 
                         a.nit, 
-                        a.foto, 
+                        a.foto,
+                        a.tiempo_caducidad, 
                         b.grado_militar, 
                         b.compania, 
                         b.puesto, 
@@ -224,6 +227,7 @@
                 $dpi = $row['dpi'];
                 $foto = $row['foto'];
                 $beneficiario = $row['beneficiario'];
+                $tiempo_caducidad = $row['tiempo_caducidad'];
                 //$nacionalidad = utf8_encode($row['nacionalidad']);
                 $genero = $row['genero'];
                 $fecha_nacimiento = $row['fecha_nacimiento'];
@@ -512,6 +516,12 @@
                                             <label for="celular" class="col-sm-2 control-label">Teléfono</label>
                                             <div class="col-sm-3">
                                                 <input type="text" class="form-control" id="telefono" placeholder="Teléfono" name="telefono" value="<?php echo $telefono; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="correo" class="col-sm-2 control-label">Años de Vigencia</label>
+                                            <div class="col-sm-4">
+                                                <input type="tiempo_caducidad" class="form-control" id="tiempo_caducidad" placeholder="Años" name="tiempo_caducidad" value="<?php echo $tiempo_caducidad; ?>">
                                             </div>
                                         </div>
                                     </div>

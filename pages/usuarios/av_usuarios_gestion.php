@@ -29,8 +29,12 @@ include_once('../class.upload.php');
     $apellido3 = '';
     $dpi = '';
     $foto ='';
+    // $fecha_vencimiento_carnet = date("Y-m-d");
+    // $nuevafecha = strtotime ( '+2 year' , strtotime ( $fecha_vencimiento_carnet ) ) ;
+    // $nuevafecha = date("Y-m-d" , $nuevafecha );
+
     $fecha_vencimiento_carnet = date("Y-m-d");
-    $nuevafecha = strtotime ( '+2 year' , strtotime ( $fecha_vencimiento_carnet ) ) ;
+    $nuevafecha = strtotime ( '+'.$tiempo_caducidad.' year' , strtotime ( $fecha_vencimiento_carnet ) ) ;
     $nuevafecha = date("Y-m-d" , $nuevafecha );
     //$nacionalidad = '';
     $genero = '';
@@ -144,7 +148,7 @@ include_once('../class.upload.php');
             $sql1 = "INSERT INTO av_datos_personales (codigo, nombre, nombre2,
                     apellido, apellido2, apellido3, dpi, genero, beneficiario,
                     fecha_nacimiento, lugar_nacimiento, vecindad, estado_civil,
-                    profesion, direccion, telefono, correo, nit, foto, fecha_vencimiento_carnet, fecha_registro, user_registro) VALUES (
+                    profesion, direccion, telefono, correo, nit, foto, fecha_vencimiento_carnet, fecha_registro, user_registro, tiempo_caducidad) VALUES (
                     '".utf8_decode($codigo)."', '".utf8_decode($nombre)."',
                     '".utf8_decode($nombre2)."', '".utf8_decode($apellido)."',
                     '".utf8_decode($apellido2)."', '".utf8_decode($apellido3)."',
@@ -153,7 +157,7 @@ include_once('../class.upload.php');
                     '".$estado_civil."', '".$profesion."',
                     '".utf8_decode($direccion)."', '".utf8_decode($telefono)."',
                     '".utf8_decode($correo)."', '".utf8_decode($nit)."', '".utf8_decode($img_edited)."',
-                    '".utf8_decode($nuevafecha)."', now(), '".utf8_decode($_SESSION['usuario_id'])."');";
+                    '".utf8_decode($nuevafecha)."', now(), '".utf8_decode($_SESSION['usuario_id'])."', '".utf8_decode($tiempo_caducidad)."');";
             if (mysql_query($sql1)) {
                 $last_id = mysql_insert_id();
 
