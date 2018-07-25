@@ -1,14 +1,16 @@
 <?php
     //Definición de Variables locales
-    global $idtipo; $nombre; $institucion; $ninstitucion; $btn; $mensaje1; $mensaje2; $mensaje3; $nombretipo;
+    global $tbtn; $idtipo; $nombre; $institucion; $ninstitucion; $btn; $mensaje1; $mensaje2; $mensaje3; $nombretipo;
     
     //Inicialización de Variables locales
     $nombre = "";
     $institucion = ""; 
     $ninstitucion = "";
     $nombretipo = "";
+    $tbtn = 0;
     
     // Asignar el valor que viene en el request a variables
+    if (!$tbtn) { $tbtn  = isset_or('tbtn', '0'); }
     if (!$idtipo) { $idtipo  = isset_or('idtipo', '0'); }
     if (!$institucion) { $institucion  = isset_or('institucion', $_SESSION['usuario_institucion'] ); }
        
@@ -141,7 +143,9 @@
                         </ul>
                         <center>
                             <div class="btn-group" > 
-                                <a class="btn btn-primary" target="" href="index.php?p=sistema/tipocatalogos_list.php"><i class="fa fa-arrow-circle-left"></i> Ver Listado de Catálogos del Sistema</a>
+                                <?php if ($tbtn!=1) { ?>
+                                    <a class="btn btn-primary" target="" href="index.php?p=sistema/tipocatalogos_list.php"><i class="fa fa-arrow-circle-left"></i> Ver Listado de Catálogos del Sistema</a>
+                                <?php } ?>
                                 <a class="btn btn-success" target="" href="index.php?p=sistema/catalogos_edit.php<?php echo "&idtipo=".$idtipo."&institucion=".$_SESSION['usuario_institucion'].""; ?>"><i class="fa fa-plus-circle"></i> Ingresar un nuevo registro en el catálogo <?php echo $nombretipo; ?></a>
                                 
                             </div>

@@ -6,8 +6,169 @@
     global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $nacionalidad; $genero; $fecha_nacimiento; $lugar_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $nit; $beneficiario; $foto;
 
     // av_datos_servicios
-    global $grado_militar; $compañia; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar;
+    global $grado_militar; $compañia; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $var_where1;
 
+    //Inicialización de Variables locales para busqueda
+    // av_datos_personales
+    $id = '';
+    $codigo = '';
+    $nombre = '';
+    $nombre2 = '';
+    $apellido = '';
+    $apellido2 = '';
+    $apellido3 = '';
+    $dpi = '';
+    $foto ='';
+    $fecha_vencimiento_carnet = date("Y-m-d H:i:s");
+    $genero = '';
+    $beneficiario = '';
+    $fecha_nacimiento = '';
+    $lugar_nacimiento = '';
+    $vecindad = '';
+    $estado_civil = '';
+    $profesion = '';
+    $direccion = '';
+    $telefono = '';
+    $correo = '';
+    $nit = '';
+
+    // av_datos_servicios
+    $grado_militar = '';
+    $compania = '';
+    $puesto = '';
+    $fecha_alta = '';
+    $fecha_baja = '';
+    $motivo_baja = '';
+    $computo_servicios = '';
+    $sueldo_mensual = '';
+    $zona_militar = '';
+    $img_edited = '';
+    $armas_servicios = '';
+
+    $user_registro = '';
+    $fecha_registro = '';
+
+
+    // Asignar el valor que viene en el request a variables *
+    if (!$id) { $id  = isset_or('id', '0'); };
+    if (!$codigo) { $codigo  = isset_or('codigo', ''); };
+    if (!$nombre) { $nombre = isset_or('nombre', ''); };
+    if (!$nombre2) { $nombre2 = isset_or('nombre2', ''); };
+    if (!$apellido) { $apellido = isset_or('apellido', ''); };
+    if (!$apellido2) { $apellido2 = isset_or('apellido2', ''); };
+    if (!$apellido3) { $apellido3 = isset_or('apellido3', ''); };
+    if (!$dpi) { $dpi = isset_or('dpi', ''); };
+    if (!$foto) { $foto = isset_or('foto', ''); };
+    if (!$fecha_vencimiento_carnet) { $fecha_vencimiento_carnet = isset_or('fecha_vencimiento_carnet', ''); };
+    if (!$genero) { $genero = isset_or('genero', ''); };
+    if (!$beneficiario) { $beneficiario = isset_or('beneficiario', ''); };
+    if (!$fecha_nacimiento) { $fecha_nacimiento = isset_or('fecha_nacimiento', ''); };
+    if (!$lugar_nacimiento) { $lugar_nacimiento = isset_or('lugar_nacimiento', ''); };
+    if (!$vecindad) { $vecindad = isset_or('vecindad', ''); };
+    if (!$estado_civil) { $estado_civil = isset_or('estado_civil', ''); };
+    if (!$profesion) { $profesion = isset_or('profesion', ''); };
+    if (!$direccion) { $direccion = isset_or('direccion', ''); };
+    if (!$telefono) { $telefono = isset_or('telefono', ''); };
+    if (!$correo) { $correo = isset_or('correo', ''); };
+    if (!$nit) { $nit = isset_or('nit', ''); };
+
+    if (!$grado_militar) { $grado_militar = isset_or('grado_militar', ''); };
+    if (!$compania) { $compania = isset_or('compania', ''); };
+    if (!$puesto) { $puesto = isset_or('puesto', ''); };
+    if (!$fecha_alta) { $fecha_alta = isset_or('fecha_alta', ''); };
+    if (!$fecha_baja) { $fecha_baja = isset_or('fecha_baja', ''); };
+    if (!$motivo_baja) { $motivo_baja = isset_or('motivo_baja', ''); };
+    if (!$computo_servicios) { $computo_servicios = isset_or('computo_servicios', ''); };
+    if (!$sueldo_mensual) { $sueldo_mensual = isset_or('sueldo_mensual', ''); };
+    if (!$zona_militar) { $zona_militar = isset_or('zona_militar', ''); };
+    if (!$img_edited) { $img_edited = isset_or('image_aviary', ''); };
+    if (!$armas_servicios) { $armas_servicios = isset_or('armas_servicios', ''); };
+
+    if (!$user_registro) { $user_registro = isset_or('user_registro', ''); };
+    if (!$fecha_registro) { $fecha_registro = isset_or('fecha_registro', ''); };
+
+    $var_where1 = ' ';
+    // Datos personales
+
+    if ($nombre) {
+        $var_where1 = $var_where1 . "AND UPPER(a.nombre) LIKE _utf8  '" . $nombre . "' COLLATE utf8_general_ci "
+                                  . "OR UPPER(a.nombre2) LIKE _utf8 '" . $nombre . "' COLLATE utf8_general_ci ";
+    };
+
+    if ($apellido) {
+        $var_where1 = $var_where1 . "AND UPPER(a.apellido) LIKE _utf8  '" . $apellido . "' COLLATE utf8_general_ci "
+                                  . "OR UPPER(a.apellido2) LIKE _utf8 '" . $apellido . "' COLLATE utf8_general_ci "
+                                  . "OR UPPER(a.apellido3) LIKE _utf8 '" . $apellido . "' COLLATE utf8_general_ci ";
+    };
+
+    if ($codigo) {
+        $var_where1 = $var_where1 . "AND UPPER(a.codigo) LIKE UPPER('%" . $codigo . "%') ";
+    };
+    if ($dpi) {
+        $var_where1 = $var_where1 . "AND UPPER(a.dpi) LIKE UPPER('%" . $dpi . "%') ";
+    };
+    if ($genero) {
+        $var_where1 = $var_where1 . "AND a.genero = '" . $genero ."' ";
+    };
+    if ($estado_civil) {
+        $var_where1 = $var_where1 . "AND a.estado_civil = '" . $estado_civil . "' ";
+    };
+    if ($lugar_nacimiento) {
+        $var_where1 = $var_where1 . "AND a.lugar_nacimiento = '" . $lugar_nacimiento . "' ";
+    };
+    if ($fecha_nacimiento) {
+        $var_where1 = $var_where1 . "AND a.fecha_nacimiento = '" . $fecha_nacimiento . "'";
+    };
+    if ($direccion) {
+        $var_where1 = $var_where1 . " AND UPPER(a.direccion) LIKE UPPER('%" . $direccion . "%') ";
+    };
+    if ($vecindad) {
+        $var_where1 = $var_where1 . "AND a.vecindad =  '" . $vecindad . "'";
+    };
+    if ($profesion) {
+        $var_where1 = $var_where1 . "AND a.profesion = '" . $profesion . "'";
+    }
+
+    if ($armas_servicios) {
+        $var_where1 = $var_where1 . "AND b.armas_servicios = '" . $armas_servicios . "'";
+    }
+
+    if ($correo) {
+        $var_where1 = $var_where1 . "AND UPPER(a.correo) LIKE UPPER('%" . $correo . "%') ";
+    }
+
+    // Datos servicios
+    if ($grado_militar) {
+        $var_where1 = $var_where1 . " AND UPPER(b.grado_militar) LIKE UPPER('%" . $grado_militar . "%') ";
+    };
+    if ($compania) {
+        $var_where1 = $var_where1 . " AND UPPER(b.compania) LIKE UPPER('%" . $compania . "%') ";
+    };
+    if ($fecha_alta) {
+        $var_where1 = $var_where1 . "AND b.fecha_alta = '" . $fecha_alta . "' ";
+    };
+
+    if ($fecha_baja) {
+        $var_where1 = $var_where1 . "AND b.fecha_baja = '" . $fecha_baja . "' ";
+    };
+
+    if ($motivo_baja) {
+        $var_where1 = $var_where1 . " AND UPPER(b.motivo_baja) LIKE UPPER('%" . $motivo_baja . "%') ";
+    };
+    if ($computo_servicios) {
+        $var_where1 = $computo_servicios . " AND UPPER(b.motivo_baja) LIKE UPPER('%" . $computo_servicios . "%') ";
+    };
+
+    // Opciones Administracion
+    if ($user_registro) {
+        $var_where1 = $var_where1 . "AND a.user_registro = '" . $user_registro . "' ";
+    };
+
+    if ($fecha_registro) {
+        $var_where1 = $var_where1 . "AND a.fecha_registro = '" . $fecha_registro . "' ";
+    };
+
+    // Fin de busqueda
 
     $imagen = "fa fa-users";
 
@@ -23,7 +184,9 @@
                     a.vecindad,
                     a.telefono,
                     (select b.nombre from ap_municipios b where b.id = a.vecindad) as municipio
-                    FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id";
+                    FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id "
+                    . $var_where1 . " ";
+                    ;
 
     $resp1 = mysql_query($sql1);
 ?>
@@ -108,10 +271,12 @@ if (!$resp1) { // Error en la ejecución del query
                 </span>
             </td>
         <?php } 
-        print "  <td class='center' align='center' nowrap>
-                    <a href='index.php?p=usuarios/av_usuarios_edit.php&id=".$row['vid']."' title='Editar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-pencil'></i></button></a>
-                    <a href='index.php?p=usuarios/av_usuarios_gestion.php&id=".$row['vid']."&btn=Borrar' title='Borrar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-times'></i></button></a>
-                 </td>";
+        print "  <td class='center' align='center' nowrap>";
+        print "     <a href='index.php?p=usuarios/av_usuarios_edit.php&id=".$row['vid']."' title='Editar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-pencil'></i></button></a>";
+        if ($_SESSION['usuario_nivel'] <= 1 OR $_SESSION['usuario_nivel'] == 2) { 
+            print "     <a href='index.php?p=usuarios/av_usuarios_gestion.php&id=".$row['vid']."&btn=Borrar' title='Borrar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-times'></i></button></a>";
+        }
+        print "  </td>";
         print "</tr>";
     }
 ?>

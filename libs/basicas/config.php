@@ -24,15 +24,15 @@ $registros          = 25;  		            // cantidad de registros a mostrar por 
 $db_motor           = "mysql";            // Tipo de Servidor de Base de datos (mysql,postgresql,oracle,etc).
 $sql_host           = "localhost";        // Host, nombre del servidor o IP del servidor de base de datos.
 
-$entorno            = 1;                  // 1 / 2 / 3
+$entorno            = 2;                  // 1 / 2 / 3
 
 switch ($entorno) {
   case 1: // Desarrollo local------
-      $sql_db             = "avemilgua";   //impulsar_gescon Base de datos que se usario
+      $sql_db             = "insayd_avemilgua";   //impulsar_gescon Base de datos que se usario
       $sql_usuario        = "root";               // Usuario de Mysql
-      $sql_pass           = "root";      // contrasenia de Mysql
+      $sql_pass           = "Javirala24.gt";      // contrasenia de Mysql
       $ap_nombre_ct       = "AVEMILGUA - Local";  // Nombre de la aplicación Corto <i class='fa fa-key'></i>
-      $ap_nombre_lg       = "<i class='fa fa-user'></i> AVEMILGUA - Local";  // Nombre de la aplicación Largo
+      $ap_nombre_lg       = "<i class='fas fa-shield-alt'></i> AVEMILGUA - Local";  // Nombre de la aplicación Largo
       $path_foto          = "avemilgua/"; // path de almacenado de foto
       break;
   case 2: // Desarrollo insayd.com ------
@@ -40,7 +40,7 @@ switch ($entorno) {
       $sql_usuario        = "insayd_avemilgua";	  // Usuario de Mysql
       $sql_pass           = "Javirala24.gt";      // contrasenia de Mysql
       $ap_nombre_ct       = "AVEMILGUA - Test";	  // Nombre de la aplicación Corto <i class='fa fa-key'></i>
-      $ap_nombre_lg       = "<i class='fa fa-key'></i> AVEMILGUA - Test";	// Nombre de la aplicación Largo
+      $ap_nombre_lg       = "<i class='fas fa-shield-alt'></i> AVEMILGUA - Test";	// Nombre de la aplicación Largo
       $path_foto          = "av/"; // path de almacenado de foto
       break;
   case 3: // Produccion host propio ------
@@ -48,7 +48,7 @@ switch ($entorno) {
       $sql_usuario        = "insayd_avemilgua";	    // Usuario de Mysql
       $sql_pass           = "Javirala24.gt";        // contrasenia de Mysql
       $ap_nombre_ct       = "AVEMILGUA - Consola";	// Nombre de la aplicación Corto <i class='fa fa-key'></i>
-      $ap_nombre_lg       = "<i class='fa fa-key'></i> AVEMILGUA - Consola";	// Nombre de la aplicación Largo
+      $ap_nombre_lg       = "<i class='fas fa-shield-alt'></i> AVEMILGUA - Consola";	// Nombre de la aplicación Largo
       $path_foto          = "av/"; // path de almacenado de foto
       break;
 }

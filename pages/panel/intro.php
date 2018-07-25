@@ -3,32 +3,38 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header"> Página de Base</h1>
+                <h1 class="page-header"> Gestión de Datos de Veteranos Militares</h1>
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-12">
                 <div class="jumbotron panel-green">
-                    <h1>Bienvenido</h1>
-                    <p>A continuación encontrá una serie de funciones que le serviran para generar los resultados de sus datos deseados.</p>
-                    <p><a class="btn btn-primary btn-lg" role="button">Leer más</a></p>
+                    <h1>Bienvenido!</h1>
+                    <p>A continuación encontrá una serie de formularios y listados que le permitirán administrar la información de AVEMILGUA.</p>
+                    <p><a href="index.php?p=usuarios/veteranos_busc.php" class="btn btn-primary btn-lg" role="button">Búsqueda Personalizada</a></p>
 
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="col-lg-4">
-                  <h2>Heading</h2>
-                   <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                  <p><a class="btn" href="#">View details &raquo;</a></p>
+                  <h2><i class="fas fa-user-plus"></i> Nuevo Veterano</h2>
+                   <p>Por medio de esta opción puede agregar directamente un veterano, si posee los permisos necesarios. </p>
+                   <?php if ($_SESSION['usuario_nivel'] <= 2 OR $_SESSION['usuario_nivel'] == 4) { ?>
+                   <p><a class="btn" href="index.php?p=usuarios/av_usuarios_edit.php#">Ir al formulario &raquo;</a></p>
+                   <?php }; ?>
                 </div>
                 <div class="col-lg-4">
-                  <h2>Heading</h2>
-                   <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                  <p><a class="btn" href="#">View details &raquo;</a></p>
-               </div>
+                  <h2><i class="fas fa-search"></i> Buscar Veteranos</h2>
+                   <p>Ingrese a esta opción para generar listados de beneficiarios utilizando un formulario de búsquedas con varios criterios. </p>
+
+                   <p><a class="btn" href="index.php?p=usuarios/veteranos_busc.php">Ir al formulario &raquo;</a></p>
+               
+                </div>
                 <div class="col-lg-4">
-                  <h2>Heading</h2>
-                  <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                  <p><a class="btn" href="#">View details &raquo;</a></p>
+                  <h2><i class="fas fa-users"></i> Usuarios</h2>
+                  <p>Administre los permisos de usuarios existentes o cree nuevos usuarios.</p>
+                  <?php if ($_SESSION['usuario_nivel'] <= 2) { ?>
+                  <p><a class="btn" href="index.php?p=usuarios/usuarios_list.php">Ir al listado &raquo;</a></p>
+                  <?php }; ?>
                 </div>
             </div>
         </div>

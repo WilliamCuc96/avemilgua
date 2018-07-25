@@ -21,7 +21,7 @@
                         <form class="form-horizontal" role="form" action="index.php" method="get">
 <!-- Inicia Formulario (Peledahe) -->
                             <!-- -->
-                            <input class="text" name="p" type="hidden" value="usuarios/veteranos_list.php"/>
+                            <input class="text" name="p" type="hidden" value="usuarios/av_usuarios_list.php"/>
                             <!-- -->
 
                             <div class="form-group">

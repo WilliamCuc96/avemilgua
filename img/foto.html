@@ -12,11 +12,43 @@
 	<title>Tomar foto con Javascript y PHP</title>
 </head>
 <body>
-	<video id="video"></video>
+		<div class="form-group">
+				<div class="col-sm-6">
+					<!--
+							<video id="video" width="200" height="160"></video>
+							<br>
+							<button type="button" class="btn btn-danger" id="boton">Tomar foto</button>
+							<p id="estado"></p>
+				</div>
+				<div >
+						<div class="input-group">
+						 <canvas id="canvas" style="display: none;"></canvas> 
+					</div>
+					-->
+				
+				<table>
+					<tr>
+						<th>Cámara</th>
+						<th width="30">&nbsp;&nbsp;&nbsp;</th>
+						<th>Fotografía</th>
+					</tr>
+					<tr>
+						<td><video id="video" width="200" height="160" style="background-color: rgba(185, 233, 255, 0.356)"></video></td>
+						<td>&nbsp;&nbsp;&nbsp;</td>
+						<td><canvas width="200" height="160" id="canvas" style="background-color: rgba(185, 233, 255, 0.356)"></canvas></td>
+					</tr>
+				</table>
+				<button type="button" class="btn btn-danger" id="boton">Tomar foto</button>
+				<p id="estado"></p>
+			</div>
+		</div>
+			<!--
+	<video id="video" width="200" height="160"></video>
 	<br>
-	<button type="button" id="boton">Tomar foto</button>
+	<button type="button" class="btn btn-danger" id="boton">Tomar foto</button>
 	<p id="estado"></p>
 	<canvas id="canvas" style="display: none;"></canvas>
+	-->
 </body>
 <script type="text/javascript">
 

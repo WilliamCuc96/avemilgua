@@ -105,7 +105,7 @@ if (!$resp1) { // Error en la ejecución del query
                             <li>Haga click en el icono <i class="fa fa-times"></i> para eliminar el registro.</li>
                             <li>Si el registro no está en el listado y desea ingresar uno nuevo, haga click en el boton siguiente.</li>
                         </ul>
-                        <a class="btn btn-warning btn-xs btn-block" target="" href="index.php?p=usuarios/av_ipm_edit.php">Ingresar nuevo veterano</NAV></a>
+                        <a class="btn btn-warning btn-xs btn-block" target="" href="index.php?p=usuarios/av_ipm_edit.php">Ingresar nuevo donante</NAV></a>
                     </div>
 
                 </div>
