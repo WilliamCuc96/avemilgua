@@ -1,7 +1,7 @@
 <!-- PHP -->
 <?php
 //Definición de Variables locales *
-    global $id; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $grado_militar; $numero_catalogo; $dpi; $direccion; $municipio; $correo; $telefono; $cantidad;
+    global $id; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $grado_militar; $numero_catalogo; $dpi; $direccion; $municipio; $correo; $telefono; $cantidad; $fecha_inicio; $fecha_registro; $usuario_registro;
 
 //Inicialización de Variables locales *
     $mensaje1 = '';
@@ -22,6 +22,9 @@
     $correo = '';
     $telefono = '';
     $cantidad = '';
+    $fecha_inicio = '';
+    $fecha_registro = '';
+    $usuario_registro = '';
 
     // Asignar el valor que viene en el request a variables *
     if (!$id) { $id  = isset_or('id', '0'); };
@@ -38,6 +41,9 @@
     if (!$correo) { $correo = isset_or('correo', ''); };
     if (!$telefono) { $telefono = isset_or('telefono', ''); };
     if (!$cantidad) { $cantidad = isset_or('cantidad', ''); };
+    if (!$fecha_inicio) { $fecha_inicio = isset_or('fecha_inicio', ''); };
+    if (!$fecha_registro) { $fecha_registro = isset_or('fecha_registro', ''); };
+    if (!$usuario_registro) { $usuario_registro = isset_or('usuario_registro', ''); };
 
     if (!$btn) { $btn = isset_or('btn', ''); };
 
@@ -64,13 +70,13 @@
         case "Insertar":
             $sql1 = "INSERT INTO av_datos_ipm (id, nombre, nombre2, apellido,
                     apellido2, apellido3, grado_militar, numero_catalogo ,dpi,
-                    direccion, municipio, correo, telefono, cantidad) VALUES (
+                    direccion, municipio, correo, telefono, cantidad, fecha_inicio, fecha_registro, usuario_registro) VALUES (
                     '".$id."','".utf8_decode($nombre)."','".utf8_decode($nombre2)."',
                     '".utf8_decode($apellido)."', '".utf8_decode($apellido2)."',
                     '".utf8_decode($apellido3)."', '".utf8_decode($grado_militar)."',
                     '".utf8_decode($numero_catalogo)."', '".$dpi."', '".utf8_decode($direccion)."',
                     '".$municipio."', '".utf8_decode($correo)."', '".utf8_decode($telefono)."',
-                    '".$cantidad."');";
+                    '".$cantidad."','".$fecha_inicio."', now(), '".utf8_decode($_SESSION['usuario_id'])."');";
             break;
         case "Actualizar":
             $sql1 = "UPDATE av_datos_ipm SET
@@ -86,7 +92,8 @@
                     municipio = '".utf8_decode($municipio)."',
                     correo =  '".utf8_decode($correo)."',
                     telefono = '".utf8_decode($telefono)."',
-                    cantidad = '".$cantidad."'
+                    cantidad = '".$cantidad."',
+                    fecha_inicio = '".$fecha_inicio."'
                     WHERE id = '".$id."'";
              break;
         case "Borrar":
