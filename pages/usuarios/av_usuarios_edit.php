@@ -266,16 +266,20 @@
                 <h1 class="page-header">
                     <?php
                         if ($foto) {
-                            echo '<img src="'.$foto.'" alt="Foto" class="img-circle" width="" height="80"> ';
+                            $fotodb = $foto; // para campo de update
+                            echo '<img src="'.$foto.'" alt="Foto" class="img-thumbnail" width="80" height="80"> ';
                         } else {
                             echo '<span class="fa-stack fa-1x">
                                         <i class="fas fa-portrait fa-stack-1x"></i>
                                         <i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i>
                                 </span> ';
                         }
+                        if ($id == "0" or $id == "") {
+                            echo "Nuevo registro de Veterano!";
+                        } else {
+                            echo $nombre . " " . $apellido;
+                        }
                     ?>
-
-                    Información de: <?php echo $nombre . " " . $apellido; ?>
                 </h1>
             </div>
             <!-- /.col-lg-12 * -->
@@ -534,26 +538,15 @@
                                                 <!-- tomar foto-->
                                                 <div class="form-group" id="foto">
                                                     <label for="foto" class="col-sm-2 control-label">Tomar Fotografía</label>
-                                                    <div class="col-sm-2 control-label">
+                                                    <div class="col-sm-9 control-label">
                                                         <?php include_once '../img/foto.html'; ?>
                                                     </div>
                                                     <br>
-                                                    <br>
                                                     <p id="msj_im"></p>
-                                                    <div class="col-sm-9">
-                                                        <img id="im2" style="display:none" src="" alt="image" />
+                                                    <div class="col-sm-1">
+                                                        <img id="im5" style="display:none" src="" alt="image" />
                                                     </div>
                                                 </div>    
-                                                <br>
-                                                <!--
-                                                <div class="col-sm-9">
-                                                    <video id="video"></video>
-                                                    <br>
-                                                    <button id="boton">Tomar foto</button>
-                                                    <p id="estado"></p>
-                                                    <canvas id="canvas" style="display: none;"></canvas>
-                                                </div>
-                                                -->
 
                                             </div>
                                             
@@ -561,9 +554,10 @@
                                             <div class="form-group">
                                                 <label for="foto" class="col-sm-2 control-label">Subir Fotografía</label>
                                                 <div class="col-sm-4">
-                                                    <input type="file" id="image_to_upload" placeholder="Seleccione una foto" name="foto" value="<?php echo $foto; ?>">
+                                                    <input type="file" id="image_to_upload" placeholder="Seleccione una foto" name="foto" value="">
                                                     <img style="display:none" id="im" src="" alt="image" />
-                                                    <input type="hidden" id="image_aviary" name="image_aviary" value="">
+                                                    <input type="hidden" id="image_aviary" name="image_aviary" value="" >
+                                                    <input type="hidden" id="fotodb" name="fotodb" value="<?php echo $fotodb; ?>" >
                                                 </div>
                                             </div>
                                         <?php 
@@ -583,7 +577,11 @@
                                         <?php if ($data['foto']) { ?>
                                             <div class="col-md-12 text-center">
                                                 <div class="">
-                                                    <br><br>
+                                                    <br>
+                                                    <small id="passwordHelpInline" class="text-muted">
+                                                        Recuerde hacer click en el boton para guardar si tomó nueva Foto.
+                                                    </small>
+                                                    <br>
                                                     <?php
                                                         $parametros = "nombre=".utf8_encode( $data['nombre'])."&nombre2=".utf8_encode( $data['nombre2'])."&apellido=".utf8_encode( $data['apellido'])."&apellido2=".utf8_encode( $data['apellido2'])."&dpi=".$data['dpi']."&codigo=".$data['codigo']."&foto=".$data['foto']."&fecha_vencimiento_carnet=".$fechafinal."&beneficiario=".$data['beneficiario'];
                                                     ?>
@@ -747,8 +745,8 @@
                                                 <?php if ($id == "0" or $id == "") { ?>
                                                     <button type="submit" class="btn btn-success" value="Insertar" name="btn" >Guardar</button>
                                                 <?php } else { ?>
-                                                    <button type="submit" class="btn btn-warning" value="Actualizar" name="btn" >Modificar</button>
-                                                    <button type="submit" class="btn btn-danger" value="Borrar" name="btn" >Borrar</button>
+                                                    <button type="submit" class="btn btn-warning" value="Actualizar" name="btn" >Guardar Cambios</button>
+                                                    <!-- <button type="submit" class="btn btn-danger" value="Borrar" name="btn" >Borrar</button> -->
                                                 <?php } ?>
                                                 <button type="reset" class="btn btn-inverse" value="Cancelar">Cancelar</button>
                                                 <small id="passwordHelpInline" class="text-muted">
@@ -1004,7 +1002,7 @@
                 $('#image_aviary').val(msg);
                 var img2 = document.getElementById('im2');
                 var msj = document.getElementById("msj_im");
-                msj.innerHTML = '<label class="col-sm-2 control-label">Fotografía recortada: </label>';
+                msj.innerHTML = '';
                 img2.src = msg;
                 img2.style.display = "";
             });

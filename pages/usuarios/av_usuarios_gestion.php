@@ -11,7 +11,7 @@ include_once('../class.upload.php');
     global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $img_edited; $armas_servicios; $fecha_registro; $user_registro;
 
     // av_archivo
-    global $id_archivo; $id_personal; $nombre_archivo; $descripcion; $observaciones; $fecha_registro_archivo; $user_registro_archivo;
+    global $fotodb; $id_archivo; $id_personal; $nombre_archivo; $descripcion; $observaciones; $fecha_registro_archivo; $user_registro_archivo;
 
 
 //Inicialización de Variables locales *
@@ -21,6 +21,7 @@ include_once('../class.upload.php');
     $mensaje4 = 'Para generar un PDF es necesario agregar una imagen en la información del usuario';
     // av_datos_personales
     $id = '';
+    $fotodb = "";
     $codigo = '';
     $nombre = '';
     $nombre2 = '';
@@ -82,6 +83,7 @@ include_once('../class.upload.php');
     if (!$apellido3) { $apellido3 = isset_or('apellido3', ''); };
     if (!$dpi) { $dpi = isset_or('dpi', ''); };
     if (!$foto) { $foto = isset_or('foto', ''); };
+    if (!$fotodb) { $fotodb = isset_or('fotodb', ''); };
     if (!$fecha_vencimiento_carnet) { $fecha_vencimiento_carnet = isset_or('fecha_vencimiento_carnet', ''); };
     //if (!$nacionalidad) { $nacionalidad = isset_or('nacionalidad', ''); };
     if (!$genero) { $genero = isset_or('genero', ''); };
@@ -192,6 +194,9 @@ include_once('../class.upload.php');
             break;
 
         case "Actualizar":
+            if ($img_edited == "") {
+                $img_edited = $fotodb;
+            }
             $sql1 = "UPDATE av_datos_personales SET
                     codigo = '".utf8_decode($codigo)."',
                     nombre ='".utf8_decode($nombre)."',
@@ -487,25 +492,31 @@ $sqlpdf = "SELECT   codigo,
                         <div class="">
                             <h3></h3>
                             <div class="btn-group">
-                            <?php print($nombre)?>
                                 <a href="index.php?p=usuarios/av_usuarios_list.php" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Listado de Veteranos</a>
                             </div>
                             <?php if($btn == "Borrar"): ?>
 
                             <?php else: ?>
                             <div class="btn-group">
-                                <a href='index.php?p=usuarios/av_usuarios_edit.php&id=<?php echo $id ?>' class="btn btn-danger"><i class="fa fa-pencil"></i> Editar Informacion</a>
+                                <a href='index.php?p=usuarios/av_usuarios_edit.php&id=<?php echo $id ?>' class="btn btn-success"><i class="fa fa-pencil"></i> Editar Informacion de <?php print($nombre." ".$apellido)?></a>
                             </div>
                             <?php endif; ?>
                         </div>
                     </div>
             <?php else: ?>
-                    <div class="col-md-12 text-center">
+            <div class="col-md-12 text-center">
                         <div class="">
                             <h3></h3>
                             <div class="btn-group">
                                 <a href="index.php?p=usuarios/av_usuarios_list.php" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Listado de Veteranos</a>
                             </div>
+                            <?php if($btn == "Borrar"): ?>
+
+                            <?php else: ?>
+                            <div class="btn-group">
+                                <a href='index.php?p=usuarios/av_usuarios_edit.php&id=<?php echo $id ?>' class="btn btn-success"><i class="fa fa-pencil"></i> Editar Informacion de <?php print($nombre." ".$apellido)?></a>
+                            </div>
+                            <?php endif; ?>
                         </div>
                     </div>
             <?php endif; ?>

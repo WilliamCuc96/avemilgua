@@ -30,7 +30,8 @@ if (tieneSoporteUserMedia()) {
 				var contexto = $canvas.getContext("2d");
 				$canvas.width = $video.videoWidth;
 				$canvas.height = $video.videoHeight;
-				contexto.drawImage($video, 0, 0, $canvas.width, $canvas.height);
+                contexto.drawImage($video, 0, 0, $canvas.width, $canvas.height);
+                //contexto.drawImage($video, 0, 0, 200, 160);
 
 				var foto = $canvas.toDataURL(); //Esta es la foto, en base 64
         var block = foto.split(";");
