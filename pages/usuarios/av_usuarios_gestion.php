@@ -5,7 +5,7 @@ include_once('../class.upload.php');
 
 //Definición de Variables locales *
     // av_datos_personales
-    global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $genero; $fecha_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $foto; $fecha_vencimiento_carnet; //$nacionalidad;
+    global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi; $genero; $fecha_nacimiento; $vecindad; $estado_civil; $profesion; $direccion; $telefono; $correo; $lugar_nacimiento; $nit; $beneficiario; $foto; $fecha_vencimiento_carnet; $tiempo_caducidad;//$nacionalidad;
 
     // av_datos_servicios
     global $grado_militar; $compania; $puesto; $fecha_alta; $fecha_baja; $motivo_baja; $computo_servicios; $sueldo_mensual; $zona_militar; $img_edited; $armas_servicios; $fecha_registro; $user_registro;
@@ -30,13 +30,10 @@ include_once('../class.upload.php');
     $apellido3 = '';
     $dpi = '';
     $foto ='';
+    $tiempo_caducidad = '';
     // $fecha_vencimiento_carnet = date("Y-m-d");
     // $nuevafecha = strtotime ( '+2 year' , strtotime ( $fecha_vencimiento_carnet ) ) ;
     // $nuevafecha = date("Y-m-d" , $nuevafecha );
-
-    $fecha_vencimiento_carnet = date("Y-m-d");
-    $nuevafecha = strtotime ( '+'.$tiempo_caducidad.' year' , strtotime ( $fecha_vencimiento_carnet ) ) ;
-    $nuevafecha = date("Y-m-d" , $nuevafecha );
     //$nacionalidad = '';
     $genero = '';
     $beneficiario = '';
@@ -83,6 +80,7 @@ include_once('../class.upload.php');
     if (!$apellido3) { $apellido3 = isset_or('apellido3', ''); };
     if (!$dpi) { $dpi = isset_or('dpi', ''); };
     if (!$foto) { $foto = isset_or('foto', ''); };
+    if (!$tiempo_caducidad) { $tiempo_caducidad = isset_or('tiempo_caducidad', ''); };
     if (!$fotodb) { $fotodb = isset_or('fotodb', ''); };
     if (!$fecha_vencimiento_carnet) { $fecha_vencimiento_carnet = isset_or('fecha_vencimiento_carnet', ''); };
     //if (!$nacionalidad) { $nacionalidad = isset_or('nacionalidad', ''); };
@@ -98,6 +96,8 @@ include_once('../class.upload.php');
     if (!$correo) { $correo = isset_or('correo', ''); };
     if (!$nit) { $nit = isset_or('nit', ''); };
     if (!$fecha_registro) { $fecha_registro = isset_or('fecha_registro', ''); };
+    if (!$tiempo_caducidad) { $tiempo_caducidad = isset_or('tiempo_caducidad', ''); };
+
 
     if (!$id_personal) { $id_personal = isset_or('id_personal', ''); };
     if (!$nombre_archivo) { $nombre_archivo = isset_or('nombre_archivo', ''); };
@@ -117,6 +117,10 @@ include_once('../class.upload.php');
     if (!$zona_militar) { $zona_militar = isset_or('zona_militar', ''); };
     if (!$armas_servicios) { $armas_servicios = isset_or('armas_servicios', ''); };
     if (!$img_edited) { $img_edited = isset_or('image_aviary', ''); };
+
+    $fecha_vencimiento_carnet = date("Y-m-d");
+    $nuevafecha = strtotime ( '+'.$tiempo_caducidad.' year' , strtotime ( $fecha_vencimiento_carnet ) ) ;
+    $nuevafecha = date("Y-m-d" , $nuevafecha );
 
 
     $new_name = "carne_".$id;
