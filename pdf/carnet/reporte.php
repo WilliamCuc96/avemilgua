@@ -112,7 +112,9 @@ $pdf->SetAutoPageBreak(false, 0);
 //$img_file = K_PATH_IMAGES.'Frente_Avemilgua_2014-01.jpg';
 //$pdf->Image($img_file, 0, 0, 85.5, 54, '', '', '', false, 300, '', false, false, 0);
 //---------------------Text----------------------
-
+$pdf->SetFont('helvetica', 'B', 10);
+$pdf->SetXY(161,43);
+$pdf->Write(0,"AVEMILGUA");
 $pdf->writeHTMLCell(40, 40, 150, 10, '<img src="'.$img_file.'">');
 $pdf->SetFont('helvetica', 'B', 14);
 $pdf->SetXY(5,50);
