@@ -18,7 +18,30 @@ $dpi = $_REQUEST['dpi'];
 $codigo = $_REQUEST['codigo'];
 $foto = $_REQUEST['foto'];
 $beneficiario = $_REQUEST['gradoMilitar'];
-$fechafinal = $_REQUEST['fecha_vencimiento_carnet'];
+$genero = $_REQUEST['genero'];
+$fecha_nacimiento = $_REQUEST['fecha_nacimiento'];
+$estado_civil = $_REQUEST['estado_civil'];
+$profesion = $_REQUEST['profesion'];
+$direccion = $_REQUEST['direccion'];
+$correo = $_REQUEST['correo'];
+$telefono = $_REQUEST['telefono'];
+$fecha_baja = $_REQUEST['fecha_baja'];
+$municipio = $_REQUEST['municipio'];
+$compania = $_REQUEST['compania'];
+$puesto = $_REQUEST['puesto'];
+$fecha_alta = $_REQUEST['fecha_alta'];
+$motivo_baja = $_REQUEST['motivo_baja'];
+$computo_servicios = $_REQUEST['computo_servicios'];
+$sueldo_mensual = $_REQUEST['sueldo_mensual'];
+$zona_militar = $_REQUEST['zona_militar'];
+$armas_servicios = $_REQUEST['armas_servicios'];
+
+if($genero = $_REQUEST['genero'] == "M"){
+	$nuevoGenero = "Masculino";
+}else{
+	$nuevoGenero = "Femenino";
+}
+
 
 //$nombre2 = $_REQUEST['nombre2'];
 //$apellido = $_REQUEST['apellido'];
@@ -90,32 +113,33 @@ $pdf->SetAutoPageBreak(false, 0);
 //$pdf->Image($img_file, 0, 0, 85.5, 54, '', '', '', false, 300, '', false, false, 0);
 //---------------------Text----------------------
 
-$pdf->writeHTMLCell(40, 40, 85, 10, '<img src="'.$img_file.'">');
+//$pdf->writeHTMLCell(40, 40, 85, 10, '<img src="'.$img_file.'">');
 $pdf->SetFont('helvetica', 'B', 14);
 $pdf->SetXY(2,50);
 $pdf->Cell(206, 0, $nombre." ".$nombre2, 0, 1, 'C', 0, '', 1);
 $pdf->SetXY(2,57);
 $pdf->Cell(206, 0, $apellido." ".$apellido2, 0, 1, 'C', 0, '', 1);
-//$pdf->SetXY(19,27);
-//$pdf->Write(0,$apellido);$pdf->Write(0,"   ");$pdf->Write(0,$apellido2);
-//$pdf->SetXY(17,27);
-//$pdf->Write(0,$apellido2);
 $pdf->SetFont('helvetica', 'B', 9);
-$pdf->SetXY(2,108);
-$pdf->Write(0,"GRADO MILITAR:");
-$pdf->SetXY(30,109);
-$pdf->Write(0,$beneficiario);
-$pdf->SetXY(2,115);
-$pdf->Write(0,"DPI:");
-$pdf->SetXY(10,116);
-$pdf->Write(0,$dpi);
-$pdf->SetXY(2,121);
-$pdf->Write(0,"NO. DE REGISTRO:");
-$pdf->SetXY(33,122);
-$pdf->Write(0,$codigo);
+$pdf->SetXY(5,70);
+//$pdf->Write(0,"GRADO MILITAR:");
+$pdf->Cell(45, 10, "GRADO MILITAR", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,70);
+$pdf->Cell(155, 10, $beneficiario, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,80);
+$pdf->Cell(45, 10, "DPI", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,80);
+$pdf->Cell(155, 10, $dpi, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,90);
+$pdf->Cell(45, 10, "NO. DE REGISTRO:", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,90);
+$pdf->Cell(155, 10, $codigo, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,100);
+$pdf->Cell(45, 10, "GENERO", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,100);
+$pdf->Cell(155, 10, $nuevoGenero, 1, 1, 'A', 0, '', 1);
 $pdf->SetFont('helvetica', 'B', 9);
 $pdf->Write(0,$fechafinal);
-$pdf->writeHTMLCell(30, 15, 54, 18, '<img src="'.$foto.'">');
+$pdf->writeHTMLCell(40, 40, 85, 10, '<img src="'.$foto.'">');
 //---------------------Text----------------------
 
 // restore auto-page-break status
