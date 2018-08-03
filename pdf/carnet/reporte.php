@@ -98,7 +98,7 @@ $html = '';
 
 $pdf->setJPEGQuality(75);
 
-$img_file = K_PATH_IMAGES.'no-user.png';
+$img_file = K_PATH_IMAGES.'logo.png';
 
 // -- set new background ---
 
@@ -113,12 +113,12 @@ $pdf->SetAutoPageBreak(false, 0);
 //$pdf->Image($img_file, 0, 0, 85.5, 54, '', '', '', false, 300, '', false, false, 0);
 //---------------------Text----------------------
 
-//$pdf->writeHTMLCell(40, 40, 85, 10, '<img src="'.$img_file.'">');
+$pdf->writeHTMLCell(40, 40, 150, 10, '<img src="'.$img_file.'">');
 $pdf->SetFont('helvetica', 'B', 14);
-$pdf->SetXY(2,50);
-$pdf->Cell(206, 0, $nombre." ".$nombre2, 0, 1, 'C', 0, '', 1);
-$pdf->SetXY(2,57);
-$pdf->Cell(206, 0, $apellido." ".$apellido2, 0, 1, 'C', 0, '', 1);
+$pdf->SetXY(5,50);
+$pdf->Cell(100, 0, $nombre." ".$nombre2, 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(5,57);
+$pdf->Cell(100, 0, $apellido." ".$apellido2, 0, 1, 'L', 0, '', 1);
 $pdf->SetFont('helvetica', 'B', 9);
 $pdf->SetXY(5,70);
 //$pdf->Write(0,"GRADO MILITAR:");
@@ -225,7 +225,7 @@ $pdf->Cell(155, 10, $motivo_baja, 1, 1, 'A', 0, '', 1);
 
 $pdf->SetFont('helvetica', 'B', 9);
 $pdf->Write(0,$fechafinal);
-$pdf->writeHTMLCell(40, 40, 85, 10, '<img src="'.$foto.'">');
+$pdf->writeHTMLCell(40, 40, 15, 10, '<img src="'.$foto.'">');
 //---------------------Text----------------------
 
 // restore auto-page-break status
