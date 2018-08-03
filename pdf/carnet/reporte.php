@@ -1,30 +1,5 @@
 <?php
 
-// $usuario = "root";
-// $contrasena = "root";  // en mi caso tengo contraseña pero en casa caso introducidla aquí.
-// $servidor = "localhost";
-// $basededatos = "avemilgua";
-
-// $conexion = mysqli_connect( $servidor, $usuario, $contrasena );
-// $conexion = mysqli_connect( $servidor, $usuario, $contrasena ) or die ("No se ha podido conectar al servidor de Base de datos");
-
-// $db = mysqli_select_db( $conexion, $basededatos );
-
-// $db = mysqli_select_db( $conexion, $basededatos ) or die ( "No se ha podido conectar a la base de datos" );
-
-// //if (!$nombre) { $nombre = isset_or('nombre', ''); };
-
-// $sql1 = "SELECT * FROM av_datos_personales where id = 2";
-
-// $resp1 = mysql_query($sql1);
-
-// echo($sql1['nombre']);
-//$resultado = mysqli_query( $conexion, $consulta );
-//$resultado = mysqli_query( $conexion, $consulta ) or die ( "Error en la consulta a la base de datos");
-
-//global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi;
-
-// Include the main TCPDF library (search for installation path).
 require_once('tcpdf_include.php');
 include_once('lang/eng.php');
 //include_once('../../libs/basicas/config.php');
@@ -34,7 +9,16 @@ include_once('lang/eng.php');
 
 //$id = $_REQUEST['id'];
 
-$nombre = $sql1['nombre'];
+$id = $_REQUEST['id'];
+$nombre = $_REQUEST['nombre'];
+$nombre2 = $_REQUEST['nombre2'];
+$apellido = $_REQUEST['apellido'];
+$apellido2 = $_REQUEST['apellido2'];
+$dpi = $_REQUEST['dpi'];
+$codigo = $_REQUEST['codigo'];
+$foto = $_REQUEST['foto'];
+$beneficiario = $_REQUEST['gradoMilitar'];
+$fechafinal = $_REQUEST['fecha_vencimiento_carnet'];
 
 //$nombre2 = $_REQUEST['nombre2'];
 //$apellido = $_REQUEST['apellido'];
@@ -91,6 +75,8 @@ $html = '';
 
 $pdf->setJPEGQuality(75);
 
+$img_file = K_PATH_IMAGES.'no-user.png';
+
 // -- set new background ---
 
 // get the current page break margin
@@ -104,40 +90,32 @@ $pdf->SetAutoPageBreak(false, 0);
 //$pdf->Image($img_file, 0, 0, 85.5, 54, '', '', '', false, 300, '', false, false, 0);
 //---------------------Text----------------------
 
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->SetXY(5,18);
-$pdf->Cell(45, 0, $nombre, 0, 1, 'C', 0, '', 1);
-//$pdf->Cell(45, 0, "William Osveli", 0, 1, 'C', 0, '', 1);
-//$pdf->Write(0,"Nombre:");
-//$pdf->SetXY(19,22);
-//$pdf->Write(0,$nombre);$pdf->Write(0,"   ");$pdf->Write(0,$nombre2);
-//$pdf->SetXY(17,22);
-//$pdf->Write(0,$nombre2);
-//$pdf->SetXY(5,23);
-//$pdf->Cell(45, 0, $apellido." ".$apellido2, 0, 1, 'C', 0, '', 1);
+$pdf->writeHTMLCell(40, 40, 85, 10, '<img src="'.$img_file.'">');
+$pdf->SetFont('helvetica', 'B', 14);
+$pdf->SetXY(2,50);
+$pdf->Cell(206, 0, $nombre." ".$nombre2, 0, 1, 'C', 0, '', 1);
+$pdf->SetXY(2,57);
+$pdf->Cell(206, 0, $apellido." ".$apellido2, 0, 1, 'C', 0, '', 1);
 //$pdf->SetXY(19,27);
 //$pdf->Write(0,$apellido);$pdf->Write(0,"   ");$pdf->Write(0,$apellido2);
 //$pdf->SetXY(17,27);
 //$pdf->Write(0,$apellido2);
-//$pdf->SetFont('helvetica', 'B', 8);
-//$pdf->SetXY(2,30);
-//$pdf->Write(0,"GRADO:");
-//$pdf->SetXY(17,30);
-//$pdf->Write(0,$beneficiario);
-//$pdf->SetXY(2,36);
-// $pdf->Write(0,"DPI:");
-// $pdf->SetXY(10,36);
-// $pdf->Write(0,$dpi);
-// $pdf->SetXY(2,42);
-// $pdf->Write(0,"NO. DE REGISTRO:");
-// $pdf->SetXY(30,42);
-// $pdf->Write(0,$codigo);
-// $pdf->SetFont('helvetica', 'B', 9);
-// $pdf->SetXY(2,49);
-// $pdf->Write(0,"VENCIMIENTO:");
-// $pdf->SetXY(30,49);
-// $pdf->Write(0,$fechafinal);
-//$pdf->writeHTMLCell(30, 15, 54, 18, '<img src="'.$foto.'">');
+$pdf->SetFont('helvetica', 'B', 9);
+$pdf->SetXY(2,108);
+$pdf->Write(0,"GRADO MILITAR:");
+$pdf->SetXY(30,109);
+$pdf->Write(0,$beneficiario);
+$pdf->SetXY(2,115);
+$pdf->Write(0,"DPI:");
+$pdf->SetXY(10,116);
+$pdf->Write(0,$dpi);
+$pdf->SetXY(2,121);
+$pdf->Write(0,"NO. DE REGISTRO:");
+$pdf->SetXY(33,122);
+$pdf->Write(0,$codigo);
+$pdf->SetFont('helvetica', 'B', 9);
+$pdf->Write(0,$fechafinal);
+$pdf->writeHTMLCell(30, 15, 54, 18, '<img src="'.$foto.'">');
 //---------------------Text----------------------
 
 // restore auto-page-break status

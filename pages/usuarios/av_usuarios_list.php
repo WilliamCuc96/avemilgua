@@ -172,23 +172,40 @@
 
     $imagen = "fa fa-users";
 
-    $sql1 = "SELECT a.id as vid,
-                    a.nombre,
-                    a.nombre2,
-                    a.apellido,
-                    a.apellido2,
-                    a.codigo,
-                    a.foto,
-                    (select nombre from ap_catalogos WHERE tipo_catalogo = 39 AND grado_militar = id) as gradoMilitar,
-                    b.fecha_baja,
-                    a.vecindad,
-                    a.telefono,
-                    (select b.nombre from ap_municipios b where b.id = a.vecindad) as municipio
-                    FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id "
+    $sql1 = "SELECT 	a.id as vid,
+                        a.nombre,
+                        a.nombre2,
+                        a.apellido,
+                        a.apellido2,
+                        a.codigo,
+                        a.dpi,
+                        a.genero,
+                        a.fecha_nacimiento,
+                        (select nombre from ap_catalogos where tipo_catalogo = 15 and id = a.estado_civil) as estado_civil,
+                        (select nombre from ap_catalogos where tipo_catalogo = 38 and id = profesion) as profesion,
+                        a.direccion,
+                        a.correo,
+                        a.foto,
+                        a.telefono,
+                        (select nombre from ap_catalogos WHERE tipo_catalogo = 39 AND grado_militar = id) as gradoMilitar,
+                        b.fecha_baja,
+                        (select b.nombre from ap_municipios b where b.id = a.vecindad) as municipio,
+                        b.compania,
+                        b.puesto,
+                        b.fecha_alta,
+                        b.motivo_baja,
+                        b.computo_servicios,
+                        b.sueldo_mensual,
+                        b.zona_militar,
+                        (SELECT nombre from ap_catalogos WHERE tipo_catalogo = 40 and id = armas_servicios) as armas_servicios
+                FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id "
                     . $var_where1 . " ";
                     ;
 
     $resp1 = mysql_query($sql1);
+
+    
+
 ?>
 
 <div id="page-wrapper">
@@ -250,6 +267,10 @@ if (!$resp1) { // Error en la ejecución del query
 <!-- PHP -->
 <?php
     while($row=mysql_fetch_assoc($resp1)){
+
+        $parametros = "id=".utf8_encode( $row['vid'])."&nombre=".utf8_encode( $row['nombre'])."&nombre2=".utf8_encode( $row['nombre2'])."&apellido=".utf8_encode( $row['apellido'])."&apellido2=".utf8_encode( $row['apellido2'])."&codigo=".utf8_encode( $row['codigo'])."&dpi=".utf8_encode( $row['dpi'])."&genero=".utf8_encode( $row['genero'])."&fecha_nacimiento=".utf8_encode( $row['fecha_nacimiento'])."&estado_civil=".utf8_encode( $row['estado_civil'])."&profesion=".utf8_encode( $row['profesion']).
+    "&direccion=".utf8_encode( $row['direccion'])."&correo=".utf8_encode( $row['correo'])."&foto=".utf8_encode( $row['foto'])."&telefono=".utf8_encode( $row['telefono'])."&gradoMilitar=".utf8_encode( $row['gradoMilitar'])."&fecha_baja=".utf8_encode( $row['fecha_baja'])."&municipio=".utf8_encode( $row['municipio'])."&compania=".utf8_encode( $row['compania'])."&puesto=".utf8_encode( $row['puesto'])."&fecha_alta=".utf8_encode( $row['frcha_alta']).
+    "&motivo_baja=".utf8_encode( $row['motivo_baja'])."&computo_servicio=".utf8_encode( $row['computo_servicio'])."&sueldo_mensual=".utf8_encode( $row['sueldo_mensual'])."&zona_militar=".utf8_encode( $row['zona_militar'])."&armas_servicios=".utf8_encode( $row['armas_servicios']);
         print "<tr class=''>";
         print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['codigo'])."</td>";
         print "  <td>".utf8_encode($row['nombre'])." ".utf8_encode($row['nombre2'])." ".utf8_encode($row['apellido'])." ".utf8_encode($row['apellido2'])."</td>";
@@ -275,7 +296,9 @@ if (!$resp1) { // Error en la ejecución del query
         print "     <a href='index.php?p=usuarios/av_usuarios_edit.php&id=".$row['vid']."' title='Editar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-pencil'></i></button></a>";
         if ($_SESSION['usuario_nivel'] <= 1 OR $_SESSION['usuario_nivel'] == 2) { 
             print "     <a href='index.php?p=usuarios/av_usuarios_gestion.php&id=".$row['vid']."&btn=Borrar' title='Borrar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-times'></i></button></a>";
-        }
+        }?>
+            <a href="../pdf/carnet/reporte.php?<?php echo $parametros;?>" class='btn btn-xs btn-default' target="_blank"><i class="fa fa-file-pdf-o">
+        <?php
         //print "     <a href='../pdf/carnet/reporte.php' title='Editar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-file-pdf'></i></button></a>";
         print "  </td>";
         print "</tr>";
