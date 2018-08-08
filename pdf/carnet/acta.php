@@ -35,6 +35,67 @@ $computo_servicios = $_REQUEST['computo_servicios'];
 $sueldo_mensual = $_REQUEST['sueldo_mensual'];
 $zona_militar = $_REQUEST['zona_militar'];
 $armas_servicios = $_REQUEST['armas_servicios'];
+$fecha_acta = date('Y-m-d');
+
+$date = new DateTime($fecha_acta);
+$timestamp = $date->getTimestamp();
+
+$nuevafechaacta = date("d-m-Y", $timestamp);
+
+$year = date("Y", strtotime($nuevafechaacta));
+$dia = date("d", strtotime($nuevafechaacta));
+$mes = date("m", strtotime($nuevafechaacta));
+
+    switch ($mes){
+        case "01":
+            $month = "ENERO";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "02":
+            $month = "FEBRERO";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "03":
+            $month = "MARZO";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "04":
+            $month = "ABRIL";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "05":
+            $month = "MAYO";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "06":
+            $month = "JUNIO";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "07":
+            $month = "JULIO";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "08":
+            $month = "AGOSTO";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "09":
+            $month = "SEPTIEMBRE";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "10":
+            $month = "OCTUBRE";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "11":
+            $month = "NOVIEMBRE";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "12":
+            $month = "DICIEMBRE";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+    }
 
 if($genero = $_REQUEST['genero'] == "M"){
 	$nuevoGenero = "Masculino";
@@ -57,11 +118,6 @@ if($genero = $_REQUEST['genero'] == "M"){
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, $custom_layout, true, 'UTF-8', false);
 
 // set document information
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nicola Asuni');
-$pdf->SetTitle('');
-$pdf->SetSubject('TCPDF Tutorial');
-$pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
 // remove default header/footer
 $pdf->setPrintHeader(false);
@@ -112,28 +168,66 @@ $pdf->SetAutoPageBreak(false, 0);
 //$img_file = K_PATH_IMAGES.'Frente_Avemilgua_2014-01.jpg';
 //$pdf->Image($img_file, 0, 0, 85.5, 54, '', '', '', false, 300, '', false, false, 0);
 //---------------------Text----------------------
+$pdf->SetFont('helvetica', 'B', 12);
+$pdf->SetXY(57,20);
+$pdf->Write(0,"ASOCIACION DE VETERANOS MILITARES ");
+$pdf->SetXY(80,25);
+$pdf->Write(0," DE GUATEMALA ");
+$pdf->SetXY(70,50);
+$pdf->Write(0,"CERTIFICACION DE SERVICIOS");
 $pdf->SetFont('helvetica', 'B', 10);
 $pdf->SetXY(161,43);
 $pdf->Write(0,"AVEMILGUA");
-$pdf->writeHTMLCell(40, 40, 150, 10, '<img src="'.$img_file.'">');
+$pdf->writeHTMLCell(40, 40, 15, 10, '<img src="'.$img_file.'">');
 $pdf->SetFont('helvetica', 'B', 9);
-$pdf->SetXY(15,70);
-$pdf->Write(0,"Por medio de la presente acta se comunica la intencion de dar baja al veterano militar con el nombre de ");
-$pdf->SetXY(15,75);
-$pdf->Cell(100, 0, $nombre." ".$nombre2." ".$apellido." ".$apellido2, 0, 1, 'L', 0, '', 1);
-$pdf->SetXY(70,75);
-$pdf->Write(0,"quien corresponde al documento de identificacion numero ");
-$pdf->SetXY(15,80);
-$pdf->Cell(100, 0, $dpi, 0, 1, 'L', 0, '', 1);
-$pdf->SetXY(45,80);
-$pdf->Write(0,"y codigo numero ");
-$pdf->SetXY(75,80);
-$pdf->Cell(100, 0, $codigo.". ", 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(15,175);
+//$pdf->Cell(100, 0, $nombre." ".$nombre2." ".$apellido." ".$apellido2, 0, 1, 'L', 0, '', 1);
+
+//$pdf->SetXY(15,180);
+//$pdf->Cell(100, 0, $dpi, 0, 1, 'L', 0, '', 1);
+//$pdf->SetXY(45,80);
+//$pdf->Write(0,"El infraescrito Coronel de Infanteria DEM en situación de retiro Carlos Padilla");
+$pdf->SetXY(27,77);
+$pdf->Cell(150, 0, "El infraescrito Coronel de Infanteria DEM en situación de retiro Carlos Padilla Secretario General", 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,81);
+$pdf->Cell(150, 6, "de la asociación de Veteranos Militares de Guatemala CERTIFICA:", 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,90);
+$pdf->Cell(150, 6, "que para el efecto tuvo a la vista los registros de veteranos militares de Guatemala en donde muestra la siguiente información:", 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,99);
+$pdf->Cell(150, 6, "* NOMBRE: ".$nombre." ".$nombre2." ".$apellido." ".$apellido2, 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,105);
+$pdf->Cell(150, 6, "* FECHA DE ALTA:   ".$fecha_alta, 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,111);
+$pdf->Cell(150, 6, "* FECHA DE BAJA:   ".$fecha_baja, 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,117);
+$pdf->Cell(150, 6, "* MOTIVO:   ".$motivo_baja, 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,123);
+$pdf->Cell(150, 6, "* COMPUTO DE SERVICIO:   ".$computo_servicios, 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,129);
+$pdf->Cell(150, 6, "* CODIGO:   ".$codigo, 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,135);
+$pdf->Cell(150, 6, "* DPI:   ".$dpi, 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,141);
+$pdf->Cell(150, 6, "* PUESTO:   ".$puesto, 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,147);
+$pdf->Cell(150, 6, "* ZONA MILITAR:   ".$zona_militar, 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,153);
+$pdf->Cell(150, 6, "* ARMAS/SERVICIOS:   ".$armas_servicios, 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,163);
+$pdf->Cell(150, 6, "Presto sus servicios en el ejercito de Guatemala.", 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,173);
+$pdf->Cell(150, 6, "Se extiende la presente certificación en duplicado, original para el interesado y una copia", 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(27,179);
+$pdf->Cell(150, 6, "al archivo del ejercito de Guatemala en la fecha ".$fechafinal.".", 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(5,220);
+$pdf->Cell(200, 6, "------------------------------------------------------------------", 0, 1, 'C', 0, '', 1);
+$pdf->SetXY(5,225);
+$pdf->Cell(200, 6, "SECRETARIO GENERAL", 0, 1, 'C', 0, '', 1);
+
 //$pdf->Write(0,"GRADO MILITAR:");
 
 $pdf->SetFont('helvetica', 'B', 9);
-$pdf->Write(0,$fechafinal);
-$pdf->writeHTMLCell(40, 40, 15, 10, '<img src="'.$foto.'">');
+$pdf->writeHTMLCell(40, 40, 150, 10, '<img src="'.$foto.'">');
 //---------------------Text----------------------
 
 // restore auto-page-break status
