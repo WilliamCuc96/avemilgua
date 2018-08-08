@@ -55,7 +55,7 @@ if (tieneSoporteUserMedia()) {
             contentType: false,
             success:function(data){
               console.log(data);
-              var completeURL1 = "https://"+window.location.hostname + "/av/" + data;
+              var completeURL1 = "http://"+window.location.hostname + "/av/" + data;
               document.getElementById('im').src= completeURL1;
               openAviaryWC(completeURL1);
             }
@@ -70,7 +70,7 @@ if (tieneSoporteUserMedia()) {
         //   // dataType:"json",
         //   success: function(data){
         //     console.log(data);
-        //        var completeURL1 = "https://"+window.location.hostname + "/av/" + data;
+        //        var completeURL1 = "http://"+window.location.hostname + "/av/" + data;
         //        document.getElementById('im').src= completeURL1;
         //        openAviaryWC(completeURL1);
         //   }
@@ -78,7 +78,7 @@ if (tieneSoporteUserMedia()) {
         // $.post(,
         //  function(data){
         //    console.log(data);
-        //    var completeURL1 = "https://"+window.location.hostname + "/av/" + data;
+        //    var completeURL1 = "http://"+window.location.hostname + "/av/" + data;
         //    document.getElementById('im').src= completeURL1;
         //    openAviaryWC(completeURL1);
         // },

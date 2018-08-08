@@ -1,7 +1,7 @@
 <?php
 include_once 'class_upload.php';
 
-$url_p= "https://".$_SERVER['HTTP_HOST']."/"."av/";
+$url_p= "http://".$_SERVER['HTTP_HOST']."/"."av/";
 $temporal = $_REQUEST['temporal'];//trae la url de la imagein editada, donde la guarda el editor (no sirve)
 $imgDelete = $_REQUEST['img'];
 

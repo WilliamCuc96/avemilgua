@@ -39,16 +39,16 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-<?php
-    if (isset($_REQUEST["p"])) {
+        <?php
+            if (isset($_REQUEST["p"])) {
 
-        include_once ''.$_REQUEST["p"];
+                include_once ''.$_REQUEST["p"];
 
-    } else {
-        include_once 'panel/intro.php';
-       // include_once 'panel/info.php';
-    }
-?>
+            } else {
+                include_once 'panel/intro.php';
+            // include_once 'panel/info.php';
+            }
+        ?>
 
     </div>
     <!-- /#wrapper -->

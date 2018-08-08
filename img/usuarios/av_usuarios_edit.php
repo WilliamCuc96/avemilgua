@@ -948,13 +948,13 @@
         }).data('datepicker');
         });
 </script>
-<script src="https://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
 <script type="text/javascript" src="https://dme0ih8comzn4.cloudfront.net/imaging/v3/editor.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <script type="text/javascript">
     function readURL(url) {
-        completeURL = "https://"+window.location.hostname + "/av/" + url;
+        completeURL = "http://"+window.location.hostname + "/av/" + url;
         document.getElementById('im').src=completeURL;
     }
     jQuery.noConflict();
@@ -1025,7 +1025,7 @@
     }
 
     function openAviary(ur) {
-      completeURL = "https://"+window.location.hostname + "/av/" + ur;
+      completeURL = "http://"+window.location.hostname + "/av/" + ur;
       // alert(completeURL);
       launchEditor("im",completeURL);
     }
