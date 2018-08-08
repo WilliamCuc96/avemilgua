@@ -1,30 +1,5 @@
 <?php
 
-// $usuario = "root";
-// $contrasena = "root";  // en mi caso tengo contraseña pero en casa caso introducidla aquí.
-// $servidor = "localhost";
-// $basededatos = "avemilgua";
-
-// $conexion = mysqli_connect( $servidor, $usuario, $contrasena );
-// $conexion = mysqli_connect( $servidor, $usuario, $contrasena ) or die ("No se ha podido conectar al servidor de Base de datos");
-
-// $db = mysqli_select_db( $conexion, $basededatos );
-
-// $db = mysqli_select_db( $conexion, $basededatos ) or die ( "No se ha podido conectar a la base de datos" );
-
-// //if (!$nombre) { $nombre = isset_or('nombre', ''); };
-
-// $sql1 = "SELECT * FROM av_datos_personales where id = 2";
-
-// $resp1 = mysql_query($sql1);
-
-// echo($sql1['nombre']);
-//$resultado = mysqli_query( $conexion, $consulta );
-//$resultado = mysqli_query( $conexion, $consulta ) or die ( "Error en la consulta a la base de datos");
-
-//global $id; $codigo; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $dpi;
-
-// Include the main TCPDF library (search for installation path).
 require_once('tcpdf_include.php');
 include_once('lang/eng.php');
 //include_once('../../libs/basicas/config.php');
@@ -34,7 +9,39 @@ include_once('lang/eng.php');
 
 //$id = $_REQUEST['id'];
 
-$nombre = $sql1['nombre'];
+$id = $_REQUEST['id'];
+$nombre = $_REQUEST['nombre'];
+$nombre2 = $_REQUEST['nombre2'];
+$apellido = $_REQUEST['apellido'];
+$apellido2 = $_REQUEST['apellido2'];
+$dpi = $_REQUEST['dpi'];
+$codigo = $_REQUEST['codigo'];
+$foto = $_REQUEST['foto'];
+$beneficiario = $_REQUEST['gradoMilitar'];
+$genero = $_REQUEST['genero'];
+$fecha_nacimiento = $_REQUEST['fecha_nacimiento'];
+$estado_civil = $_REQUEST['estado_civil'];
+$profesion = $_REQUEST['profesion'];
+$direccion = $_REQUEST['direccion'];
+$correo = $_REQUEST['correo'];
+$telefono = $_REQUEST['telefono'];
+$fecha_baja = $_REQUEST['fecha_baja'];
+$municipio = $_REQUEST['municipio'];
+$compania = $_REQUEST['compania'];
+$puesto = $_REQUEST['puesto'];
+$fecha_alta = $_REQUEST['fecha_alta'];
+$motivo_baja = $_REQUEST['motivo_baja'];
+$computo_servicios = $_REQUEST['computo_servicios'];
+$sueldo_mensual = $_REQUEST['sueldo_mensual'];
+$zona_militar = $_REQUEST['zona_militar'];
+$armas_servicios = $_REQUEST['armas_servicios'];
+
+if($genero = $_REQUEST['genero'] == "M"){
+	$nuevoGenero = "Masculino";
+}else{
+	$nuevoGenero = "Femenino";
+}
+
 
 //$nombre2 = $_REQUEST['nombre2'];
 //$apellido = $_REQUEST['apellido'];
@@ -91,6 +98,8 @@ $html = '';
 
 $pdf->setJPEGQuality(75);
 
+$img_file = K_PATH_IMAGES.'logo.png';
+
 // -- set new background ---
 
 // get the current page break margin
@@ -103,41 +112,122 @@ $pdf->SetAutoPageBreak(false, 0);
 //$img_file = K_PATH_IMAGES.'Frente_Avemilgua_2014-01.jpg';
 //$pdf->Image($img_file, 0, 0, 85.5, 54, '', '', '', false, 300, '', false, false, 0);
 //---------------------Text----------------------
+$pdf->SetFont('helvetica', 'B', 10);
+$pdf->SetXY(161,43);
+$pdf->Write(0,"AVEMILGUA");
+$pdf->writeHTMLCell(40, 40, 150, 10, '<img src="'.$img_file.'">');
+$pdf->SetFont('helvetica', 'B', 14);
+$pdf->SetXY(5,50);
+$pdf->Cell(100, 0, $nombre." ".$nombre2, 0, 1, 'L', 0, '', 1);
+$pdf->SetXY(5,57);
+$pdf->Cell(100, 0, $apellido." ".$apellido2, 0, 1, 'L', 0, '', 1);
+$pdf->SetFont('helvetica', 'B', 9);
+$pdf->SetXY(5,70);
+//$pdf->Write(0,"GRADO MILITAR:");
+$pdf->SetFillColor(220, 219, 219);
+$pdf->MultiCell(45, 10, 'GRADO MILITAR', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "GRADO MILITAR", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,70);
+$pdf->Cell(155, 10, $beneficiario, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,80);
+$pdf->MultiCell(45, 10, 'DPI', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "DPI", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,80);
+$pdf->Cell(155, 10, $dpi, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,90);
+$pdf->MultiCell(45, 10, 'NO. DE REGISTRO', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "NO. DE REGISTRO:", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,90);
+$pdf->Cell(155, 10, $codigo, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,100);
+$pdf->MultiCell(45, 10, 'GENERO', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "GENERO", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,100);
+$pdf->Cell(155, 10, $nuevoGenero, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,110);
+$pdf->MultiCell(45, 10, 'FECHA DE NACIMIENTO', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "FECHA DE NACIMIENTO", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,110);
+$pdf->Cell(155, 10, $fecha_nacimiento, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,120);
+$pdf->MultiCell(45, 10, 'ESTADO CIVIL', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "ESTADO CIVIL", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,120);
+$pdf->Cell(155, 10, $estado_civil, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,130);
+$pdf->MultiCell(45, 10, 'PROFESIÓN', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "PROFESION", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,130);
+$pdf->Cell(155, 10, $profesion, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,140);
+$pdf->MultiCell(45, 10, 'DIRECCIÓN', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "DIRECCIÓN", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,140);
+$pdf->Cell(155, 10, $direccion, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,150);
+$pdf->MultiCell(45, 10, 'CORREO', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "CORREO", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,150);
+$pdf->Cell(155, 10, $correo, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,160);
+$pdf->MultiCell(45, 10, 'TELEFONO', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "TELEFONO", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,160);
+$pdf->Cell(155, 10, $telefono, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,170);
+$pdf->MultiCell(45, 10, 'FECHA DE ALTA', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "FECHA ALTA", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,170);
+$pdf->Cell(155, 10, $fecha_alta, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,180);
+$pdf->MultiCell(45, 10, 'FECHA DE BAJA', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "FECHA BAJA", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,180);
+$pdf->Cell(155, 10, $fecha_baja, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,190);
+$pdf->MultiCell(45, 10, 'MUNICIPIO', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "MUNICIPIO", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,190);
+$pdf->Cell(155, 10, $municipio, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,200);
+$pdf->MultiCell(45, 10, 'COMPAÑIA', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "COMPAÑIA", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,200);
+$pdf->Cell(155, 10, $compania, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,210);
+$pdf->MultiCell(45, 10, 'PUESTO', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "PUESTO", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,210);
+$pdf->Cell(155, 10, $puesto, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,220);
+$pdf->MultiCell(45, 10, 'COMPUTOS DE SERVICIO', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "COMPUTOS DE SERVICIO", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,220);
+$pdf->Cell(155, 10, $computo_servicios, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,230);
+$pdf->MultiCell(45, 10, 'SUELDO MENSUAL', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "SUELDO MENSUAL", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,230);
+$pdf->Cell(155, 10, $sueldo_mensual, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,240);
+$pdf->MultiCell(45, 10, 'ZONA MILITAR', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "ZONA MILITAR", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,240);
+$pdf->Cell(155, 10, $zona_militar, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,250);
+$pdf->MultiCell(45, 10, 'ARMAS/SERVICIOS', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "ARMAS/SERVICIOS", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,250);
+$pdf->Cell(155, 10, $armas_servicios, 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(5,260);
+$pdf->MultiCell(45, 10, 'MOTIVO DE BAJA', 1, 'A', 1, 0, '', '', false);
+//$pdf->Cell(45, 10, "MOTIVO DE BAJA", 1, 1, 'A', 0, '', 1);
+$pdf->SetXY(50,260);
+$pdf->Cell(155, 10, $motivo_baja, 1, 1, 'A', 0, '', 1);
 
-$pdf->SetFont('helvetica', 'B', 12);
-$pdf->SetXY(5,18);
-$pdf->Cell(45, 0, $nombre, 0, 1, 'C', 0, '', 1);
-//$pdf->Cell(45, 0, "William Osveli", 0, 1, 'C', 0, '', 1);
-//$pdf->Write(0,"Nombre:");
-//$pdf->SetXY(19,22);
-//$pdf->Write(0,$nombre);$pdf->Write(0,"   ");$pdf->Write(0,$nombre2);
-//$pdf->SetXY(17,22);
-//$pdf->Write(0,$nombre2);
-//$pdf->SetXY(5,23);
-//$pdf->Cell(45, 0, $apellido." ".$apellido2, 0, 1, 'C', 0, '', 1);
-//$pdf->SetXY(19,27);
-//$pdf->Write(0,$apellido);$pdf->Write(0,"   ");$pdf->Write(0,$apellido2);
-//$pdf->SetXY(17,27);
-//$pdf->Write(0,$apellido2);
-//$pdf->SetFont('helvetica', 'B', 8);
-//$pdf->SetXY(2,30);
-//$pdf->Write(0,"GRADO:");
-//$pdf->SetXY(17,30);
-//$pdf->Write(0,$beneficiario);
-//$pdf->SetXY(2,36);
-// $pdf->Write(0,"DPI:");
-// $pdf->SetXY(10,36);
-// $pdf->Write(0,$dpi);
-// $pdf->SetXY(2,42);
-// $pdf->Write(0,"NO. DE REGISTRO:");
-// $pdf->SetXY(30,42);
-// $pdf->Write(0,$codigo);
-// $pdf->SetFont('helvetica', 'B', 9);
-// $pdf->SetXY(2,49);
-// $pdf->Write(0,"VENCIMIENTO:");
-// $pdf->SetXY(30,49);
-// $pdf->Write(0,$fechafinal);
-//$pdf->writeHTMLCell(30, 15, 54, 18, '<img src="'.$foto.'">');
+$pdf->SetFont('helvetica', 'B', 9);
+$pdf->Write(0,$fechafinal);
+$pdf->writeHTMLCell(40, 40, 15, 10, '<img src="'.$foto.'">');
 //---------------------Text----------------------
 
 // restore auto-page-break status
@@ -155,7 +245,7 @@ $pdf->lastPage();
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('carnet.pdf', 'I');
+$pdf->Output('reporte.pdf', 'I');
 
 //============================================================+
 // END OF FILE

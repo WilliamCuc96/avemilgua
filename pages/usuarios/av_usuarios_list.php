@@ -172,23 +172,40 @@
 
     $imagen = "fa fa-users";
 
-    $sql1 = "SELECT a.id as vid,
-                    a.nombre,
-                    a.nombre2,
-                    a.apellido,
-                    a.apellido2,
-                    a.codigo,
-                    a.foto,
-                    (select nombre from ap_catalogos WHERE tipo_catalogo = 39 AND grado_militar = id) as gradoMilitar,
-                    b.fecha_baja,
-                    a.vecindad,
-                    a.telefono,
-                    (select b.nombre from ap_municipios b where b.id = a.vecindad) as municipio
-                    FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id "
+    $sql1 = "SELECT 	a.id as vid,
+                        a.nombre,
+                        a.nombre2,
+                        a.apellido,
+                        a.apellido2,
+                        a.codigo,
+                        a.dpi,
+                        a.genero,
+                        a.fecha_nacimiento,
+                        (select nombre from ap_catalogos where tipo_catalogo = 15 and id = a.estado_civil) as estado_civil,
+                        (select nombre from ap_catalogos where tipo_catalogo = 38 and id = profesion) as profesion,
+                        a.direccion,
+                        a.correo,
+                        a.foto,
+                        a.telefono,
+                        (select nombre from ap_catalogos WHERE tipo_catalogo = 39 AND grado_militar = id) as gradoMilitar,
+                        b.fecha_baja,
+                        (select b.nombre from ap_municipios b where b.id = a.vecindad) as municipio,
+                        b.compania,
+                        b.puesto,
+                        b.fecha_alta,
+                        b.motivo_baja,
+                        b.computo_servicios,
+                        b.sueldo_mensual,
+                        b.zona_militar,
+                        (SELECT nombre from ap_catalogos WHERE tipo_catalogo = 40 and id = armas_servicios) as armas_servicios
+                FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id "
                     . $var_where1 . " ";
                     ;
 
     $resp1 = mysql_query($sql1);
+
+    
+
 ?>
 
 <div id="page-wrapper">
@@ -250,6 +267,135 @@ if (!$resp1) { // Error en la ejecución del query
 <!-- PHP -->
 <?php
     while($row=mysql_fetch_assoc($resp1)){
+
+        $fecha = $row['fecha_alta'];
+
+        $date = new DateTime($fecha);
+        $timestamp = $date->getTimestamp();
+
+        $nuevafechaalta = date("d-m-Y", $timestamp);
+        //$dia = date("F", $nuevafecha);
+        
+        $year = date("Y", strtotime($nuevafechaalta));
+        $dia = date("d", strtotime($nuevafechaalta));
+        $mes = date("m", strtotime($nuevafechaalta));
+
+    switch ($mes){
+        case "01":
+            $month = "ENERO";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "02":
+            $month = "FEBRERO";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "03":
+            $month = "MARZO";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "04":
+            $month = "ABRIL";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "05":
+            $month = "MAYO";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "06":
+            $month = "JUNIO";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "07":
+            $month = "JULIO";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "08":
+            $month = "AGOSTO";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "09":
+            $month = "SEPTIEMBRE";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "10":
+            $month = "OCTUBRE";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "11":
+            $month = "NOVIEMBRE";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+        case "12":
+            $month = "DICIEMBRE";
+            $fechafinal = $dia." DE ".$month." DE ".$year;
+            break;
+    }
+    $fecha1 = $row['fecha_baja'];
+
+        $date1 = new DateTime($fecha1);
+        $timestamp1 = $date1->getTimestamp();
+
+        $nuevafechabaja = date("d-m-Y", $timestamp1);
+        //$dia = date("F", $nuevafecha);
+        
+        $year1 = date("Y", strtotime($nuevafechabaja));
+        $dia1 = date("d", strtotime($nuevafechabaja));
+        $mes1 = date("m", strtotime($nuevafechabaja));
+
+    switch ($mes1){
+        case "01":
+            $month1 = "ENERO";
+            $fechafinal2 = $dia1." DE ".$month1." DE ".$year1;
+            break;
+        case "02":
+            $month1 = "FEBRERO";
+            $fechafinal2 = $dia1." DE ".$month1." DE ".$year1;
+            break;
+        case "03":
+            $month1 = "MARZO";
+            $fechafinal2 = $dia1." DE ".$month1." DE ".$year1;
+            break;
+        case "04":
+            $month1 = "ABRIL";
+            $fechafinal2 = $dia1." DE ".$month1." DE ".$year1;
+            break;
+        case "05":
+            $month1 = "MAYO";
+            $fechafinal2 = $dia1." DE ".$month1." DE ".$year1;
+            break;
+        case "06":
+            $month1 = "JUNIO";
+            $fechafinal2 = $dia1." DE ".$month1." DE ".$year1;
+            break;
+        case "07":
+            $month1 = "JULIO";
+            $fechafinal2 = $dia1." DE ".$month1." DE ".$year1;
+            break;
+        case "08":
+            $month1 = "AGOSTO";
+            $fechafinal2 = $dia1." DE ".$month1." DE ".$year1;
+            break;
+        case "09":
+            $month1 = "SEPTIEMBRE";
+            $fechafinal2 = $dia1." DE ".$month1." DE ".$year1;
+            break;
+        case "10":
+            $month1 = "OCTUBRE";
+            $fechafinal2 = $dia1." DE ".$month1." DE ".$year1;
+            break;
+        case "11":
+            $month1 = "NOVIEMBRE";
+            $fechafinal2 = $dia1." DE ".$month1." DE ".$year1;
+            break;
+        case "12":
+            $month1 = "DICIEMBRE";
+            $fechafinal2 = $dia1." DE ".$month1." DE ".$year1;
+            break;
+    }
+
+        $parametros = "id=".utf8_encode( $row['vid'])."&nombre=".utf8_encode( $row['nombre'])."&nombre2=".utf8_encode( $row['nombre2'])."&apellido=".utf8_encode( $row['apellido'])."&apellido2=".utf8_encode( $row['apellido2'])."&codigo=".utf8_encode( $row['codigo'])."&dpi=".utf8_encode( $row['dpi'])."&genero=".utf8_encode( $row['genero'])."&fecha_nacimiento=".utf8_encode( $row['fecha_nacimiento'])."&estado_civil=".utf8_encode( $row['estado_civil'])."&profesion=".utf8_encode( $row['profesion']).
+    "&direccion=".utf8_encode( $row['direccion'])."&correo=".utf8_encode( $row['correo'])."&foto=".utf8_encode( $row['foto'])."&telefono=".utf8_encode( $row['telefono'])."&gradoMilitar=".utf8_encode( $row['gradoMilitar'])."&fecha_baja=".utf8_encode($fechafinal2)."&municipio=".utf8_encode( $row['municipio'])."&compania=".utf8_encode( $row['compania'])."&puesto=".utf8_encode( $row['puesto'])."&fecha_alta=".utf8_encode($fechafinal).
+    "&motivo_baja=".utf8_encode( $row['motivo_baja'])."&computo_servicios=".utf8_encode( $row['computo_servicios'])."&sueldo_mensual=".utf8_encode( $row['sueldo_mensual'])."&zona_militar=".utf8_encode( $row['zona_militar'])."&armas_servicios=".utf8_encode( $row['armas_servicios']);
         print "<tr class=''>";
         print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['codigo'])."</td>";
         print "  <td>".utf8_encode($row['nombre'])." ".utf8_encode($row['nombre2'])." ".utf8_encode($row['apellido'])." ".utf8_encode($row['apellido2'])."</td>";
@@ -272,10 +418,15 @@ if (!$resp1) { // Error en la ejecución del query
             </td>
         <?php } 
         print "  <td class='center' align='center' nowrap>";
+        ?>
+            <a href="../pdf/carnet/acta.php?<?php echo $parametros;?>" class='btn btn-xs btn-default' target="_blank"><i class="fa fa-file-pdf"></i>
+        <?php
         print "     <a href='index.php?p=usuarios/av_usuarios_edit.php&id=".$row['vid']."' title='Editar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-pencil'></i></button></a>";
         if ($_SESSION['usuario_nivel'] <= 1 OR $_SESSION['usuario_nivel'] == 2) { 
             print "     <a href='index.php?p=usuarios/av_usuarios_gestion.php&id=".$row['vid']."&btn=Borrar' title='Borrar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-times'></i></button></a>";
-        }
+        }?>
+            <a href="../pdf/carnet/reporte.php?<?php echo $parametros;?>" class='btn btn-xs btn-default' target="_blank"><i class="fa fa-file-pdf"></i>
+        <?php
         //print "     <a href='../pdf/carnet/reporte.php' title='Editar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-file-pdf'></i></button></a>";
         print "  </td>";
         print "</tr>";
