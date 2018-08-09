@@ -48,7 +48,7 @@
             <li>
                 <a href="#"><i class="fa fa-file-excel-o fa-fw"></i> Reportes<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-
+                    <li><a href="index.php?p=usuarios/av_reporte_veterano.php"><i class = "fa fa-list fa-fw"></i> Reporte 1</a></li>
                     <?php if ($_SESSION['usuario_nivel'] == 1) { ?>
 
                     <?php }; ?>
