@@ -119,7 +119,7 @@ include_once('../class.upload.php');
     if (!$img_edited) { $img_edited = isset_or('image_aviary', ''); };
 
     $fecha_vencimiento_carnet = date("Y-m-d");
-    
+
     if($tiempo_caducidad){
         $nuevafecha = strtotime ( '+'.$tiempo_caducidad.' year' , strtotime ( $fecha_vencimiento_carnet ) ) ;
         $nuevafecha = date("Y-m-d" , $nuevafecha );
@@ -169,7 +169,7 @@ include_once('../class.upload.php');
                     '".$estado_civil."', '".$profesion."',
                     '".utf8_decode($direccion)."', '".utf8_decode($telefono)."',
                     '".utf8_decode($correo)."', '".utf8_decode($nit)."', '".utf8_decode($img_edited)."',
-                    '".utf8_decode($nuevafecha)."', now(), '".utf8_decode($_SESSION['usuario_id'])."', '".utf8_decode($nuevafecha)."');";
+                    '".utf8_decode($nuevafecha)."', now(), '".utf8_decode($_SESSION['usuario_id'])."', '".utf8_decode($tiempo_caducidad)."');";
             if (mysql_query($sql1)) {
                 $last_id = mysql_insert_id();
 
