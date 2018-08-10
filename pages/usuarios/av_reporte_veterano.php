@@ -5,11 +5,27 @@
     // av_datos_personales
     global $id; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $grado_militar; $numero_catalogo; $dpi; $direccion; $municipio; $correo; $telefono; $cantidad;
 
-    $sql1 = "SELECT lugar_nacimiento,
-                    (select nombre from ap_municipios where id = lugar_nacimiento) as municipio,
-                    beneficiario,
-                    (select nombre from ap_catalogos where tipo_catalogo = 37 and id = beneficiario) as tipo_beneficiario
-                FROM av_datos_personales";
+    // $sql1 = "SELECT a.id,
+    //        a.nombre,
+    //        a.departamento_id,
+    //        a.departamento,
+    //        b.lugar_nacimiento,
+    //        b.beneficiario,
+    //        (SELECT COUNT(beneficiario) FROM av_datos_personales WHERE beneficiario = 1 AND lugar_nacimiento = a.id) as tipo_veterano,
+    //        (SELECT COUNT(beneficiario) FROM av_datos_personales WHERE beneficiario <> 1 AND lugar_nacimiento = a.id) as tipo_otro,
+    //        (SELECT COUNT(lugar_nacimiento) FROM av_datos_personales WHERE lugar_nacimiento = a.id) as tveteranos
+    // FROM ap_municipios a, av_datos_personales b";
+
+    // $resp1 = mysql_query($sql1);
+
+    $sql1 = "SELECT a.id,
+                    a.nombre,
+                    a.departamento_id,
+                    a.departamento,
+                    b.lugar_nacimiento,
+                    b.beneficiario,
+                    (SELECT COUNT(lugar_nacimiento) FROM av_datos_personales WHERE lugar_nacimiento = a.id) as tveteranos
+            FROM ap_municipios a, av_datos_personales b";
 
     $resp1 = mysql_query($sql1);
 ?>
@@ -71,9 +87,9 @@ if (!$resp1) { // Error en la ejecución del query
 <?php
     while($row=mysql_fetch_assoc($resp1)){
         print "<tr class=''>";
-        print "  <td>".utf8_encode($row['nombre'])." ".utf8_encode($row['nombre2'])." ".utf8_encode($row['apellido'])." ".utf8_encode($row['apellido2'])."</td>";
-        print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['municipio'])."</td>";
-        print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['tipo_beneficiario'])."</td>";
+        print "  <td>".utf8_encode($row['nombre'])." ".utf8_encode($row['departamento'])." ".utf8_encode($row['apellido'])." ".utf8_encode($row['apellido2'])."</td>";
+        print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['nombre'])."</td>";
+        print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['tveteranos'])."</td>";
         print "  <td class='hidden-xs'>".utf8_encode($row['direccion'])."</td>";
         print "  <td class='hidden-xs'>".utf8_encode($row['municipio'])."</td>";
         print "</tr>";
