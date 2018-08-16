@@ -9,9 +9,9 @@
                     a.nombre,
                     a.departamento_id,
                     a.departamento,
-                    (SELECT COUNT(b.beneficiario) FROM av_datos_personales b WHERE b.beneficiario = 1 and b.lugar_nacimiento = a.id) as veterano,
-                    (SELECT COUNT(b.beneficiario) FROM av_datos_personales b WHERE b.beneficiario <> 1 and b.lugar_nacimiento = a.id) as otro,
-                    (SELECT COUNT(b.beneficiario) FROM av_datos_personales b WHERE b.lugar_nacimiento = a.id) as total
+                    (SELECT COUNT(b.beneficiario) FROM av_datos_personales b WHERE b.foto <> '' and b.lugar_nacimiento = a.id) as foto,
+                    (SELECT COUNT(b.beneficiario) FROM av_datos_personales b WHERE b.foto = '' and b.lugar_nacimiento = a.id) as nofoto,
+                    (SELECT COUNT(b.foto) FROM av_datos_personales b WHERE b.lugar_nacimiento = a.id) as total
             FROM ap_municipios a";
 
     $resp1 = mysql_query($sql1);
@@ -63,9 +63,8 @@ if (!$resp1) { // Error en la ejecución del query
                                     <!-- PENDIENTE ESTE CAMBIO -->
                                     <th>Departamento</th>
                                     <th class="hidden-xs hidden-sm">Municipio</th>
-                                    <th class="hidden-xs hidden-sm">Veterano</th>
-                                    <th class="hidden-xs">Otros</th>
-                                    <th class="hidden-xs">Total</th>
+                                    <th class="hidden-xs hidden-sm">Con Foto</th>
+                                    <th class="hidden-xs">Sin Foto</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,9 +75,8 @@ if (!$resp1) { // Error en la ejecución del query
         print "<tr class=''>";
         print "  <td>".utf8_encode($row['nombre'])." ".utf8_encode($row['departamento'])." ".utf8_encode($row['apellido'])." ".utf8_encode($row['apellido2'])."</td>";
         print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['nombre'])."</td>";
-        print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['veterano'])."</td>";
-        print "  <td class='hidden-xs'>".utf8_encode($row['otro'])."</td>";
-        print "  <td class='hidden-xs'>".utf8_encode($row['total'])."</td>";
+        print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['foto'])."</td>";
+        print "  <td class='hidden-xs'>".utf8_encode($row['nofoto'])."</td>";
         print "</tr>";
     }
 ?>
