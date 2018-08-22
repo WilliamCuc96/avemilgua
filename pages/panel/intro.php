@@ -9,6 +9,7 @@ $usuario3Total = 0;
 $usuario4Total = 0;
 $nombre;
 $apellido;
+$permiso;
 
 $sql1 = "SELECT a.id,
                 (SELECT COUNT(user_registro) FROM av_datos_personales WHERE user_registro = 10) as conteo1
@@ -38,6 +39,7 @@ $resp4 = mysql_query($sql4);
 while($row4=mysql_fetch_assoc($resp4)){
     $usuario4Total = $row4['conteo4'];
 }
+
 ?>
 <div id="page-wrapper">
     <div class="container-fluid">
@@ -45,74 +47,76 @@ while($row4=mysql_fetch_assoc($resp4)){
             <div class="col-lg-12">
                 <h1 class="page-header"> Gestión de Datos de Veteranos Militares</h1>
             </div>
-            <div class="row">
-        <div class="col-lg-4 col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-user fa-5x"></i>
+            <?php if ($_SESSION['usuario_nivel'] == 3 OR $_SESSION['usuario_nivel'] == 1) { ?>
+                <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><?php echo $usuario1Total; ?></div>
+                                    <div>Shenny Pixtún</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $usuario1Total; ?></div>
-                            <div>Shenny Pixtún</div>
-                        </div>
+                        <a>
+                            <div class="panel-footer">
+                                <span class="pull-left">Usuarios Ingresados</span>
+                                <span class="pull-right"></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
                     </div>
                 </div>
-                <a>
-                    <div class="panel-footer">
-                        <span class="pull-left">Usuarios Ingresados</span>
-                        <span class="pull-right"></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="panel panel-green">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-user fa-5x"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><?php echo $usuario2Total; ?></div>
+                                    <div>Heidy 	Noi</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $usuario2Total; ?></div>
-                            <div>Heidy 	Noi</div>
-                        </div>
+                        <a>
+                            <div class="panel-footer">
+                                <span class="pull-left">Usuarios Ingresados</span>
+                                <span class="pull-right"></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
                     </div>
                 </div>
-                <a>
-                    <div class="panel-footer">
-                        <span class="pull-left">Usuarios Ingresados</span>
-                        <span class="pull-right"></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="panel panel-red">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-user fa-5x"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><?php echo $usuario4Total; ?></div>
+                                    <div>Karla 	Suriano</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $usuario4Total; ?></div>
-                            <div>Karla 	Suriano</div>
-                        </div>
+                        <a>
+                            <div class="panel-footer">
+                                <span class="pull-left">Usuarios Ingresados</span>
+                                <span class="pull-right"></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
                     </div>
                 </div>
-                <a>
-                    <div class="panel-footer">
-                        <span class="pull-left">Usuarios Ingresados</span>
-                        <span class="pull-right"></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
             </div>
-        </div>
-    </div>
+            <?php }; ?>  
             <!-- /.col-lg-12 -->
             <div class="col-lg-12">
                 <div class="jumbotron panel-green">
