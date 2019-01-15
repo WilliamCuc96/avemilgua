@@ -33,7 +33,7 @@ if(!empty($rows)){
 }
  
 //Setup the filename that our CSV will have when it is downloaded.
-$fileName = 'Contatos.csv';
+$fileName = 'Contatos-De-Veteranos.csv';
  
 //Set the Content-Type and Content-Disposition headers to force the download.
 header('Content-Type: application/excel');
