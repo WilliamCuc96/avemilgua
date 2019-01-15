@@ -49,7 +49,11 @@
     $fecha_registro = '';
 
 
-    // Asignar el valor que viene en el request a variables *
+    // Asignar el valor que viene en el request a variables * 500co pago 20% total cuenta
+    // los cedros 500 10%
+    // centro medico zona 10 500 
+    // 250 10%
+
     if (!$id) { $id  = isset_or('id', '0'); };
     if (!$codigo) { $codigo  = isset_or('codigo', ''); };
     if (!$nombre) { $nombre = isset_or('nombre', ''); };

@@ -1,0 +1,190 @@
+<?php 
+header('Content-type: application/vnd.ms-excel');
+header("Content-Disposition: attachment; filename=nombre_del_archivo.xls");
+header("Pragma: no-cache");
+header("Expires: 0");
+
+    $fechaunix = date ( "YmdHis" );
+    $fecha_ini = isset_or('fecha_ini', ''); ;
+    $fecha_fin = isset_or('fecha_fin', ''); ;
+    $codigo        = isset_or('codigo', '');
+    
+    // usamos la sesion de nombre definido.
+    session_name($usuarios_sesion);
+    // Iniciamos el uso de sesiones
+    session_start(); 
+    
+    // Consulta SQL
+    // echo " [Where]" . $s_where . "[FIN]";
+    $sql1 = "SELECT a.id,
+                    a.nombre,
+                    a.departamento_id,
+                    a.departamento,
+                    (SELECT COUNT(b.beneficiario) FROM av_datos_personales b WHERE b.beneficiario = 1 and b.lugar_nacimiento = a.id) as veterano,
+                    (SELECT COUNT(b.beneficiario) FROM av_datos_personales b WHERE b.beneficiario <> 1 and b.lugar_nacimiento = a.id) as otro,
+                    (SELECT COUNT(b.beneficiario) FROM av_datos_personales b WHERE b.lugar_nacimiento = a.id) as total
+            FROM ap_municipios a";
+
+    $resp1 = mysql_query($sql1);
+
+    if(mysql_num_rows($sql1)){
+        header("Content-type: application/vnd.ms-excel");
+        header("Content-Disposition:  filename=\"REP-".$fechaunix.".xls\";");
+    }
+    ?>
+<?php
+if (!$resp1) { // Error en la ejecución del query  
+    
+    //$errmsg = "No pudo ejecutarse satisfactoriamente la consulta en la BD";
+    
+    //$resp2 = $currentUrl."index.php?p=panel/error.php&errmsg=".$errmsg."";
+       // echo $resp2;
+       // exit;
+    //redirect($resp2);
+
+} elseif (mysql_num_rows($resp1) == 0) { // búsqueda satisfactoria, 0 registros encontrados
+    
+    //$errmsg = "No se encontraron registros en su búsqueda!";
+    
+    //$resp2 = $currentUrl."index.php?p=panel/error.php&errmsg=".$errmsg."";
+       // echo $resp2;
+       // exit;
+    //redirect($resp2);
+    
+} else {
+    print('echo////////////////////////////////////////-------------------'.mysql_num_rows($resp1));
+    header("Content-type: application/vnd.ms-excel");
+    header("Content-Disposition:  filename=\"REP-".$fechaunix.".xls\";");
+    print('///////////////////////////////////////////////////////////////////////////////////echo');
+?>
+<html>
+<body>
+  <table id="rounded-corner" summary="Clientes de Campus Tec 1">
+        <tfoot>
+            <tr>
+                <td colspan="37" align="center" class="rounded-foot-left"><strong>Clientes al  </strong><em><span style="color:green;"><?php echo date( "Y-m-d H:i:s" ) ?></span></em></td>
+                <td class="rounded-foot-right">&nbsp;</td>
+            </tr>
+        </tfoot>
+        <thead>
+            <tr>
+                <?php  if ($disponible) { ?>
+                    <th scope="col" class="rounded">Departamento</th>
+                <?php  } else { ?>
+                    <th scope="col" class="rounded">Municipio</th>
+                <?php  } ?>
+                <th scope="col" class="rounded">Veterano</th>
+                <th scope="col" class="rounded">Otro</th>
+                <th scope="col" class="rounded">Total</th>
+        </thead>
+        <tbody>
+        <?php 
+            while($row=mysql_fetch_assoc($resp1)){
+                print "<tr class=''>";
+                print "  <td>".utf8_encode($row['nombre'])." ".utf8_encode($row['departamento'])." ".utf8_encode($row['apellido'])." ".utf8_encode($row['apellido2'])."</td>";
+                print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['nombre'])."</td>";
+                print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['veterano'])."</td>";
+                print "  <td class='hidden-xs'>".utf8_encode($row['otro'])."</td>";
+                print "  <td class='hidden-xs'>".utf8_encode($row['total'])."</td>";
+                print "</tr>";
+                }
+                print "</tr>";
+            }
+            mysql_free_result($resp1);
+	?>
+        
+            <tr>
+                
+                <th scope="col" class="rounded"></th>
+                <th scope="col" class="rounded"></th>
+                <th scope="col" class="rounded"></th>
+                <th scope="col" class="rounded" align='right'><?php echo $eptotalon; ?></th>
+                <?php  if ($_SESSION['usuario_nivel'] == 1) { ?>
+                    <th scope="col" class="rounded"></th>
+                <?php  }; ?>
+                <th scope="col" class="rounded"></th>
+                <th scope="col" class="rounded"></th>
+                <?php  if (!$disponible) { ?>
+                    <th scope="col" class="rounded"></th>
+                <?php  } ?>
+            </tr>
+        </tbody>
+        
+    </table>	
+</body>
+</html>
+
+
+
+////////
+
+<?php
+if (!$resp1) { // Error en la ejecución del query  
+    
+    
+
+} elseif (mysql_num_rows($resp1) == 0) { // búsqueda satisfactoria, 0 registros encontrados
+    
+    
+    
+} else {
+    print('echo////////////////////////////////////////-------------------'.mysql_num_rows($resp1));
+    header("Content-type: application/vnd.ms-excel");
+    header("Content-Disposition:  filename=\"REP-".$fechaunix.".xls\";");
+    print('///////////////////////////////////////////////////////////////////////////////////echo'.$fechaunix);
+?>
+<html>
+<body>
+  <table id="rounded-corner" summary="Clientes de Campus Tec 1">
+        <tfoot>
+            <tr>
+                <td colspan="37" align="center" class="rounded-foot-left"><strong>Clientes al  </strong><em><span style="color:green;"><?php echo date( "Y-m-d H:i:s" ) ?></span></em></td>
+                <td class="rounded-foot-right">&nbsp;</td>
+            </tr>
+        </tfoot>
+        <thead>
+            <tr>
+                <?php  if ($disponible) { ?>
+                    <th scope="col" class="rounded">Departamento</th>
+                <?php  } else { ?>
+                    <th scope="col" class="rounded">Municipio</th>
+                <?php  } ?>
+                <th scope="col" class="rounded">Veterano</th>
+                <th scope="col" class="rounded">Otro</th>
+                <th scope="col" class="rounded">Total</th>
+        </thead>
+        <tbody>
+        <?php 
+            while($row=mysql_fetch_assoc($resp1)){
+                print "<tr class=''>";
+                print "  <td>".utf8_encode($row['nombre'])." ".utf8_encode($row['departamento'])." ".utf8_encode($row['apellido'])." ".utf8_encode($row['apellido2'])."</td>";
+                print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['nombre'])."</td>";
+                print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['veterano'])."</td>";
+                print "  <td class='hidden-xs'>".utf8_encode($row['otro'])."</td>";
+                print "  <td class='hidden-xs'>".utf8_encode($row['total'])."</td>";
+                print "</tr>";
+            }
+            mysql_free_result($resp1);
+	?>
+        
+        <tr>
+                
+                <th scope="col" class="rounded"></th>
+                <th scope="col" class="rounded"></th>
+                <th scope="col" class="rounded"></th>
+                <th scope="col" class="rounded" align='right'><?php echo $eptotalon; ?></th>
+                <?php  if ($_SESSION['usuario_nivel'] == 1) { ?>
+                    <th scope="col" class="rounded"></th>
+                <?php  }; ?>
+                <th scope="col" class="rounded"></th>
+                <th scope="col" class="rounded"></th>
+                <?php  if (!$disponible) { ?>
+                    <th scope="col" class="rounded"></th>
+                <?php  } ?>
+            </tr>
+        </tbody>
+        
+    </table>	
+</body>
+</html>
+<?php  }; ?>

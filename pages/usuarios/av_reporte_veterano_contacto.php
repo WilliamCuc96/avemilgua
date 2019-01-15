@@ -4,29 +4,27 @@
     // av_datos_personales
     global $id; $nombre; $nombre2; $apellido; $apellido2; $apellido3; $grado_militar; $numero_catalogo; $dpi; $direccion; $municipio; $correo; $telefono; $cantidad;
 
-    //Nombre archivo .XML
-    $Reporte = "Reporte.xml";
-    $FileName = "./$Reporte";
-    $Header = '';
-    $Header .= "\r\n";
 
-    header('Expires: 0');
-    header('Cache-control: private');
-    header ("Content-type: text/xml"); // Archivo xml
-    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-    header('Content-Description: File Transfer');
-    header('Last-Modified: '.date('D, d M Y H:i:s'));
-    header('Content-Disposition: attachment; filename="'.$Reporte.'"');
-    header("Content-Transfer-Encoding: binary");
-
-    $sql1 = "SELECT a.id,
+    /*$sql1 = "SELECT a.id,
                     a.nombre,
                     a.departamento_id,
                     a.departamento,
                     (SELECT COUNT(b.beneficiario) FROM av_datos_personales b WHERE b.beneficiario = 1 and b.lugar_nacimiento = a.id) as veterano,
                     (SELECT COUNT(b.beneficiario) FROM av_datos_personales b WHERE b.beneficiario <> 1 and b.lugar_nacimiento = a.id) as otro,
-                    (SELECT COUNT(b.beneficiario) FROM av_datos_personales b WHERE b.lugar_nacimiento = a.id) as total
+                    (SELECT COUNT(b.beneficiario) FROM av_datos_personales b WHERE b.lugar_nacimiento = a.id) as total,
+                    (SELECT b.correo FROM av_datospersonales b WHERE )
+                    a.correo,
+                    a.telefono
             FROM ap_municipios a";
+
+    $resp1 = mysql_query($sql1);*/
+    $sql1 = "SELECT nombre, 
+                    nombre2, 
+                    apellido, 
+                    apellido2, 
+                    correo, 
+                    telefono 
+            FROM av_datos_personales";
 
     $resp1 = mysql_query($sql1);
 
@@ -35,7 +33,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><i class="fa fa-users"></i> Reporte de Veteranos Por Departamento y Municipio</h1>
+            <h1 class="page-header"><i class="fa fa-users"></i> Contacto de Veteranos</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -73,25 +71,21 @@ if (!$resp1) { // Error en la ejecución del query
                             <thead>
                                 <tr>
                                     <!-- PENDIENTE ESTE CAMBIO -->
-                                    <th>Departamento</th>
-                                    <th class="hidden-xs hidden-sm">Municipio</th>
-                                    <th class="hidden-xs hidden-sm">Veterano</th>
-                                    <th class="hidden-xs">Otros</th>
-                                    <th class="hidden-xs">Total</th>
+                                    <th>Nombre</th>
+                                    <th class="hidden-xs hidden-sm">Telefono</th>
+                                    <th class="hidden-xs hidden-sm">Correo</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- PHP -->
                                 <?php
-                                    header ("Content-type: text/xml");
+                                    header ("Content-type: text/csv");
                                     echo("<kits>");
                                     while($row=mysql_fetch_assoc($resp1)){
                                         print "<tr class=''>";
-                                        print "  <td>".utf8_encode($row['nombre'])." ".utf8_encode($row['departamento'])." ".utf8_encode($row['apellido'])." ".utf8_encode($row['apellido2'])."</td>";
-                                        print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['nombre'])."</td>";
-                                        print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['veterano'])."</td>";
-                                        print "  <td class='hidden-xs'>".utf8_encode($row['otro'])."</td>";
-                                        print "  <td class='hidden-xs'>".utf8_encode($row['total'])."</td>";
+                                        print "  <td>".utf8_encode($row['nombre'])." ".utf8_encode($row['nombre2'])." ".utf8_encode($row['apellido'])." ".utf8_encode($row['apellido2'])."</td>";
+                                        print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['telefono'])."</td>";
+                                        print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['correo'])."</td>";
                                         print "</tr>";
                                         echo("<kits>");
                                     }
@@ -100,9 +94,22 @@ if (!$resp1) { // Error en la ejecución del query
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.table-responsive -->
+                    <!-- /.table-responsive
+                    <div>
+                        <form class="form-horizontal" href="../pages/usuarios/exportData.php" method="post" name="upload_excel" enctype="multipart/form-data">
+                            <div class="form-group">
+                                    <div class="col-md-12 col-md-offset-10">
+                                        <input type="submit" name="Export" class="btn btn-success" value="export to excel"/>
+                                    </div>
+                            </div>                    
+                        </form>
+                                   
+                    </div> -->
+                    <form method="post" action="../pages/usuarios/exportData.php">
+                        <input type="submit" name="export" class="btn btn-success" value="Exportar CSV" />
+                    </form>
 
-                    <div class="well well-sm">
+                    <!--<div class="well well-sm">
                         <h4><i class="fa fa-info-circle"></i> Instrucciones</h4>
                         <ul>
                             <li>En la parte superior puede buscar un registro ingresando una porcion de texto.</li>
@@ -112,7 +119,7 @@ if (!$resp1) { // Error en la ejecución del query
                         </ul>
                         <a class="btn btn-warning btn-xs btn-block" target="" href="index.php?p=usuarios/av_ipm_edit.php">Ingresar nuevo donante</NAV></a>
                         <a class="btn btn-warning btn-xs btn-block" target="" href="index.php?p=usuarios/exportData.php">Descargar</NAV></a>
-                    </div>
+                    </div>-->
 
                 </div>
                 <!-- /.panel-body -->
@@ -167,4 +174,28 @@ $(document).ready(function() {
  //       bottom: true
  //   } );
 } );
+</script>
+<script>
+    Function funcionCSV(){
+    <?php
+    header('Content-Type: text/csv; charset=utf-8');
+    header('Content-Disposition: attachment; filename=data.csv');
+
+    $output = fopen('php://output', 'w');
+
+    fputcsv($output, array('Column 1', 'Column 2', 'Column 3'));
+
+    $sql1 = "SELECT nombre, 
+                    nombre2, 
+                    apellido, 
+                    apellido2, 
+                    correo, 
+                    telefono 
+            FROM av_datos_personales";
+
+    $resp1 = mysql_query($sql1);
+
+    while ($resp1 = mysql_fetch_assoc($resp1)) fputcsv($output, $resp1);
+    ?>
+}
 </script>

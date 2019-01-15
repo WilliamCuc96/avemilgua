@@ -49,8 +49,10 @@
             <li>
                 <a href="#"><i class="fa fa-file-excel-o fa-fw"></i> Reportes<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="index.php?p=usuarios/av_reporte_veterano.php"><i class = "fa fa-list fa-fw"></i> Reporte 1</a></li>
-                    <li><a href="index.php?p=usuarios/av_reporte_veterano_foto.php"><i class = "fa fa-list fa-fw"></i> Reporte 2</a></li>
+                    <!--<li><a href="index.php?p=usuarios/av_reporte_veterano.php"><i class = "fa fa-list fa-fw"></i> Reporte 1</a></li>
+                    <li><a href="index.php?p=usuarios/av_reporte_veterano_foto.php"><i class = "fa fa-list fa-fw"></i> Reporte 2</a></li>-->
+                    <li><a href="index.php?p=usuarios/av_reporte_veterano_contacto.php"><i class = "fa fa-list fa-fw"></i> Archivo .CSV</a></li>
+
                     
                     <?php if ($_SESSION['usuario_nivel'] <= 2) { ?>
 
