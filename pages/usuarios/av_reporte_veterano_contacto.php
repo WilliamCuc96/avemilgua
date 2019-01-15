@@ -175,27 +175,4 @@ $(document).ready(function() {
  //   } );
 } );
 </script>
-<script>
-    Function funcionCSV(){
-    <?php
-    header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename=data.csv');
 
-    $output = fopen('php://output', 'w');
-
-    fputcsv($output, array('Column 1', 'Column 2', 'Column 3'));
-
-    $sql1 = "SELECT nombre, 
-                    nombre2, 
-                    apellido, 
-                    apellido2, 
-                    correo, 
-                    telefono 
-            FROM av_datos_personales";
-
-    $resp1 = mysql_query($sql1);
-
-    while ($resp1 = mysql_fetch_assoc($resp1)) fputcsv($output, $resp1);
-    ?>
-}
-</script>
