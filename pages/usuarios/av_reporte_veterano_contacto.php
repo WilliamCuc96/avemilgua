@@ -19,11 +19,10 @@
 
     $resp1 = mysql_query($sql1);*/
     $sql1 = "SELECT nombre, 
-                    nombre2, 
                     apellido, 
-                    apellido2, 
+                    telefono, 
                     correo, 
-                    telefono 
+                    (SELECT a.nombre FROM ap_municipios a WHERE a.id = lugar_nacimiento) as departamento 
             FROM av_datos_personales";
 
     $resp1 = mysql_query($sql1);
@@ -74,6 +73,7 @@ if (!$resp1) { // Error en la ejecución del query
                                     <th>Nombre</th>
                                     <th class="hidden-xs hidden-sm">Telefono</th>
                                     <th class="hidden-xs hidden-sm">Correo</th>
+                                    <th class="hidden-xs hidden-sm">Departamento</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -86,6 +86,7 @@ if (!$resp1) { // Error en la ejecución del query
                                         print "  <td>".utf8_encode($row['nombre'])." ".utf8_encode($row['nombre2'])." ".utf8_encode($row['apellido'])." ".utf8_encode($row['apellido2'])."</td>";
                                         print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['telefono'])."</td>";
                                         print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['correo'])."</td>";
+                                        print "  <td class='hidden-xs hidden-sm'>".utf8_encode($row['departamento'])."</td>";
                                         print "</tr>";
                                         echo("<kits>");
                                     }
@@ -104,7 +105,7 @@ if (!$resp1) { // Error en la ejecución del query
                             </div>                    
                         </form>
                                    
-                    </div> -->
+                    </div> Boton que manda a llamar el archivo que crea el CSV-->
                     <form method="post" action="../pages/usuarios/exportData.php">
                         <input type="submit" name="export" class="btn btn-success" value="Exportar CSV" />
                     </form>

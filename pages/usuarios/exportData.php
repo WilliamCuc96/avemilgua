@@ -10,7 +10,12 @@ $database = 'avemilgua';
 $pdo = new PDO("mysql:host=$host;dbname=$database", $user, $password);
  
 //Create our SQL query.
-$sql = "SELECT nombre, apellido, telefono, correo FROM av_datos_personales";
+$sql = "SELECT nombre, 
+               apellido, 
+               telefono, 
+               correo, 
+               (SELECT a.nombre FROM ap_municipios a WHERE a.id = lugar_nacimiento) as departamento 
+          FROM av_datos_personales";
  
 //Prepare our SQL query.
 $statement = $pdo->prepare($sql);
