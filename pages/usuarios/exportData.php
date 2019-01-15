@@ -68,7 +68,7 @@ $connect = mysqli_connect("localhost", "root", "root", "avemilgua");
 $output = '';
 if(isset($_POST["export"])){
 
-     $query = "SELECT nombre, telefono, correo FROM av_datos_personales";
+     $query = "SELECT nombre, apellido, telefono, correo FROM av_datos_personales";
      $result = mysqli_query($connect, $query);
      if(mysqli_num_rows($result) > 0)
           
@@ -77,6 +77,7 @@ if(isset($_POST["export"])){
      <table class="table" bordered="1">  
           <tr>  
                <th scope="col" class="rounded">Nombre</th>
+               <th scope="col" class="rounded">Apellido</th>
                <th scope="col" class="rounded">Telefono</th>
                <th scope="col" class="rounded">Correo</th>
           </tr>
@@ -84,7 +85,8 @@ if(isset($_POST["export"])){
      while($row = mysqli_fetch_array($result)){
           $output .= '
           <tr>  
-               <td>'.$row["nombre"].'</td>  
+               <td>'.$row["nombre"].'</td>
+               <td>'.$row["apellido"].'</td>  
                <td>'.$row["telefono"].'</td>  
                <td>'.$row["correo"].'</td>
           </tr>
