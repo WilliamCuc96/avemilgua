@@ -120,7 +120,7 @@ $pdf->SetXY(2,42);
 $pdf->Write(0,"NO. DE REGISTRO:");
 $pdf->SetXY(30,42);
 $pdf->Write(0,$codigo);
-$pdf->SetFont('helvetica', 'B', 9);
+$pdf->SetFont('helvetica', 'B', 8);
 $pdf->SetXY(2,49);
 $pdf->Write(0,"VENCIMIENTO:");
 $pdf->SetXY(30,49);
