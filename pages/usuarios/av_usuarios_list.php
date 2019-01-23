@@ -51,7 +51,7 @@
 
     // Asignar el valor que viene en el request a variables * 500co pago 20% total cuenta
     // los cedros 500 10%
-    // centro medico zona 10 500 
+    // centro medico zona 10 500
     // 250 10%
 
     if (!$id) { $id  = isset_or('id', '0'); };
@@ -208,7 +208,7 @@
 
     $resp1 = mysql_query($sql1);
 
-    
+
 
 ?>
 
@@ -239,7 +239,9 @@ if (!$resp1) { // Error en la ejecución del query
 } else {
     echo "<div class='alert alert-block alert-success fade in'>
                 <a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a>
-                <p><h4><i class='fa fa-check-square-o'></i> Se muestran en el listado los ultimos ".mysql_num_rows($resp1)." registros ingresados</h4> Búsqueda satisfactoria, seleccione el registro que desea gestionar por medio del ícono  (<i class='fa fa-pencil'></i>) </p>
+                <p><h4><i class='fa fa-check-square-o'></i> Se muestran en el listado los ultimos ".mysql_num_rows($resp1)." registros ingresados</h4></p>
+                <h5><i class='fa fa-exclamation-triangle'></i> Para ver el resto de usuarios haga una busqueda <a href='index.php?p=usuarios/veteranos_busc.php'>(aqui)</a></h5>
+
             </div>";
 ?>
 
@@ -279,7 +281,7 @@ if (!$resp1) { // Error en la ejecución del query
 
         $nuevafechaalta = date("d-m-Y", $timestamp);
         //$dia = date("F", $nuevafecha);
-        
+
         $year = date("Y", strtotime($nuevafechaalta));
         $dia = date("d", strtotime($nuevafechaalta));
         $mes = date("m", strtotime($nuevafechaalta));
@@ -341,7 +343,7 @@ if (!$resp1) { // Error en la ejecución del query
 
         $nuevafechabaja = date("d-m-Y", $timestamp1);
         //$dia = date("F", $nuevafecha);
-        
+
         $year1 = date("Y", strtotime($nuevafechabaja));
         $dia1 = date("d", strtotime($nuevafechabaja));
         $mes1 = date("m", strtotime($nuevafechabaja));
@@ -420,13 +422,13 @@ if (!$resp1) { // Error en la ejecución del query
                     <i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i>
                 </span>
             </td>
-        <?php } 
+        <?php }
         print "  <td class='center' align='center' nowrap>";
         ?>
             <a href="../pdf/carnet/acta.php?<?php echo $parametros;?>" class='btn btn-xs btn-default' target="_blank"><i class="fa fa-file-pdf"></i>
         <?php
         print "     <a href='index.php?p=usuarios/av_usuarios_edit.php&id=".$row['vid']."' title='Editar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-pencil'></i></button></a>";
-        if ($_SESSION['usuario_nivel'] <= 1 OR $_SESSION['usuario_nivel'] == 2) { 
+        if ($_SESSION['usuario_nivel'] <= 1 OR $_SESSION['usuario_nivel'] == 2) {
             print "     <a href='index.php?p=usuarios/av_usuarios_gestion.php&id=".$row['vid']."&btn=Borrar' title='Borrar Usuario' ><button class='btn btn-xs btn-default'><i class='fa fa-times'></i></button></a>";
         }?>
             <a href="../pdf/carnet/reporte.php?<?php echo $parametros;?>" class='btn btn-xs btn-default' target="_blank"><i class="fa fa-file-pdf"></i>

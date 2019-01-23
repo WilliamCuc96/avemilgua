@@ -13,6 +13,9 @@
         <!-- BOX TABS (Peledahe) -->
         <div class="row">
             <div class="col-lg-12">
+              <div class='alert alert-block alert-warning fade in'>
+                <h5><i class='fa fa-exclamation-triangle'></i> No es necesario llenar todos los campos!</h5>
+              </div>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <i class="fa fa-info-circle"></i> Ingrese en el siguiente formulario sus criterios de búsqueda
@@ -96,35 +99,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="lugar_nacimiento" class="col-sm-3 control-label">Lugar de Nacimiento</label>
-                                <div class="col-sm-3">
-                                    <select id="lugar_nacimiento" class="form-control col-md-12" name="lugar_nacimiento" >
-                                        <?php
-                                            $sql2="SELECT departamento
-                                            FROM ap_municipios
-                                            GROUP BY departamento";
-                                            $resp2 = mysql_query($sql2);
-                                        ?>
-                                        <option value="" selected="selected" >Seleccionar</option>
-                                        <?php
-                                            while($row2=mysql_fetch_assoc($resp2)){
-                                                echo "<option value='".$row2['departamento']."'>".$row2['departamento']."</option>";
-
-                                            }
-                                        ?>
-                                    </select>
-                                </div>
-
-                                <label for="fecha_nacimiento" class="col-sm-2 control-label">Fecha de Nacimiento</label>
-                                <div class="col-sm-3">
-                                      <div class="form-group input-group">
-                                        <input name="fecha_nacimiento" class="form-control" id="dpYears" data-date="1940-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years" size="16" type="text" value="<?php if(!$fecha_nacimiento){echo "";}else {echo $fecha_nacimiento;}?>">
-                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                      </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 <label for="direccion" class="col-sm-3 control-label">Dirección</label>
                                 <div class="col-sm-3">
                                     <textarea class="form-control" rows="2" id="direccion" placeholder="Dirección" name="direccion"><?php echo $direccion; ?></textarea>
@@ -190,12 +164,41 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="lugar_nacimiento" class="col-sm-3 control-label">Lugar de Nacimiento</label>
+                                <div class="col-sm-3">
+                                    <select id="lugar_nacimiento" class="form-control col-md-12" name="lugar_nacimiento" >
+                                        <?php
+                                            $sql2="SELECT departamento
+                                            FROM ap_municipios
+                                            GROUP BY departamento";
+                                            $resp2 = mysql_query($sql2);
+                                        ?>
+                                        <option value="" selected="selected" >Seleccionar</option>
+                                        <?php
+                                            while($row2=mysql_fetch_assoc($resp2)){
+                                                echo "<option value='".$row2['departamento']."'>".$row2['departamento']."</option>";
+
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+
+                                <label for="fecha_nacimiento" class="col-sm-2 control-label">Fecha de Nacimiento</label>
+                                <div class="col-sm-3">
+                                      <div class="form-group input-group">
+                                        <input name="fecha_nacimiento" class="form-control" id="dpYears" data-date="1940-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years" size="16" type="text" value="<?php if(!$fecha_nacimiento){echo "";}else {echo $fecha_nacimiento;}?>">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                      </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <h3>&nbsp;&nbsp; Datos de Servicios</h3>
                             </div>
 
                             <div class="form-group">
                             <label for="grado_militar" class="col-sm-3 control-label">Grado Militar</label>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <select id="grado_militar" class="form-control col-md-12" name="grado_militar" >
                                     <?php
                                         $sql2="SELECT  id, nombre
@@ -214,32 +217,34 @@
                                     ?>
                                 </select>
                             </div>
-                            <label for="zona_militar" class="col-sm-1 control-label">Zona Militar</label>
-                            <div class="col-sm-2">
+                            <label for="zona_militar" class="col-sm-2 control-label">Zona Militar</label>
+                            <div class="col-sm-3">
                                 <input type="text" class="form-control" id="zona_militar" placeholder="Zona" name="zona_militar" value="<?php echo $zona_militar; ?>">
                             </div>
-                            <label for="armas_servicios" class="col-sm-1 control-label">Armas y Servicios</label>
-                            <div class="col-sm-2">
-                                <select id="armas_servicios" class="form-control col-md-12" name="armas_servicios" >
-                                    <?php
-                                        $sql2="SELECT  id, nombre
-                                                FROM ap_catalogos
-                                                WHERE tipo_catalogo = 40 AND institucion = 1
-                                                ORDER BY nombre";
-                                        $resp2 = mysql_query($sql2);
-                                    ?>
-                                    <option value="" selected="selected" >Seleccionar</option>
-                                    <?php
-                                        while($row2=mysql_fetch_assoc($resp2)){
-                                            print '<option value="'.$row2['id'].'" ';
-                                            if ($armas_servicios == $row2['id']) { print ' selected="selected" '; };
-                                            print ' >'.utf8_encode($row2['nombre']).'</option>';
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-
                         </div>
+
+                        <div class="form-group">
+                        <label for="armas_servicios" class="col-sm-3 control-label">Armas y Servicios</label>
+                        <div class="col-sm-3">
+                            <select id="armas_servicios" class="form-control col-md-12" name="armas_servicios" >
+                                <?php
+                                    $sql2="SELECT  id, nombre
+                                            FROM ap_catalogos
+                                            WHERE tipo_catalogo = 40 AND institucion = 1
+                                            ORDER BY nombre";
+                                    $resp2 = mysql_query($sql2);
+                                ?>
+                                <option value="" selected="selected" >Seleccionar</option>
+                                <?php
+                                    while($row2=mysql_fetch_assoc($resp2)){
+                                        print '<option value="'.$row2['id'].'" ';
+                                        if ($armas_servicios == $row2['id']) { print ' selected="selected" '; };
+                                        print ' >'.utf8_encode($row2['nombre']).'</option>';
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
 
 
                         <div class="form-group">
@@ -252,11 +257,18 @@
                             <div class="col-sm-3">
                                 <input type="text" class="form-control" id="puesto" placeholder="Puesto" name="puesto" value="<?php echo $puesto; ?>">
                             </div>
-
                         </div>
 
-
-                        <!-- Fecha Alta/Fecha Baja -->
+                        <div class ="form-group">
+                        <label for="motivo_baja" class="col-sm-3 control-label">Motivo de Baja</label>
+                            <div class="col-sm-3">
+                                <textarea class="form-control" rows="2" id="motivo_baja" placeholder="" name="motivo_baja"><?php echo $motivo_baja; ?></textarea>
+                            </div>
+                        <label for="computo_servicios" class="col-sm-2 control-label">Computos de Servicios</label>
+                            <div class="col-sm-3">
+                                <textarea class="form-control" rows="2" id="computo_servicios" placeholder="" name="computo_servicios"><?php echo $computo_servicios; ?></textarea>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="fecha_alta" class="col-sm-3 control-label">Fecha de Alta</label>
                             <div class="col-sm-3">
@@ -272,18 +284,6 @@
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Motivo Baja/Computos Servicios -->
-                        <div class ="form-group">
-                        <label for="motivo_baja" class="col-sm-3 control-label">Motivo de Baja</label>
-                            <div class="col-sm-3">
-                                <textarea class="form-control" rows="2" id="motivo_baja" placeholder="" name="motivo_baja"><?php echo $motivo_baja; ?></textarea>
-                            </div>
-                        <label for="computo_servicios" class="col-sm-2 control-label">Computos de Servicios</label>
-                            <div class="col-sm-3">
-                                <textarea class="form-control" rows="2" id="computo_servicios" placeholder="" name="computo_servicios"><?php echo $computo_servicios; ?></textarea>
-                            </div>
-
                         </div>
 
                         <div class="form-group">
