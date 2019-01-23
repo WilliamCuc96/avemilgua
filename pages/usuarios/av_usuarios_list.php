@@ -202,7 +202,7 @@
                         b.sueldo_mensual,
                         b.zona_militar,
                         (SELECT nombre from ap_catalogos WHERE tipo_catalogo = 40 and id = armas_servicios) as armas_servicios
-                FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id "
+                FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id LIMIT 100"
                     . $var_where1 . " ";
                     ;
 
@@ -239,7 +239,7 @@ if (!$resp1) { // Error en la ejecución del query
 } else {
     echo "<div class='alert alert-block alert-success fade in'>
                 <a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a>
-                <p><h4><i class='fa fa-check-square-o'></i> ".mysql_num_rows($resp1)." Registros encontrados</h4> Búsqueda satisfactoria, seleccione el registro que desea gestionar por medio del ícono  (<i class='fa fa-pencil'></i>) </p>
+                <p><h4><i class='fa fa-check-square-o'></i> Se muestran en el listado los ultimos ".mysql_num_rows($resp1)." registros ingresados</h4> Búsqueda satisfactoria, seleccione el registro que desea gestionar por medio del ícono  (<i class='fa fa-pencil'></i>) </p>
             </div>";
 ?>
 
