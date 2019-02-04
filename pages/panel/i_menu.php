@@ -1,12 +1,12 @@
 <div class="navbar-default sidebar bg-danger" role="navigation">
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
-             
+
             <li class="sidebar-search">
                 <form method="POST"  action="index.php" >
                     <div class="input-group custom-search-form">
                         <input class="text" name="p" type="hidden" value="usuarios/av_usuarios_list.php"/>
-                        <input name="codigo" value="" type="text" class="form-control" placeholder="Buscar...">
+                        <input name="codigo" value="" type="text" class="form-control" placeholder="Buscar por código...">
                         <span class="input-group-btn">
                             <button class="btn btn-default"  type="submit"  name="btn" >
                                 <i class="fa fa-search"></i>
@@ -53,7 +53,7 @@
                     <li><a href="index.php?p=usuarios/av_reporte_veterano_foto.php"><i class = "fa fa-list fa-fw"></i> Reporte 2</a></li>-->
                     <li><a href="index.php?p=usuarios/av_reporte_veterano_contacto.php"><i class = "fa fa-list fa-fw"></i> Archivo .CSV</a></li>
 
-                    
+
                     <?php if ($_SESSION['usuario_nivel'] <= 2) { ?>
 
                     <?php }; ?>
@@ -66,13 +66,13 @@
                     <?php if ($_SESSION['usuario_nivel'] <= 5) { ?>
                         <!--
                         <li><a href="index.php?p=reportes/indicadores_go.php">Indicadores</a></li>
-                        <li><a href="index.php?p=reportes/topten_go.php">Top 10</a></li> 
-                       
+                        <li><a href="index.php?p=reportes/topten_go.php">Top 10</a></li>
+
                         <li><a href="index.php?p=soporte/sql_gestion.php&sqltext=select * from ap_usuarios">Top 10</a></li>
                         -->
                     <?php }; ?>
                  </ul>
-            </li> 
+            </li>
             <?php }; ?>
 
             <?php if ($_SESSION['usuario_nivel'] <= 2) { ?>
@@ -85,7 +85,7 @@
                         <li><a href="index.php?p=sistema/tipocatalogos_list.php">Catálogos</a></li>
                     <?php }; ?>
                     <?php if ($_SESSION['usuario_nivel'] <= 1) { ?>
-                        
+
                     <?php }; ?>
                     <?php if ($_SESSION['usuario_nivel'] <= 2) { ?>
                         <li><a href="index.php?p=sistema/catalogos_list.php&idtipo=37&tbtn=1">Tipos de Beneficiario</a></li>

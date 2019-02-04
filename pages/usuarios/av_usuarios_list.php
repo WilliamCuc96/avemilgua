@@ -202,8 +202,7 @@
                         b.sueldo_mensual,
                         b.zona_militar,
                         (SELECT nombre from ap_catalogos WHERE tipo_catalogo = 40 and id = armas_servicios) as armas_servicios
-                FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id LIMIT 100"
-                    . $var_where1 . " ";
+                FROM av_datos_personales a, av_datos_servicios b WHERE a.id = b.id". $var_where1 . " LIMIT 100";
                     ;
 
     $resp1 = mysql_query($sql1);

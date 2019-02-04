@@ -88,38 +88,38 @@
         $var_where1 = " ";
     } else {
         $var_where1 = " AND a.id = '" . $id . "' ";
-        $sql1 = "SELECT a.id, 
-                        a.codigo, 
-                        a.nombre, 
-                        a.nombre2, 
-                        a.apellido, 
-                        a.apellido2, 
-                        a.apellido3, 
-                        a.dpi, 
+        $sql1 = "SELECT a.id,
+                        a.codigo,
+                        a.nombre,
+                        a.nombre2,
+                        a.apellido,
+                        a.apellido2,
+                        a.apellido3,
+                        a.dpi,
                         a.genero,
-                        a.beneficiario, 
-                        a.fecha_nacimiento, 
-                        a.lugar_nacimiento, 
-                        a.vecindad, 
-                        a.estado_civil, 
-                        a.profesion, 
-                        a.direccion, 
-                        a.telefono, 
-                        a.correo, 
-                        a.nit, 
+                        a.beneficiario,
+                        a.fecha_nacimiento,
+                        a.lugar_nacimiento,
+                        a.vecindad,
+                        a.estado_civil,
+                        a.profesion,
+                        a.direccion,
+                        a.telefono,
+                        a.correo,
+                        a.nit,
                         a.foto,
-                        a.tiempo_caducidad, 
-                        b.grado_militar, 
-                        b.compania, 
-                        b.puesto, 
-                        b.fecha_alta, 
-                        b.fecha_baja, 
-                        b.motivo_baja, 
-                        b.computo_servicios, 
-                        b.sueldo_mensual, 
-                        b.zona_militar, 
-                        b.armas_servicios 
-                        FROM av_datos_personales a, av_datos_servicios b 
+                        a.tiempo_caducidad,
+                        b.grado_militar,
+                        b.compania,
+                        b.puesto,
+                        b.fecha_alta,
+                        b.fecha_baja,
+                        b.motivo_baja,
+                        b.computo_servicios,
+                        b.sueldo_mensual,
+                        b.zona_militar,
+                        b.armas_servicios
+                        FROM av_datos_personales a, av_datos_servicios b
                         WHERE a.id = b.id ". $var_where1 ." ";
 
         $resp1 = mysql_query($sql1);
@@ -146,7 +146,7 @@
 
         $nuevafecha = date("d-m-Y", $timestamp);
         //$dia = date("F", $nuevafecha);
-        
+
         $year = date("Y", strtotime($nuevafecha));
         $dia = date("d", strtotime($nuevafecha));
         $mes = date("m", strtotime($nuevafecha));
@@ -534,7 +534,7 @@
                                         <?php if ($_SESSION['usuario_nivel'] <= 2 OR $_SESSION['usuario_nivel'] == 4) { ?>
                                             <!-- Camara de Foto -->
                                             <div class="form-group">
-                                                
+
                                                 <!-- tomar foto-->
                                                 <div class="form-group" id="foto">
                                                     <label for="foto" class="col-sm-2 control-label">Tomar Fotografía</label>
@@ -546,10 +546,10 @@
                                                     <div class="col-sm-1">
                                                         <img id="im5" style="display:none" src="" alt="image" />
                                                     </div>
-                                                </div>    
+                                                </div>
 
                                             </div>
-                                            
+
                                             <!-- subir foto-->
                                             <div class="form-group">
                                                 <label for="foto" class="col-sm-2 control-label">Subir Fotografía</label>
@@ -560,18 +560,18 @@
                                                     <input type="hidden" id="fotodb" name="fotodb" value="<?php echo $fotodb; ?>" >
                                                 </div>
                                             </div>
-                                        <?php 
-                                            } else { 
+                                        <?php
+                                            } else {
                                                 if ($foto) {
                                                     echo '<center><img src="'.$foto.'" alt="Foto" class="img-thumbnail" width="" height="380"></center>';
                                                 } else {
                                                     echo '<center><span class="fa-stack fa-3x">
                                                                 <i class="fas fa-portrait fa-stack-1x"></i>
-                                                                <i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i> 
+                                                                <i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i>
                                                         </span>
                                                         <h3>No se guardó fotografía!</h3></center>';
                                                 }
-                                            } 
+                                            }
                                         ?>
 
                                         <?php if ($data['foto']) { ?>
@@ -650,7 +650,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group">   
+                                        <div class="form-group">
                                             <label for="zona_militar" class="col-sm-2 control-label">Dependencia</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control" id="zona_militar" placeholder="Zona" name="zona_militar" value="<?php echo $zona_militar; ?>">
@@ -704,7 +704,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <!-- Carpeta 4 -->
                                     <!-- <form action="uploader.php" method="post" enctype="multipart/form-data"> -->
                                     <!--
@@ -737,7 +737,7 @@
                                     </div>
                                     -->
                                     <!-- </form> -->
-                                
+
                                     <div class="form-group">
                                         <br>
                                         <?php if ($_SESSION['usuario_nivel'] <= 2 OR $_SESSION['usuario_nivel'] == 4) { ?>
@@ -754,7 +754,7 @@
                                                 </small>
                                             </div>
                                         <?php } ?>
-                                        
+
                                     </div>
 
                                 </div>
