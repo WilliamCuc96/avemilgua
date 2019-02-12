@@ -97,7 +97,7 @@
             </div>
         </div>
     </div>
-<center><small class="text-primary"><i class="fa fa-copyright"></i> 2018 - Desarrollado por: </small><a href="http://titonsoft.com" target="_blank"><img src="../img/logo/titonsoft_c.svg" height="20" alt="Desarrollado por titonsoft.com" /></a></center>
+<center><small class="text-primary"><i class="fa fa-copyright"></i> 2018 - Desarrollado por: </small><a href="http://merke.net" target="_blank"><img src="../img/logo/Merke.svg" height="20" alt="Desarrollado por Merke.net" /></a></center>
 
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>

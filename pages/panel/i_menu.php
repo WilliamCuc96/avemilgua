@@ -153,7 +153,7 @@
             <li class="sidebar-search">
                 <center>
 
-                    <small class="text-primary"><i class="fa fa-copyright"></i> 2018 - Desarrollado por: </small><br><img src="../img/logo/titonsoft_w.svg" height="25" alt="Desarrollado por titonsoft.com" border="0"/>
+                    <small class="text-primary"><i class="fa fa-copyright"></i> 2018 - Desarrollado por: </small><br><img src="../img/logo/Merke.svg" height="30" alt="Desarrollado por Merke.net" border="0"/>
                 </center>
                 <!-- /input-group -->
             </li>
